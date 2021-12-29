@@ -1,0 +1,66 @@
+{
+    "name": "spatie/laravel-route-attributes",
+    "description": "Auto register routes using PHP attributes",
+    "keywords": [
+        "spatie",
+        "laravel-route-attributes"
+    ],
+    "homepage": "https://github.com/spatie/laravel-route-attributes",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Freek Van der Herten",
+            "email": "freek@spatie.be",
+            "homepage": "https://spatie.be",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "illuminate/contracts": "^8.67",
+        "illuminate/support": "^8.77",
+        "spatie/laravel-package-tools": "^1.10"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "pestphp/pest": "^1.20",
+        "spatie/laravel-ray": "^1.27"
+    },
+    "autoload": {
+        "psr-4": {
+            "Spatie\\RouteAttributes\\": "src",
+            "Spatie\\RouteAttributes\\Database\\Factories\\": "database/factories"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Spatie\\RouteAttributes\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit --colors=always",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Spatie\\RouteAttributes\\RouteAttributesServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/spatie"
+        },
+        {
+            "type": "other",
+            "url": "https://spatie.be/open-source/support-us"
+        }
+    ]
+}
