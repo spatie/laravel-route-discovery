@@ -1,12 +1,12 @@
 <?php
 
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\RouteAttribute\InvokableRouteGetTestController;
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\RouteAttribute\RouteGetTestController;
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\RouteAttribute\RouteMiddlewareTestController;
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\RouteAttribute\RouteMultiVerbTestController;
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\RouteAttribute\RouteNameTestController;
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\RouteAttribute\RoutePostTestController;
-use Spatie\RouteAttributes\Tests\TestClasses\Middleware\TestMiddleware;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\RouteAttribute\InvokableRouteGetTestController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\RouteAttribute\RouteGetTestController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\RouteAttribute\RouteMiddlewareTestController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\RouteAttribute\RouteMultiVerbTestController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\RouteAttribute\RouteNameTestController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\RouteAttribute\RoutePostTestController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\TestMiddleware;
 
 test('the route annotation can register a get route', function () {
     $this->routeRegistrar->registerClass(RouteGetTestController::class);

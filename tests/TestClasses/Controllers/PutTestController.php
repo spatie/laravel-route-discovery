@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\RouteAttributes\Tests\TestClasses\Controllers;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Controllers;
 
-use Spatie\RouteAttributes\Attributes\Put;
+use Spatie\RouteDiscovery\Attributes\Put;
 
 class PutTestController
 {

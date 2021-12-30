@@ -1,14 +1,14 @@
 <?php
 
-namespace Spatie\RouteAttributes\Tests\TestClasses\Controllers;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Controllers;
 
-use Spatie\RouteAttributes\Attributes\Get;
-use Spatie\RouteAttributes\Attributes\Post;
-use Spatie\RouteAttributes\Attributes\Where;
-use Spatie\RouteAttributes\Attributes\WhereAlpha;
-use Spatie\RouteAttributes\Attributes\WhereAlphaNumeric;
-use Spatie\RouteAttributes\Attributes\WhereNumber;
-use Spatie\RouteAttributes\Attributes\WhereUuid;
+use Spatie\RouteDiscovery\Attributes\Get;
+use Spatie\RouteDiscovery\Attributes\Post;
+use Spatie\RouteDiscovery\Attributes\Where;
+use Spatie\RouteDiscovery\Attributes\WhereAlpha;
+use Spatie\RouteDiscovery\Attributes\WhereAlphaNumeric;
+use Spatie\RouteDiscovery\Attributes\WhereNumber;
+use Spatie\RouteDiscovery\Attributes\WhereUuid;
 
 #[Where('param', '[0-9]+')]
 class WhereTestController

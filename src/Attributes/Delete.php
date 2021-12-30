@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\RouteAttributes\Attributes;
+namespace Spatie\RouteDiscovery\Attributes;
 
 use Attribute;
 

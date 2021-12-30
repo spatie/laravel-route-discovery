@@ -1,9 +1,9 @@
 <?php
 
-namespace Spatie\RouteAttributes\Tests\TestClasses\Controllers\Resource;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Resource;
 
-use Spatie\RouteAttributes\Attributes\Domain;
-use Spatie\RouteAttributes\Attributes\Resource;
+use Spatie\RouteDiscovery\Attributes\Domain;
+use Spatie\RouteDiscovery\Attributes\Resource;
 
 #[Domain('my-subdomain.localhost')]
 #[Resource('posts', only: ['index', 'show'])]

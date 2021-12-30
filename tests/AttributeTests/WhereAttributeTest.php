@@ -1,6 +1,6 @@
 <?php
 
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\WhereTestController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\WhereTestController;
 
 it('can apply where on each method of a controller', function () {
     $this->routeRegistrar->registerClass(WhereTestController::class);

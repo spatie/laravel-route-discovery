@@ -1,11 +1,11 @@
 {
-    "name": "spatie/laravel-route-attributes",
+    "name": "spatie/laravel-route-discovery",
     "description": "Auto register routes using PHP attributes",
     "keywords": [
         "spatie",
-        "laravel-route-attributes"
+        "laravel-route-discovery"
     ],
-    "homepage": "https://github.com/spatie/laravel-route-attributes",
+    "homepage": "https://github.com/spatie/laravel-route-discovery",
     "license": "MIT",
     "authors": [
         {
@@ -28,13 +28,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\RouteAttributes\\": "src",
-            "Spatie\\RouteAttributes\\Database\\Factories\\": "database/factories"
+            "Spatie\\RouteDiscovery\\": "src",
+            "Spatie\\RouteDiscovery\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\RouteAttributes\\Tests\\": "tests"
+            "Spatie\\RouteDiscovery\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -47,7 +47,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Spatie\\RouteAttributes\\RouteAttributesServiceProvider"
+                "Spatie\\RouteDiscovery\\RouteDiscoveryServiceProvider"
             ]
         }
     },

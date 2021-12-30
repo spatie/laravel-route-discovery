@@ -1,10 +1,10 @@
 <?php
 
-namespace Spatie\RouteAttributes\Tests\TestClasses\Controllers;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Controllers;
 
-use Spatie\RouteAttributes\Attributes\Get;
-use Spatie\RouteAttributes\Attributes\Group;
-use Spatie\RouteAttributes\Attributes\Post;
+use Spatie\RouteDiscovery\Attributes\Get;
+use Spatie\RouteDiscovery\Attributes\Group;
+use Spatie\RouteDiscovery\Attributes\Post;
 
 #[Group(domain: 'my-subdomain.localhost', prefix: 'my-prefix')]
 #[Group(domain: 'my-second-subdomain.localhost', prefix: 'my-second-prefix')]

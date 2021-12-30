@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Routing\ViewController;
-use Spatie\RouteAttributes\RouteDiscovery\Discover;
+use Spatie\RouteDiscovery\Discovery\Discover;
 
 it('can discover views in a directory', function () {
     Discover::views()->in($this->getTestPath('TestClasses/resources/views'));

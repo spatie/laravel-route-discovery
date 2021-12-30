@@ -1,6 +1,6 @@
 <?php
 
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\AnyTestController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\AnyTestController;
 
 it('can register an any route', function () {
     $this->routeRegistrar->registerClass(AnyTestController::class);

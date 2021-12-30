@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\RouteAttributes\RouteDiscovery;
+namespace Spatie\RouteDiscovery\Discovery;
 
 class Discover
 {

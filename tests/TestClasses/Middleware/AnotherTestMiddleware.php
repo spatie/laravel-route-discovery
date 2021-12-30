@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Spatie\RouteAttributes\Tests\TestClasses\Middleware;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;

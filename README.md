@@ -1,14 +1,14 @@
-# Use PHP 8 attributes to register routes in a Laravel app
+# Automatically discover routes in a Laravel app
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-route-attributes.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-route-attributes)
-![Tests](https://github.com/spatie/laravel-route-attributes/workflows/Tests/badge.svg)
-[![Type Coverage](https://shepherd.dev/github/spatie/laravel-route-attributes/coverage.svg)](https://shepherd.dev/github/spatie/laravel-route-attributes)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-route-attributes.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-route-attributes)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-route-discovery.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-route-discovery)
+![Tests](https://github.com/spatie/laravel-route-discovery/workflows/Tests/badge.svg)
+[![Type Coverage](https://shepherd.dev/github/spatie/laravel-route-discovery/coverage.svg)](https://shepherd.dev/github/spatie/laravel-route-discovery)
+[![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-route-discovery.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-route-discovery)
 
-This package provides annotations to automatically register routes. Here's a quick example:
+This package will automatically discover and register routes of your app.
 
 ```php
-use Spatie\RouteAttributes\Attributes\Get;
+use Spatie\RouteDiscovery\Attributes\Get;
 
 class MyController
 {
@@ -32,7 +32,7 @@ Route::get('my-route', [MyController::class, 'myMethod']);
 
 ## Support us
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-route-attributes.jpg?t=2" width="419px" />](https://spatie.be/github-ad-click/laravel-route-attributes)
+[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-route-discovery.jpg?t=2" width="419px" />](https://spatie.be/github-ad-click/laravel-route-discovery)
 
 We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
@@ -43,12 +43,12 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require spatie/laravel-route-attributes
+composer require spatie/laravel-route-discovery
 ```
 
 You can publish the config file with:
 ```bash
-php artisan vendor:publish --provider="Spatie\RouteAttributes\RouteAttributesServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Spatie\RouteDiscovery\RouteDiscoveryServiceProvider" --tag="config"
 ```
 
 This is the contents of the published config file:
@@ -77,7 +77,7 @@ The package provides several annotations that should be put on controller classe
 ### Adding a GET route
 
 ```php
-use Spatie\RouteAttributes\Attributes\Get;
+use Spatie\RouteDiscovery\Attributes\Get;
 
 class MyController
 {
@@ -100,11 +100,11 @@ Route::get('my-route', [MyController::class, 'myMethod']);
 We have left no HTTP verb behind. You can use these attributes on controller methods.
 
 ```php
-#[Spatie\RouteAttributes\Attributes\Post('my-uri')]
-#[Spatie\RouteAttributes\Attributes\Put('my-uri')]
-#[Spatie\RouteAttributes\Attributes\Patch('my-uri')]
-#[Spatie\RouteAttributes\Attributes\Delete('my-uri')]
-#[Spatie\RouteAttributes\Attributes\Options('my-uri')]
+#[Spatie\RouteDiscovery\Attributes\Post('my-uri')]
+#[Spatie\RouteDiscovery\Attributes\Put('my-uri')]
+#[Spatie\RouteDiscovery\Attributes\Patch('my-uri')]
+#[Spatie\RouteDiscovery\Attributes\Delete('my-uri')]
+#[Spatie\RouteDiscovery\Attributes\Options('my-uri')]
 ```
 
 ### Resource controllers
@@ -118,7 +118,7 @@ You can use the `names` parameter to set the route names for the resource contro
 Using `Resource` attribute with `Domain`, `Prefix` and `Middleware` attributes works as well.
 
 ```php
-use Spatie\RouteAttributes\Attributes\Resource;
+use Spatie\RouteDiscovery\Attributes\Resource;
 
 #[Prefix('api/v1')]
 #[Resource('posts', except: ['create', 'edit', 'destroy'], names: 'api.v1.posts')]
@@ -147,13 +147,13 @@ class PostController
 To register a route for all verbs, you can use the `Any` attribute:
 
 ```php
-#[Spatie\RouteAttributes\Attributes\Any('my-uri')]
+#[Spatie\RouteDiscovery\Attributes\Any('my-uri')]
 ```
 
 To register a route for a few verbs at once, you can use the `Route` attribute directly:
 
 ```php
-#[Spatie\RouteAttributes\Attributes\Route(['put', 'patch'], 'my-uri')]
+#[Spatie\RouteDiscovery\Attributes\Route(['put', 'patch'], 'my-uri')]
 ```
 
 ### Specify a route name
@@ -161,7 +161,7 @@ To register a route for a few verbs at once, you can use the `Route` attribute d
 All HTTP verb attributes accept a parameter named `name` that accepts a route name.
 
 ```php
-use Spatie\RouteAttributes\Attributes\Get;
+use Spatie\RouteDiscovery\Attributes\Get;
 
 class MyController
 {
@@ -184,7 +184,7 @@ Route::get('my-route', [MyController::class, 'myMethod'])->name('my-route-name')
 All HTTP verb attributes accept a parameter named `middleware` that accepts a middleware class or an array of middleware classes.
 
 ```php
-use Spatie\RouteAttributes\Attributes\Get;
+use Spatie\RouteDiscovery\Attributes\Get;
 
 class MyController
 {
@@ -205,8 +205,8 @@ Route::get('my-route', [MyController::class, 'myMethod'])->middleware(MyMiddlewa
 To apply middleware on all methods of a class you can use the `Middleware` attribute. You can mix this with applying attribute on a method.
 
 ```php
-use Spatie\RouteAttributes\Attributes\Get;
-use Spatie\RouteAttributes\Attributes\Middleware;
+use Spatie\RouteDiscovery\Attributes\Get;
+use Spatie\RouteDiscovery\Attributes\Middleware;
 
 #[Middleware(MyMiddleware::class)]
 class MyController
@@ -235,9 +235,9 @@ Route::get('my-other-route', [MyController::class, 'secondMethod'])->middleware(
 You can use the `Prefix` annotation on a class to prefix the routes of all methods of that class.
 
 ```php
-use Spatie\RouteAttributes\Attributes\Get;
-use Spatie\RouteAttributes\Attributes\Post;
-use Spatie\RouteAttributes\Attributes\Prefix;
+use Spatie\RouteDiscovery\Attributes\Get;
+use Spatie\RouteDiscovery\Attributes\Post;
+use Spatie\RouteDiscovery\Attributes\Prefix;
 
 #[Prefix('my-prefix')]
 class MyController
@@ -266,9 +266,9 @@ Route::post('my-prefix/my-post-route', [MyController::class, 'myPostMethod']);
 You can use the `Domain` annotation on a class to prefix the routes of all methods of that class.
 
 ```php
-use Spatie\RouteAttributes\Attributes\Get;
-use Spatie\RouteAttributes\Attributes\Post;
-use Spatie\RouteAttributes\Attributes\Domain;
+use Spatie\RouteDiscovery\Attributes\Get;
+use Spatie\RouteDiscovery\Attributes\Post;
+use Spatie\RouteDiscovery\Attributes\Domain;
 
 #[Domain('my-subdomain.localhost')]
 class MyController
@@ -307,9 +307,9 @@ return [
 ```
 
 ```php
-use Spatie\RouteAttributes\Attributes\Get;
-use Spatie\RouteAttributes\Attributes\Post;
-use Spatie\RouteAttributes\Attributes\DomainFromConfig;
+use Spatie\RouteDiscovery\Attributes\Get;
+use Spatie\RouteDiscovery\Attributes\Post;
+use Spatie\RouteDiscovery\Attributes\DomainFromConfig;
 
 #[DomainFromConfig('domains.main')]
 class MyController
@@ -333,10 +333,10 @@ You can use the `Where` annotation on a class or method to constrain the format 
 
 
 ```php
-use Spatie\RouteAttributes\Attributes\Get;
-use Spatie\RouteAttributes\Attributes\Post;
-use Spatie\RouteAttributes\Attributes\Where;
-use Spatie\RouteAttributes\Attributes\WhereAlphaNumeric;
+use Spatie\RouteDiscovery\Attributes\Get;
+use Spatie\RouteDiscovery\Attributes\Post;
+use Spatie\RouteDiscovery\Attributes\Where;
+use Spatie\RouteDiscovery\Attributes\WhereAlphaNumeric;
 
 #[Where('my-where', '[0-9]+')]
 class MyController
@@ -375,9 +375,9 @@ For convenience, some commonly used regular expression patterns have helper attr
 You can use the `Group` annotation on a class to create multiple groups with different domains and prefixes for the routes of all methods of that class.
 
 ```php
-use Spatie\RouteAttributes\Attributes\Get;
-use Spatie\RouteAttributes\Attributes\Post;
-use Spatie\RouteAttributes\Attributes\Domain;
+use Spatie\RouteDiscovery\Attributes\Get;
+use Spatie\RouteDiscovery\Attributes\Post;
+use Spatie\RouteDiscovery\Attributes\Domain;
 
 #[Group(domain: 'my-subdomain.localhost', prefix: 'my-prefix')]
 #[Group(domain: 'my-second-subdomain.localhost', prefix: 'my-second-prefix')]

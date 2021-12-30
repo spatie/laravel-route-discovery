@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\RouteAttributes\Tests\TestClasses\Controllers\RouteRegistrar;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Controllers\RouteRegistrar;
 
-use Spatie\RouteAttributes\Attributes\Get;
+use Spatie\RouteDiscovery\Attributes\Get;
 
 class RegistrarTestSecondController
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\RouteAttributes\Tests\TestClasses\AutoDiscovery\RouteName;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\AutoDiscovery\RouteName;
 
-use Spatie\RouteAttributes\Attributes\Route;
+use Spatie\RouteDiscovery\Attributes\Route;
 
 class CustomRouteNameController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\RouteAttributes;
+namespace Spatie\RouteDiscovery;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\Router;
@@ -10,10 +10,10 @@ use ReflectionAttribute;
 use ReflectionClass;
 use ReflectionMethod;
 use ReflectionParameter;
-use Spatie\RouteAttributes\Attributes\Route;
-use Spatie\RouteAttributes\Attributes\RouteAttribute;
-use Spatie\RouteAttributes\Attributes\Where;
-use Spatie\RouteAttributes\Attributes\WhereAttribute;
+use Spatie\RouteDiscovery\Attributes\Route;
+use Spatie\RouteDiscovery\Attributes\RouteAttribute;
+use Spatie\RouteDiscovery\Attributes\Where;
+use Spatie\RouteDiscovery\Attributes\WhereAttribute;
 use SplFileInfo;
 use Symfony\Component\Finder\Finder;
 use Throwable;
@@ -131,29 +131,29 @@ class RouteRegistrar
         }
     }
 
-    protected function registerResource(ReflectionClass $class, ClassRouteAttributes $classRouteAttributes): void
+    protected function registerResource(ReflectionClass $class, ClassRouteAttributes $classRouteDiscovery): void
     {
         $this->router->group([
-            'domain' => $classRouteAttributes->domain(),
-            'prefix' => $classRouteAttributes->prefix(),
-        ], function () use ($class, $classRouteAttributes) {
-            $route = $classRouteAttributes->apiResource()
-                ? $this->router->apiResource($classRouteAttributes->resource(), $class->getName())
-                : $this->router->resource($classRouteAttributes->resource(), $class->getName());
+            'domain' => $classRouteDiscovery->domain(),
+            'prefix' => $classRouteDiscovery->prefix(),
+        ], function () use ($class, $classRouteDiscovery) {
+            $route = $classRouteDiscovery->apiResource()
+                ? $this->router->apiResource($classRouteDiscovery->resource(), $class->getName())
+                : $this->router->resource($classRouteDiscovery->resource(), $class->getName());
 
-            if ($only = $classRouteAttributes->only()) {
+            if ($only = $classRouteDiscovery->only()) {
                 $route->only($only);
             }
 
-            if ($except = $classRouteAttributes->except()) {
+            if ($except = $classRouteDiscovery->except()) {
                 $route->except($except);
             }
 
-            if ($names = $classRouteAttributes->names()) {
+            if ($names = $classRouteDiscovery->names()) {
                 $route->names($names);
             }
 
-            if ($middleware = $classRouteAttributes->middleware()) {
+            if ($middleware = $classRouteDiscovery->middleware()) {
                 $route->middleware([...$this->middleware, ...$middleware]);
             }
         });
@@ -161,7 +161,7 @@ class RouteRegistrar
 
     protected function registerRoutes(
         ReflectionClass      $class,
-        ClassRouteAttributes $classRouteAttributes
+        ClassRouteAttributes $classRouteDiscovery
     ): void {
         if ($class->isAbstract()) {
             return;
@@ -218,7 +218,7 @@ class RouteRegistrar
                     )
                     ->name($attributeClass->name);
 
-                $wheres = $classRouteAttributes->wheres();
+                $wheres = $classRouteDiscovery->wheres();
                 foreach ($wheresAttributes as $wheresAttribute) {
                     /** @var Where $wheresAttributeClass */
                     $wheresAttributeClass = $wheresAttribute->newInstance();
@@ -230,7 +230,7 @@ class RouteRegistrar
                     $route->setWheres($wheres);
                 }
 
-                $classMiddleware = $classRouteAttributes->middleware();
+                $classMiddleware = $classRouteDiscovery->middleware();
                 $methodMiddleware = $attributeClass->middleware;
                 $route->middleware([...$this->middleware, ...$classMiddleware, ...$methodMiddleware]);
             }

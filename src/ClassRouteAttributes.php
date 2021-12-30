@@ -1,16 +1,16 @@
 <?php
 
-namespace Spatie\RouteAttributes;
+namespace Spatie\RouteDiscovery;
 
 use ReflectionClass;
-use Spatie\RouteAttributes\Attributes\Domain;
-use Spatie\RouteAttributes\Attributes\DomainFromConfig;
-use Spatie\RouteAttributes\Attributes\Group;
-use Spatie\RouteAttributes\Attributes\Middleware;
-use Spatie\RouteAttributes\Attributes\Prefix;
-use Spatie\RouteAttributes\Attributes\Resource;
-use Spatie\RouteAttributes\Attributes\RouteAttribute;
-use Spatie\RouteAttributes\Attributes\Where;
+use Spatie\RouteDiscovery\Attributes\Domain;
+use Spatie\RouteDiscovery\Attributes\DomainFromConfig;
+use Spatie\RouteDiscovery\Attributes\Group;
+use Spatie\RouteDiscovery\Attributes\Middleware;
+use Spatie\RouteDiscovery\Attributes\Prefix;
+use Spatie\RouteDiscovery\Attributes\Resource;
+use Spatie\RouteDiscovery\Attributes\RouteAttribute;
+use Spatie\RouteDiscovery\Attributes\Where;
 
 class ClassRouteAttributes
 {
@@ -23,7 +23,7 @@ class ClassRouteAttributes
 
     public function prefix(): ?string
     {
-        /** @var \Spatie\RouteAttributes\Attributes\Prefix $attribute */
+        /** @var \Spatie\RouteDiscovery\Attributes\Prefix $attribute */
         if (! $attribute = $this->getAttribute(Prefix::class)) {
             return null;
         }
@@ -33,7 +33,7 @@ class ClassRouteAttributes
 
     public function domain(): ?string
     {
-        /** @var \Spatie\RouteAttributes\Attributes\Domain $attribute */
+        /** @var \Spatie\RouteDiscovery\Attributes\Domain $attribute */
         if (! $attribute = $this->getAttribute(Domain::class)) {
             return null;
         }
@@ -43,7 +43,7 @@ class ClassRouteAttributes
 
     public function domainFromConfig(): ?string
     {
-        /** @var \Spatie\RouteAttributes\Attributes\DomainFromConfig $attribute */
+        /** @var \Spatie\RouteDiscovery\Attributes\DomainFromConfig $attribute */
         if (! $attribute = $this->getAttribute(DomainFromConfig::class)) {
             return null;
         }
@@ -79,7 +79,7 @@ class ClassRouteAttributes
 
     public function resource(): ?string
     {
-        /** @var \Spatie\RouteAttributes\Attributes\Resource $attribute */
+        /** @var \Spatie\RouteDiscovery\Attributes\Resource $attribute */
         if (! $attribute = $this->getAttribute(Resource::class)) {
             return null;
         }
@@ -89,7 +89,7 @@ class ClassRouteAttributes
 
     public function apiResource(): ?string
     {
-        /** @var \Spatie\RouteAttributes\Attributes\Resource $attribute */
+        /** @var \Spatie\RouteDiscovery\Attributes\Resource $attribute */
         if (! $attribute = $this->getAttribute(Resource::class)) {
             return null;
         }
@@ -99,7 +99,7 @@ class ClassRouteAttributes
 
     public function except(): string | array | null
     {
-        /** @var \Spatie\RouteAttributes\Attributes\Resource $attribute */
+        /** @var \Spatie\RouteDiscovery\Attributes\Resource $attribute */
         if (! $attribute = $this->getAttribute(Resource::class)) {
             return null;
         }
@@ -109,7 +109,7 @@ class ClassRouteAttributes
 
     public function only(): string | array | null
     {
-        /** @var \Spatie\RouteAttributes\Attributes\Resource $attribute */
+        /** @var \Spatie\RouteDiscovery\Attributes\Resource $attribute */
         if (! $attribute = $this->getAttribute(Resource::class)) {
             return null;
         }
@@ -119,7 +119,7 @@ class ClassRouteAttributes
 
     public function names(): string | array | null
     {
-        /** @var \Spatie\RouteAttributes\Attributes\Resource $attribute */
+        /** @var \Spatie\RouteDiscovery\Attributes\Resource $attribute */
         if (! $attribute = $this->getAttribute(Resource::class)) {
             return null;
         }
@@ -129,7 +129,7 @@ class ClassRouteAttributes
 
     public function middleware(): array
     {
-        /** @var \Spatie\RouteAttributes\Attributes\Middleware $attribute */
+        /** @var \Spatie\RouteDiscovery\Attributes\Middleware $attribute */
         if (! $attribute = $this->getAttribute(Middleware::class)) {
             return [];
         }

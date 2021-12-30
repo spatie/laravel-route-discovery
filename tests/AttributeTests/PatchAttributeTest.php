@@ -1,6 +1,6 @@
 <?php
 
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\PatchTestController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\PatchTestController;
 
 it('can register a patch route', function () {
     $this->routeRegistrar->registerClass(PatchTestController::class);

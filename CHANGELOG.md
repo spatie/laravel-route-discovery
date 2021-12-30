@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `laravel-route-attributes` will be documented in this file
+All notable changes to `laravel-route-discovery` will be documented in this file
 
 ## 1.9.0 - 2021-10-04
 

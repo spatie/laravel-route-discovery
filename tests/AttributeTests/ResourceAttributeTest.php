@@ -1,16 +1,16 @@
 <?php
 
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\Resource\ResourceTestApiController;
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\Resource\ResourceTestDomainController;
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\Resource\ResourceTestExceptController;
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\Resource\ResourceTestFullController;
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\Resource\ResourceTestMiddlewareController;
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\Resource\ResourceTestNamesArrayController;
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\Resource\ResourceTestNamesStringController;
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\Resource\ResourceTestOnlyController;
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\Resource\ResourceTestPrefixController;
-use Spatie\RouteAttributes\Tests\TestClasses\Middleware\OtherTestMiddleware;
-use Spatie\RouteAttributes\Tests\TestClasses\Middleware\TestMiddleware;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Resource\ResourceTestApiController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Resource\ResourceTestDomainController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Resource\ResourceTestExceptController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Resource\ResourceTestFullController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Resource\ResourceTestMiddlewareController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Resource\ResourceTestNamesArrayController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Resource\ResourceTestNamesStringController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Resource\ResourceTestOnlyController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Resource\ResourceTestPrefixController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\OtherTestMiddleware;
+use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\TestMiddleware;
 
 it('can register resource with prefix', function () {
     $this->routeRegistrar->registerClass(ResourceTestPrefixController::class);

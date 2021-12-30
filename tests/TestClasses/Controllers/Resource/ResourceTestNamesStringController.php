@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\RouteAttributes\Tests\TestClasses\Controllers\Resource;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Resource;
 
-use Spatie\RouteAttributes\Attributes\Resource;
+use Spatie\RouteDiscovery\Attributes\Resource;
 
 #[Resource('posts', only: ['index', 'show'], names: 'api.v1.posts')]
 class ResourceTestNamesStringController

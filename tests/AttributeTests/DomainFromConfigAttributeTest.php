@@ -1,6 +1,6 @@
 <?php
 
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\DomainFromConfigTestController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\DomainFromConfigTestController;
 
 it('can apply a domain on the url of every method', function () {
     config()->set('domains.test', 'config.localhost');

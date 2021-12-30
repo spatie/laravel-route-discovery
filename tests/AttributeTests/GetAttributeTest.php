@@ -1,6 +1,6 @@
 <?php
 
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\GetTestController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\GetTestController;
 
 it('can register a get route', function () {
     $this->routeRegistrar->registerClass(GetTestController::class);

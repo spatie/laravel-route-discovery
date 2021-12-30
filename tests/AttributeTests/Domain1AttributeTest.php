@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\Domain1TestController;
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\Domain2TestController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Domain1TestController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Domain2TestController;
 
 it('registers the same url on different domains', function () {
     config()->set('domains.test', 'config.localhost');

@@ -1,16 +1,17 @@
 <?php
 
-namespace Spatie\RouteAttributes;
+namespace Spatie\RouteDiscovery;
 
+use Illuminate\Routing\Route;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class RouteAttributesServiceProvider extends PackageServiceProvider
+class RouteDiscoveryServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('laravel-route-attributes')
+            ->name('laravel-route-discovery')
             ->hasConfigFile();
     }
 

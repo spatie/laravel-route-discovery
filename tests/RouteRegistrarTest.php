@@ -1,9 +1,9 @@
 <?php
 
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\RouteRegistrar\RegistrarTestFirstController;
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\RouteRegistrar\RegistrarTestSecondController;
-use Spatie\RouteAttributes\Tests\TestClasses\Controllers\RouteRegistrar\SubDirectory\RegistrarTestControllerInSubDirectory;
-use Spatie\RouteAttributes\Tests\TestClasses\Middleware\AnotherTestMiddleware;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\RouteRegistrar\RegistrarTestFirstController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\RouteRegistrar\RegistrarTestSecondController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\RouteRegistrar\SubDirectory\RegistrarTestControllerInSubDirectory;
+use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\AnotherTestMiddleware;
 
 test('the registrar can register a single file', function () {
     $this

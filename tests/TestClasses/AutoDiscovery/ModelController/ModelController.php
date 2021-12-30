@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\RouteAttributes\Tests\TestClasses\AutoDiscovery\ModelController;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\AutoDiscovery\ModelController;
 
-use Spatie\RouteAttributes\Tests\TestClasses\Models\User;
+use Spatie\RouteDiscovery\Tests\TestClasses\Models\User;
 
 class ModelController
 {

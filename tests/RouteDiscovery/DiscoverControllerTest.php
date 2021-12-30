@@ -1,13 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Spatie\RouteAttributes\RouteDiscovery\Discover;
-use Spatie\RouteAttributes\Tests\TestClasses\AutoDiscovery\CustomMethod\CustomMethodController;
-use Spatie\RouteAttributes\Tests\TestClasses\AutoDiscovery\SingleController\MyController;
+use Spatie\RouteDiscovery\Discovery\Discover;
+use Spatie\RouteDiscovery\Tests\TestClasses\AutoDiscovery\CustomMethod\CustomMethodController;
+use Spatie\RouteDiscovery\Tests\TestClasses\AutoDiscovery\SingleController\MyController;
 
 it('can discover controller in a directory', function () {
     Discover::controllers()
-        ->useRootNamespace('Spatie\RouteAttributes\Tests\\')
+        ->useRootNamespace('Spatie\RouteDiscovery\Tests\\')
         ->useBasePath($this->getTestPath())
         ->in($this->getTestPath('TestClasses/AutoDiscovery/SingleController'));
 
@@ -22,7 +22,7 @@ it('can discover controller in a directory', function () {
 
 it('can discover controllers with custom methods', function () {
     Discover::controllers()
-        ->useRootNamespace('Spatie\RouteAttributes\Tests\\')
+        ->useRootNamespace('Spatie\RouteDiscovery\Tests\\')
         ->useBasePath($this->getTestPath())
         ->in($this->getTestPath('TestClasses/AutoDiscovery/CustomMethod'));
 
@@ -38,7 +38,7 @@ it('can discover controllers with custom methods', function () {
 it('can use a prefix when discovering routes', function () {
     Route::prefix('my-prefix')->group(function () {
         Discover::controllers()
-            ->useRootNamespace('Spatie\RouteAttributes\Tests\\')
+            ->useRootNamespace('Spatie\RouteDiscovery\Tests\\')
             ->useBasePath(test()->getTestPath())
             ->in(test()->getTestPath('TestClasses/AutoDiscovery/SingleController'));
     });

@@ -1,10 +1,10 @@
 <?php
 
-namespace Spatie\RouteAttributes\Tests\TestClasses\Controllers;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Controllers;
 
-use Spatie\RouteAttributes\Attributes\DomainFromConfig;
-use Spatie\RouteAttributes\Attributes\Get;
-use Spatie\RouteAttributes\Attributes\Post;
+use Spatie\RouteDiscovery\Attributes\DomainFromConfig;
+use Spatie\RouteDiscovery\Attributes\Get;
+use Spatie\RouteDiscovery\Attributes\Post;
 
 #[DomainFromConfig('domains.test')]
 class DomainFromConfigTestController

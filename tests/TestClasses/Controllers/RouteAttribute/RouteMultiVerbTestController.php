@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\RouteAttributes\Tests\TestClasses\Controllers\RouteAttribute;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Controllers\RouteAttribute;
 
-use Spatie\RouteAttributes\Attributes\Route;
+use Spatie\RouteDiscovery\Attributes\Route;
 
 class RouteMultiVerbTestController
 {

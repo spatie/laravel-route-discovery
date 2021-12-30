@@ -1,15 +1,15 @@
 <?php
 
-namespace Spatie\RouteAttributes\Tests;
+namespace Spatie\RouteDiscovery\Tests;
 
 use Illuminate\Routing\Route;
 use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\Arr;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\LaravelRay\RayServiceProvider;
-use Spatie\RouteAttributes\RouteAttributesServiceProvider;
-use Spatie\RouteAttributes\RouteRegistrar;
-use Spatie\RouteAttributes\Tests\TestClasses\Middleware\AnotherTestMiddleware;
+use Spatie\RouteDiscovery\RouteDiscoveryServiceProvider;
+use Spatie\RouteDiscovery\RouteRegistrar;
+use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\AnotherTestMiddleware;
 
 class TestCase extends Orchestra
 {
@@ -24,14 +24,14 @@ class TestCase extends Orchestra
         $this->routeRegistrar = (new RouteRegistrar($router))
             ->useBasePath($this->getTestPath())
             ->useMiddleware([AnotherTestMiddleware::class])
-            ->useRootNamespace('Spatie\RouteAttributes\Tests\\');
+            ->useRootNamespace('Spatie\RouteDiscovery\Tests\\');
     }
 
     protected function getPackageProviders($app)
     {
         return [
             RayServiceProvider::class,
-            RouteAttributesServiceProvider::class,
+            RouteDiscoveryServiceProvider::class,
         ];
     }
 

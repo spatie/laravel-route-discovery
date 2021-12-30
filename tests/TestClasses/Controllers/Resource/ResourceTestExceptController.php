@@ -1,9 +1,9 @@
 <?php
 
-namespace Spatie\RouteAttributes\Tests\TestClasses\Controllers\Resource;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Resource;
 
 use Illuminate\Http\Request;
-use Spatie\RouteAttributes\Attributes\Resource;
+use Spatie\RouteDiscovery\Attributes\Resource;
 
 #[Resource('posts', except: ['update', 'destroy'])]
 class ResourceTestExceptController
