@@ -2,7 +2,6 @@
 
 namespace Spatie\RouteDiscovery;
 
-use Illuminate\Routing\Route;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
