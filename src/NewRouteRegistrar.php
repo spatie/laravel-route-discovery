@@ -2,26 +2,15 @@
 
 namespace Spatie\RouteDiscovery;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
-use ReflectionAttribute;
-use ReflectionClass;
-use ReflectionMethod;
-use ReflectionParameter;
-use Spatie\RouteDiscovery\Attributes\Route;
-use Spatie\RouteDiscovery\Attributes\RouteAttribute;
-use Spatie\RouteDiscovery\Attributes\Where;
-use Spatie\RouteDiscovery\Attributes\WhereAttribute;
 use Spatie\RouteDiscovery\Discovery\Action;
 use Spatie\RouteDiscovery\Discovery\Middleware\ApplyControllerUriToActions;
 use Spatie\RouteDiscovery\Discovery\Node;
 use Spatie\RouteDiscovery\Discovery\NodeFactory;
 use SplFileInfo;
 use Symfony\Component\Finder\Finder;
-use Throwable;
 
 class NewRouteRegistrar
 {
@@ -95,12 +84,11 @@ class NewRouteRegistrar
             ->filter();
 
         collect((new Finder())->directories()->depth(0)->in($directory))
-            ->each(function(SplFileInfo $subDirectory) {
+            ->each(function (SplFileInfo $subDirectory) {
                 $nodes = $this->convertToNodes($subDirectory);
             });
 
         return $nodes;
-
     }
 
     private function applyNodeMiddleware($nodes): void
@@ -108,13 +96,13 @@ class NewRouteRegistrar
         collect([
             new ApplyControllerUriToActions(),
         ])
-        ->each(fn($middleware) => $middleware->apply($nodes));
+        ->each(fn ($middleware) => $middleware->apply($nodes));
     }
 
     private function registerRoutes(Collection $nodes): void
     {
-        $nodes->each(function(Node $node) {
-            $node->actions->each(function(Action $action) {
+        $nodes->each(function (Node $node) {
+            $node->actions->each(function (Action $action) {
                 $this->router->addRoute($action->methods, $action->uri, $action->action);
             });
 

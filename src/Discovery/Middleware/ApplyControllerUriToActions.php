@@ -13,8 +13,8 @@ class ApplyControllerUriToActions
      */
     public function apply(Collection $nodes)
     {
-        $nodes->each(function(Node $node) {
-            $node->actions->each(function(Action $action) use ($node) {
+        $nodes->each(function (Node $node) {
+            $node->actions->each(function (Action $action) use ($node) {
                 $originalActionUri = $action->uri;
 
                 $action->uri = $node->uri;
