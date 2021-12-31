@@ -7,6 +7,7 @@ use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\Arr;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\LaravelRay\RayServiceProvider;
+use Spatie\RouteDiscovery\NewRouteRegistrar;
 use Spatie\RouteDiscovery\RouteDiscoveryServiceProvider;
 use Spatie\RouteDiscovery\RouteRegistrar;
 use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\AnotherTestMiddleware;
@@ -15,6 +16,9 @@ class TestCase extends Orchestra
 {
     protected RouteRegistrar $routeRegistrar;
 
+    protected NewRouteRegistrar $newRouteRegistrar;
+
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -22,6 +26,11 @@ class TestCase extends Orchestra
         $router = app()->router;
 
         $this->routeRegistrar = (new RouteRegistrar($router))
+            ->useBasePath($this->getTestPath())
+            ->useMiddleware([AnotherTestMiddleware::class])
+            ->useRootNamespace('Spatie\RouteDiscovery\Tests\\');
+
+        $this->newRouteRegistrar = (new NewRouteRegistrar($router))
             ->useBasePath($this->getTestPath())
             ->useMiddleware([AnotherTestMiddleware::class])
             ->useRootNamespace('Spatie\RouteDiscovery\Tests\\');
@@ -74,6 +83,7 @@ class TestCase extends Orchestra
                 if ($route->uri() !== $uri) {
                     return false;
                 }
+
                 $routeController = $route->getAction(0) ?? get_class($route->getController());
 
                 if ($routeController !== $controller) {
