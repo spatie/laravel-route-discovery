@@ -23,6 +23,8 @@ class ApplyControllerUriToActions
                     $action->uri .= "/{$originalActionUri}";
                 }
             });
+
+            $this->apply($node->children);
         });
     }
 }
