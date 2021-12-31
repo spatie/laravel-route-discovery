@@ -3,7 +3,7 @@
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\WhereTestController;
 
 it('can apply where on each method of a controller', function () {
-    $this->routeRegistrar->registerClass(WhereTestController::class);
+    $this->oldRouteRegistrar->registerClass(WhereTestController::class);
 
     $this
         ->assertRegisteredRoutesCount(4)
@@ -23,7 +23,7 @@ it('can apply where on each method of a controller', function () {
 });
 
 it('can apply where on a method', function () {
-    $this->routeRegistrar->registerClass(WhereTestController::class);
+    $this->oldRouteRegistrar->registerClass(WhereTestController::class);
 
     $this
         ->assertRegisteredRoutesCount(4)
@@ -36,7 +36,7 @@ it('can apply where on a method', function () {
 });
 
 it('can apply shorthand where', function () {
-    $this->routeRegistrar->registerClass(WhereTestController::class);
+    $this->oldRouteRegistrar->registerClass(WhereTestController::class);
 
     $this
         ->assertRegisteredRoutesCount(4)

@@ -3,7 +3,7 @@
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\DomainTestController;
 
 it('can apply a domain on the url of every method', function () {
-    $this->routeRegistrar->registerClass(DomainTestController::class);
+    $this->oldRouteRegistrar->registerClass(DomainTestController::class);
 
     $this
         ->assertRegisteredRoutesCount(2)

@@ -5,7 +5,7 @@ use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\OtherTestMiddleware;
 use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\TestMiddleware;
 
 it('can apply middleware on each method of a controller', function () {
-    $this->routeRegistrar->registerClass(MiddlewareTestController::class);
+    $this->oldRouteRegistrar->registerClass(MiddlewareTestController::class);
 
     $this
         ->assertRegisteredRoutesCount(2)

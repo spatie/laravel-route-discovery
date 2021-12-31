@@ -1,19 +1,20 @@
 <?php
 
-namespace Spatie\RouteDiscovery\Discovery;
+namespace Spatie\RouteDiscovery\NodeTree;
 
 use Illuminate\Support\Str;
 use ReflectionClass;
 use ReflectionMethod;
 use SplFileInfo;
+use function collect;
 
 class NodeFactory
 {
     public function __construct(
         public string $basePath,
+
         protected string $rootNamespace,
-        protected string $registeringDirectory
-    )
+        protected string $registeringDirectory)
     {
     }
 
@@ -32,10 +33,10 @@ class NodeFactory
         }
 
         $actions = collect($class->getMethods())
-            ->filter(function (ReflectionMethod $method) {
+            ->filter(function(ReflectionMethod $method) {
                 return $method->isPublic();
             })
-            ->map(function (ReflectionMethod $method) use ($fullyQualifiedClassName) {
+            ->map(function(ReflectionMethod $method) use ($fullyQualifiedClassName) {
                 return new Action($method, $fullyQualifiedClassName);
             });
 
@@ -47,13 +48,15 @@ class NodeFactory
 
     protected function discoverUri(ReflectionClass $class): ?string
     {
-        $lastPart = Str::of($class->getFileName())
+        $parts = Str::of($class->getFileName())
             ->after($this->registeringDirectory)
             ->beforeLast('Controller')
-            ->explode('/')
-            ->last();
+            ->explode('/');
 
-        return Str::of($lastPart)->kebab();
+        return collect($parts)
+            ->filter()
+            ->map(fn (string $part) => Str::of($part)->kebab())
+            ->implode('/');
     }
 
     protected function fullQualifiedClassNameFromFile(SplFileInfo $file): string

@@ -3,7 +3,7 @@
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\PutTestController;
 
 it('can register a put route', function () {
-    $this->routeRegistrar->registerClass(PutTestController::class);
+    $this->oldRouteRegistrar->registerClass(PutTestController::class);
 
     $this
         ->assertRegisteredRoutesCount(1)

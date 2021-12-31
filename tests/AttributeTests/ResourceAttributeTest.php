@@ -13,7 +13,7 @@ use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\OtherTestMiddleware;
 use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\TestMiddleware;
 
 it('can register resource with prefix', function () {
-    $this->routeRegistrar->registerClass(ResourceTestPrefixController::class);
+    $this->oldRouteRegistrar->registerClass(ResourceTestPrefixController::class);
 
     $this
         ->assertRegisteredRoutesCount(2)
@@ -32,7 +32,7 @@ it('can register resource with prefix', function () {
 });
 
 it('can register resource with middleware', function () {
-    $this->routeRegistrar->registerClass(ResourceTestMiddlewareController::class);
+    $this->oldRouteRegistrar->registerClass(ResourceTestMiddlewareController::class);
 
     $this
         ->assertRegisteredRoutesCount(2)
@@ -53,7 +53,7 @@ it('can register resource with middleware', function () {
 });
 
 it('can register resource with domain', function () {
-    $this->routeRegistrar->registerClass(ResourceTestDomainController::class);
+    $this->oldRouteRegistrar->registerClass(ResourceTestDomainController::class);
 
     $this
         ->assertRegisteredRoutesCount(2)
@@ -74,7 +74,7 @@ it('can register resource with domain', function () {
 });
 
 it('can register resource with names as string', function () {
-    $this->routeRegistrar->registerClass(ResourceTestNamesStringController::class);
+    $this->oldRouteRegistrar->registerClass(ResourceTestNamesStringController::class);
 
     $this
         ->assertRegisteredRoutesCount(2)
@@ -93,7 +93,7 @@ it('can register resource with names as string', function () {
 });
 
 it('can register resource with names as array', function () {
-    $this->routeRegistrar->registerClass(ResourceTestNamesArrayController::class);
+    $this->oldRouteRegistrar->registerClass(ResourceTestNamesArrayController::class);
 
     $this
         ->assertRegisteredRoutesCount(2)
@@ -112,7 +112,7 @@ it('can register resource with names as array', function () {
 });
 
 it('can register resource with all methods', function () {
-    $this->routeRegistrar->registerClass(ResourceTestFullController::class);
+    $this->oldRouteRegistrar->registerClass(ResourceTestFullController::class);
 
     $this
         ->assertRegisteredRoutesCount(7)
@@ -164,7 +164,7 @@ it('can register resource with all methods', function () {
 });
 
 it('can register resource with only few methods', function () {
-    $this->routeRegistrar->registerClass(ResourceTestOnlyController::class);
+    $this->oldRouteRegistrar->registerClass(ResourceTestOnlyController::class);
 
     $this
         ->assertRegisteredRoutesCount(3)
@@ -190,7 +190,7 @@ it('can register resource with only few methods', function () {
 });
 
 it('can register resource without few methods', function () {
-    $this->routeRegistrar->registerClass(ResourceTestExceptController::class);
+    $this->oldRouteRegistrar->registerClass(ResourceTestExceptController::class);
 
     $this
         ->assertRegisteredRoutesCount(5)
@@ -228,7 +228,7 @@ it('can register resource without few methods', function () {
 });
 
 it('can register api resource', function () {
-    $this->routeRegistrar->registerClass(ResourceTestApiController::class);
+    $this->oldRouteRegistrar->registerClass(ResourceTestApiController::class);
 
     $this
         ->assertRegisteredRoutesCount(5)

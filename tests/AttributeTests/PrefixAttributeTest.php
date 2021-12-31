@@ -3,7 +3,7 @@
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\PrefixTestController;
 
 it('can apply a prefix on the url of every method', function () {
-    $this->routeRegistrar->registerClass(PrefixTestController::class);
+    $this->oldRouteRegistrar->registerClass(PrefixTestController::class);
 
     $this
         ->assertRegisteredRoutesCount(3)

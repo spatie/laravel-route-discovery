@@ -3,7 +3,7 @@
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\PostTestController;
 
 it('can register a post route', function () {
-    $this->routeRegistrar->registerClass(PostTestController::class);
+    $this->oldRouteRegistrar->registerClass(PostTestController::class);
 
     $this
         ->assertRegisteredRoutesCount(1)

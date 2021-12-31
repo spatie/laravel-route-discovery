@@ -3,7 +3,7 @@
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\DeleteTestController;
 
 it('can register a delete route', function () {
-    $this->routeRegistrar->registerClass(DeleteTestController::class);
+    $this->oldRouteRegistrar->registerClass(DeleteTestController::class);
 
     $this
         ->assertRegisteredRoutesCount(1)

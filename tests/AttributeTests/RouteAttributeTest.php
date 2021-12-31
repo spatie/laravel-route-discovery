@@ -9,7 +9,7 @@ use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\RouteAttribute\RoutePost
 use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\TestMiddleware;
 
 test('the route annotation can register a get route', function () {
-    $this->routeRegistrar->registerClass(RouteGetTestController::class);
+    $this->oldRouteRegistrar->registerClass(RouteGetTestController::class);
 
     $this
         ->assertRegisteredRoutesCount(1)
@@ -17,7 +17,7 @@ test('the route annotation can register a get route', function () {
 });
 
 test('the route annotation can register a post route', function () {
-    $this->routeRegistrar->registerClass(RoutePostTestController::class);
+    $this->oldRouteRegistrar->registerClass(RoutePostTestController::class);
 
     $this
         ->assertRegisteredRoutesCount(1)
@@ -25,7 +25,7 @@ test('the route annotation can register a post route', function () {
 });
 
 test('the route annotation can register a multi verb route', function () {
-    $this->routeRegistrar->registerClass(RouteMultiVerbTestController::class);
+    $this->oldRouteRegistrar->registerClass(RouteMultiVerbTestController::class);
 
     $this
         ->assertRegisteredRoutesCount(1)
@@ -38,7 +38,7 @@ test('the route annotation can register a multi verb route', function () {
 });
 
 it('can add middleware to a method', function () {
-    $this->routeRegistrar->registerClass(RouteMiddlewareTestController::class);
+    $this->oldRouteRegistrar->registerClass(RouteMiddlewareTestController::class);
 
     $this->assertRouteRegistered(
         controller: RouteMiddlewareTestController::class,
@@ -47,7 +47,7 @@ it('can add middleware to a method', function () {
 });
 
 it('can add a route name to a method', function () {
-    $this->routeRegistrar->registerClass(RouteNameTestController::class);
+    $this->oldRouteRegistrar->registerClass(RouteNameTestController::class);
 
     $this->assertRouteRegistered(
         controller: RouteNameTestController::class,
@@ -56,7 +56,7 @@ it('can add a route name to a method', function () {
 });
 
 it('can add a route for an invokable', function () {
-    $this->routeRegistrar->registerClass(InvokableRouteGetTestController::class);
+    $this->oldRouteRegistrar->registerClass(InvokableRouteGetTestController::class);
 
     $this
         ->assertRegisteredRoutesCount(1)

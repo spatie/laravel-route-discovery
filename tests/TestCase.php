@@ -7,16 +7,16 @@ use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\Arr;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\LaravelRay\RayServiceProvider;
-use Spatie\RouteDiscovery\NewRouteRegistrar;
-use Spatie\RouteDiscovery\RouteDiscoveryServiceProvider;
 use Spatie\RouteDiscovery\RouteRegistrar;
+use Spatie\RouteDiscovery\RouteDiscoveryServiceProvider;
+use Spatie\RouteDiscovery\OldRouteRegistrar;
 use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\AnotherTestMiddleware;
 
 class TestCase extends Orchestra
 {
-    protected RouteRegistrar $routeRegistrar;
+    protected OldRouteRegistrar $oldRouteRegistrar;
 
-    protected NewRouteRegistrar $newRouteRegistrar;
+    protected RouteRegistrar $routeRegistrar;
 
     protected function setUp(): void
     {
@@ -24,12 +24,12 @@ class TestCase extends Orchestra
 
         $router = app()->router;
 
-        $this->routeRegistrar = (new RouteRegistrar($router))
+        $this->oldRouteRegistrar = (new OldRouteRegistrar($router))
             ->useBasePath($this->getTestPath())
             ->useMiddleware([AnotherTestMiddleware::class])
             ->useRootNamespace('Spatie\RouteDiscovery\Tests\\');
 
-        $this->newRouteRegistrar = (new NewRouteRegistrar($router))
+        $this->routeRegistrar = (new RouteRegistrar($router))
             ->useBasePath($this->getTestPath())
             ->useMiddleware([AnotherTestMiddleware::class])
             ->useRootNamespace('Spatie\RouteDiscovery\Tests\\');
@@ -93,13 +93,14 @@ class TestCase extends Orchestra
                 if ($routeMethod !== $controllerMethod) {
                     return false;
                 }
-                if (array_diff($route->middleware(), array_merge($middleware, $this->routeRegistrar->middleware()))) {
+                if (array_diff($route->middleware(), array_merge($middleware, $this->oldRouteRegistrar->middleware()))) {
                     return false;
                 }
 
                 if ($route->getName() !== $name) {
                     return false;
                 }
+
 
                 if ($route->getDomain() !== $domain) {
                     return false;

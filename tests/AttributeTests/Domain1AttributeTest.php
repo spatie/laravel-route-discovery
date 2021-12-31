@@ -8,8 +8,8 @@ use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Domain2TestController;
 it('registers the same url on different domains', function () {
     config()->set('domains.test', 'config.localhost');
     config()->set('domains.test2', 'config2.localhost');
-    $this->routeRegistrar->registerClass(Domain1TestController::class);
-    $this->routeRegistrar->registerClass(Domain2TestController::class);
+    $this->oldRouteRegistrar->registerClass(Domain1TestController::class);
+    $this->oldRouteRegistrar->registerClass(Domain2TestController::class);
 
     $this
         ->assertRegisteredRoutesCount(2)

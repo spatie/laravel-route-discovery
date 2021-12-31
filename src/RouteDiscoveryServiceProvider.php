@@ -25,7 +25,7 @@ class RouteDiscoveryServiceProvider extends PackageServiceProvider
             return;
         }
 
-        $routeRegistrar = (new RouteRegistrar(app()->router))
+        $routeRegistrar = (new OldRouteRegistrar(app()->router))
             ->useRootNamespace(app()->getNamespace())
             ->useMiddleware(config('route-attributes.middleware') ?? []);
 

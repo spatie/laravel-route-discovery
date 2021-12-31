@@ -1,11 +1,12 @@
 <?php
 
-namespace Spatie\RouteDiscovery\Discovery;
+namespace Spatie\RouteDiscovery\NodeTree;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use ReflectionMethod;
 use ReflectionParameter;
+use function collect;
 
 class Action
 {
@@ -13,6 +14,9 @@ class Action
     public string $uri;
     public array $methods = [];
     public array $action;
+    public array $middleware = [];
+    public array $wheres = [];
+    public ?string $name = null;
 
     public function __construct(ReflectionMethod $method, string $controllerClass)
     {
@@ -35,11 +39,11 @@ class Action
         $uri = '';
 
         if (! in_array($this->method->getName(), $this->commonControllerMethodNames())) {
-            $uri .= '/' . Str::kebab($this->method->getName());
+            $uri = Str::kebab($this->method->getName());
         }
 
         if ($modelParameter) {
-            $uri .= "/{{$modelParameter->getName()}}";
+            $uri = "{{$modelParameter->getName()}}";
         }
 
         return $uri;

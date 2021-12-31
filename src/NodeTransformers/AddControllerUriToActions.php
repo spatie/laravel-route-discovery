@@ -1,17 +1,15 @@
 <?php
 
-namespace Spatie\RouteDiscovery\Discovery\Middleware;
+namespace Spatie\RouteDiscovery\NodeTransformers;
 
 use Illuminate\Support\Collection;
-use Spatie\RouteDiscovery\Discovery\Action;
-use Spatie\RouteDiscovery\Discovery\Node;
+use Spatie\RouteDiscovery\NodeTree\Action;
+use Spatie\RouteDiscovery\NodeTree\Node;
 
-class ApplyControllerUriToActions
+class AddControllerUriToActions implements NodeTransformer
 {
-    /**
-     * @param \Illuminate\Support\Collection $nodes
-     */
-    public function apply(Collection $nodes)
+    /** @param Collection<Node> $nodes */
+    public function apply(Collection $nodes): void
     {
         $nodes->each(function (Node $node) {
             $node->actions->each(function (Action $action) use ($node) {
@@ -23,8 +21,6 @@ class ApplyControllerUriToActions
                     $action->uri .= "/{$originalActionUri}";
                 }
             });
-
-            $this->apply($node->children);
         });
     }
 }

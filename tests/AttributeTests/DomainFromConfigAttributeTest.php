@@ -4,7 +4,7 @@ use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\DomainFromConfigTestCont
 
 it('can apply a domain on the url of every method', function () {
     config()->set('domains.test', 'config.localhost');
-    $this->routeRegistrar->registerClass(DomainFromConfigTestController::class);
+    $this->oldRouteRegistrar->registerClass(DomainFromConfigTestController::class);
 
     $this
         ->assertRegisteredRoutesCount(2)
