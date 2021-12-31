@@ -2,7 +2,6 @@
 
 namespace Spatie\RouteDiscovery\Discovery;
 
-use Spatie\RouteDiscovery\OldRouteRegistrar;
 use Spatie\RouteDiscovery\RouteRegistrar;
 
 class DiscoverControllers

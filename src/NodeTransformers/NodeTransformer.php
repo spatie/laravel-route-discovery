@@ -8,5 +8,5 @@ use Spatie\RouteDiscovery\NodeTree\Node;
 interface NodeTransformer
 {
     /** @param Collection<Node> $nodes */
-    public function apply(Collection $nodes): void;
+    public function transform(Collection $nodes): void;
 }

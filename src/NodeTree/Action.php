@@ -22,14 +22,14 @@ class Action
     {
         $this->method = $method;
 
-        $this->uri = $this->discoverUri();
+        $this->uri = $this->relativeUri();
 
         $this->methods = $this->discoverHttpMethods();
 
         $this->action = [$controllerClass, $method->name];
     }
 
-    protected function discoverUri(): ?string
+    public function relativeUri(): ?string
     {
         /** @var ReflectionParameter $modelParameter */
         $modelParameter = collect($this->method->getParameters())->first(function (ReflectionParameter $parameter) {
@@ -43,7 +43,11 @@ class Action
         }
 
         if ($modelParameter) {
-            $uri = "{{$modelParameter->getName()}}";
+            if ($uri !== '') {
+                $uri .= '/';
+            }
+
+            $uri .= "{{$modelParameter->getName()}}";
         }
 
         return $uri;
@@ -62,6 +66,6 @@ class Action
 
     protected function commonControllerMethodNames(): array
     {
-        return ['index', '__invoke', 'get', 'show', 'create', 'store', 'edit', 'update', 'destroy', 'delete'];
+        return ['index', '__invoke', 'get', 'show', 'store', 'update', 'destroy', 'delete'];
     }
 }

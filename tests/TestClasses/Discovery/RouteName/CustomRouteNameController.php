@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\RouteDiscovery\Tests\TestClasses\AutoDiscovery\RouteName;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Discovery\RouteName;
 
 use Spatie\RouteDiscovery\Attributes\Route;
 

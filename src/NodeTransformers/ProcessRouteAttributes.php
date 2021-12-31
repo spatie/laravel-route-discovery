@@ -13,7 +13,7 @@ use Throwable;
 class ProcessRouteAttributes implements NodeTransformer
 {
     /** @param Collection<Node> $nodes */
-    public function apply(Collection $nodes): void
+    public function transform(Collection $nodes): void
     {
         $nodes->each(function (Node $node) {
             $node->actions->each(function (Action $action) use ($node) {

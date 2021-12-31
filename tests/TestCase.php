@@ -78,7 +78,6 @@ class TestCase extends Orchestra
                         return false;
                     }
                 }
-
                 if ($route->uri() !== $uri) {
                     return false;
                 }

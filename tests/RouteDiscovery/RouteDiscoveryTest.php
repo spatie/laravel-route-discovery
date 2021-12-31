@@ -1,16 +1,18 @@
 <?php
 
-use Spatie\RouteDiscovery\Tests\TestClasses\AutoDiscovery\ControllerWithNonPublicMethods\NonPublicMethodsController;
-use Spatie\RouteDiscovery\Tests\TestClasses\AutoDiscovery\ModelController\ModelController;
-use Spatie\RouteDiscovery\Tests\TestClasses\AutoDiscovery\NestedController\Nested\ChildController;
-use Spatie\RouteDiscovery\Tests\TestClasses\AutoDiscovery\NestedController\ParentController;
-use Spatie\RouteDiscovery\Tests\TestClasses\AutoDiscovery\RouteName\CustomRouteNameController;
-use Spatie\RouteDiscovery\Tests\TestClasses\AutoDiscovery\SingleController\MyController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\ControllerWithNonPublicMethods\NonPublicMethodsController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\ModelController\ModelController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NestedController\Nested\ChildController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NestedController\ParentController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NestedWithParametersController\Photos\CommentsController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NestedWithParametersController\PhotosController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\RouteName\CustomRouteNameController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\SingleController\MyController;
 
 it('can automatically discovery a simple route', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/AutoDiscovery/SingleController'));
+        ->registerDirectory($this->getTestPath('TestClasses/Discovery/SingleController'));
 
     $this->assertRegisteredRoutesCount(1);
 
@@ -24,7 +26,7 @@ it('can automatically discovery a simple route', function () {
 it('can automatically discovery a route with a custom name', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/AutoDiscovery/RouteName'));
+        ->registerDirectory($this->getTestPath('TestClasses/Discovery/RouteName'));
     $this->assertRegisteredRoutesCount(1);
 
     $this->assertRouteRegistered(
@@ -35,10 +37,10 @@ it('can automatically discovery a route with a custom name', function () {
     );
 });
 
-it('can automatically discover a nested route', function () {
+it('can automatically discover a nested route without model parameters', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/AutoDiscovery/NestedController'));
+        ->registerDirectory($this->getTestPath('TestClasses/Discovery/NestedController'));
 
     $this->assertRegisteredRoutesCount(2);
 
@@ -55,24 +57,55 @@ it('can automatically discover a nested route', function () {
     );
 });
 
+it('can automatically discover a nested route with model parameters', function () {
+    $this
+        ->routeRegistrar
+        ->registerDirectory($this->getTestPath('TestClasses/Discovery/NestedWithParametersController'));
+
+    $this->assertRegisteredRoutesCount(4);
+
+    $this->assertRouteRegistered(
+        PhotosController::class,
+        controllerMethod: 'show',
+        uri: 'photos/{photo}',
+    );
+
+    $this->assertRouteRegistered(
+        PhotosController::class,
+        controllerMethod: 'edit',
+        uri: 'photos/edit/{photo}',
+    );
+
+    $this->assertRouteRegistered(
+        CommentsController::class,
+        controllerMethod: 'show',
+        uri: 'photos/{photo}/comments/{comment}',
+    );
+    $this->assertRouteRegistered(
+        CommentsController::class,
+        controllerMethod: 'edit',
+        uri: 'photos/{photo}/comments/edit/{comment}',
+    );
+});
+
 it('can automatically discovery a model route', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/AutoDiscovery/ModelController'));
+        ->registerDirectory($this->getTestPath('TestClasses/Discovery/ModelController'));
 
     $this
         ->assertRegisteredRoutesCount(1)
         ->assertRouteRegistered(
             ModelController::class,
             controllerMethod: 'edit',
-            uri: 'model/{user}',
+            uri: 'model/edit/{user}',
         );
 });
 
 it('will only automatically register public methods', function () {
     $this
         ->oldRouteRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/AutoDiscovery/ControllerWithNonPublicMethods'));
+        ->registerDirectory($this->getTestPath('TestClasses/Discovery/ControllerWithNonPublicMethods'));
 
     $this
         ->assertRegisteredRoutesCount(1)

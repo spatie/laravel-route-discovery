@@ -6,6 +6,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Spatie\RouteDiscovery\NodeTransformers\AddControllerUriToActions;
+use Spatie\RouteDiscovery\NodeTransformers\FixUrisOfNestedControllers;
 use Spatie\RouteDiscovery\NodeTransformers\NodeTransformer;
 use Spatie\RouteDiscovery\NodeTransformers\ProcessRouteAttributes;
 use Spatie\RouteDiscovery\NodeTree\Action;
@@ -65,7 +66,7 @@ class RouteRegistrar
 
         $nodes = $this->convertToNodes($directory);
 
-        $this->applyNodeMiddleware($nodes);
+        $this->transformNodes($nodes);
 
         $this->registerRoutes($nodes);
 
@@ -102,13 +103,14 @@ class RouteRegistrar
         return $nodes;
     }
 
-    protected function applyNodeMiddleware($nodes): void
+    protected function transformNodes($nodes): void
     {
         collect([
             new AddControllerUriToActions(),
             new ProcessRouteAttributes(),
+            new FixUrisOfNestedControllers(),
         ])
-        ->each(fn (NodeTransformer $middleware) => $middleware->apply($nodes));
+        ->each(fn (NodeTransformer $middleware) => $middleware->transform($nodes));
     }
 
     protected function registerRoutes(Collection $nodes): void

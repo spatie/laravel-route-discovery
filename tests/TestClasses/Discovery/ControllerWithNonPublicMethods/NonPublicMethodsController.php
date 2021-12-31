@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\RouteDiscovery\Tests\TestClasses\AutoDiscovery\ControllerWithNonPublicMethods;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Discovery\ControllerWithNonPublicMethods;
 
 class NonPublicMethodsController
 {

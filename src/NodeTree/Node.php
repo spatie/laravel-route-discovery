@@ -3,6 +3,7 @@
 namespace Spatie\RouteDiscovery\NodeTree;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use SplFileInfo;
 
 class Node
@@ -19,5 +20,22 @@ class Node
         public Collection $actions,
     ) {
 
+    }
+
+    public function namespace(): string
+    {
+        return Str::beforeLast($this->fullQualifiedClassName, '\\');
+    }
+
+    public function shortControllerName(): string
+    {
+        return Str::of($this->fullQualifiedClassName)
+            ->afterLast('\\')
+            ->beforeLast('Controller');
+    }
+
+    public function childNamespace(): string
+    {
+        return $this->namespace() . '\\' . $this->shortControllerName();
     }
 }
