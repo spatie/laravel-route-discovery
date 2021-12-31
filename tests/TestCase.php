@@ -18,7 +18,6 @@ class TestCase extends Orchestra
 
     protected NewRouteRegistrar $newRouteRegistrar;
 
-
     protected function setUp(): void
     {
         parent::setUp();

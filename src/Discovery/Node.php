@@ -7,7 +7,6 @@ use SplFileInfo;
 
 class Node
 {
-
     /**
      * @param \SplFileInfo $fileInfo
      * @param string $fullQualifiedClassName
@@ -22,6 +21,5 @@ class Node
         public Collection $actions,
         public Collection $children,
     ) {
-
     }
 }
