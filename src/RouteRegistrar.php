@@ -69,7 +69,6 @@ class RouteRegistrar
         $this->transformNodes($nodes);
 
         $this->registerRoutes($nodes);
-
     }
 
     /**
@@ -98,7 +97,7 @@ class RouteRegistrar
                 return $this->convertToNodes($subDirectory);
             })
             ->filter()
-            ->each(fn(Node $node) => $nodes->push($node));
+            ->each(fn (Node $node) => $nodes->push($node));
 
         return $nodes;
     }

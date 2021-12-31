@@ -8,11 +8,9 @@ class CommentsController
 {
     public function show(Comment $comment)
     {
-
     }
 
     public function edit(Comment $comment)
     {
-
     }
 }

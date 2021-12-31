@@ -30,7 +30,7 @@ class ProcessRouteAttributes implements NodeTransformer
                         continue;
                     }
 
-                    if (!$attributeClass instanceof Route) {
+                    if (! $attributeClass instanceof Route) {
                         $attributeClass = Route::new();
                     }
 
@@ -49,7 +49,6 @@ class ProcessRouteAttributes implements NodeTransformer
                     $action->middleware = $attributeClass->middleware;
                 }
             });
-
         });
     }
 }

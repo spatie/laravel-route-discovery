@@ -2,19 +2,19 @@
 
 namespace Spatie\RouteDiscovery\NodeTree;
 
+use function collect;
 use Illuminate\Support\Str;
 use ReflectionClass;
 use ReflectionMethod;
 use SplFileInfo;
-use function collect;
 
 class NodeFactory
 {
     public function __construct(
         public string $basePath,
-
         protected string $rootNamespace,
-        protected string $registeringDirectory)
+        protected string $registeringDirectory
+    )
     {
     }
 
@@ -33,10 +33,10 @@ class NodeFactory
         }
 
         $actions = collect($class->getMethods())
-            ->filter(function(ReflectionMethod $method) {
+            ->filter(function (ReflectionMethod $method) {
                 return $method->isPublic();
             })
-            ->map(function(ReflectionMethod $method) use ($fullyQualifiedClassName) {
+            ->map(function (ReflectionMethod $method) use ($fullyQualifiedClassName) {
                 return new Action($method, $fullyQualifiedClassName);
             });
 

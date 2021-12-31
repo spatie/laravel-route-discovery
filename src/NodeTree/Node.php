@@ -19,7 +19,6 @@ class Node
         public string $fullQualifiedClassName,
         public Collection $actions,
     ) {
-
     }
 
     public function namespace(): string

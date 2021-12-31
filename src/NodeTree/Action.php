@@ -2,11 +2,11 @@
 
 namespace Spatie\RouteDiscovery\NodeTree;
 
+use function collect;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use ReflectionMethod;
 use ReflectionParameter;
-use function collect;
 
 class Action
 {

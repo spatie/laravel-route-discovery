@@ -11,7 +11,7 @@ class FixUrisOfNestedControllers implements NodeTransformer
 {
     public function transform(Collection $nodes): void
     {
-        $nodes->each(function(Node $parentNode) use ($nodes) {
+        $nodes->each(function (Node $parentNode) use ($nodes) {
             $childNode = $this->findChild($nodes, $parentNode);
 
             if (! $childNode) {
@@ -19,7 +19,7 @@ class FixUrisOfNestedControllers implements NodeTransformer
             }
 
             /** @var Action $parentAction */
-            $parentAction = $parentNode->actions->first(function(Action $action) {
+            $parentAction = $parentNode->actions->first(function (Action $action) {
                 return $action->method->name === 'show';
             });
 
@@ -27,7 +27,7 @@ class FixUrisOfNestedControllers implements NodeTransformer
                 return;
             }
 
-            $childNode->actions->each(function(Action $action) use ($parentNode, $parentAction) {
+            $childNode->actions->each(function (Action $action) use ($parentNode, $parentAction) {
                 $result = Str::replace($parentNode->uri, $parentAction->uri, $action->uri);
 
                 $action->uri = $result;
@@ -40,7 +40,7 @@ class FixUrisOfNestedControllers implements NodeTransformer
         $childNamespace = $parentNode->childNamespace();
 
         return $nodes->first(
-            fn(Node $potentialChildNode) => $potentialChildNode->namespace() === $childNamespace
+            fn (Node $potentialChildNode) => $potentialChildNode->namespace() === $childNamespace
         );
     }
 }

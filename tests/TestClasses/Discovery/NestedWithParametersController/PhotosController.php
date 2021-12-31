@@ -8,11 +8,9 @@ class PhotosController
 {
     public function show(Photo $photo)
     {
-
     }
 
     public function edit(Photo $photo)
     {
-
     }
 }
