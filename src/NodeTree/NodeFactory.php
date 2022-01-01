@@ -14,8 +14,7 @@ class NodeFactory
         public string $basePath,
         protected string $rootNamespace,
         protected string $registeringDirectory
-    )
-    {
+    ) {
     }
 
     public function make(SplFileInfo $fileInfo): ?Node
