@@ -3,7 +3,7 @@ title: Introduction
 weight: 1
 ---
 
-## THIS PACKAGE IS IN DEVELOPMENT, DON'T USE IT (FOR NOW)
+**THIS PACKAGE IS IN DEVELOPMENT, DON'T USE IT (FOR NOW)**
 
 This package can automatically discover routes for controllers and views in your Laravel application.
 
