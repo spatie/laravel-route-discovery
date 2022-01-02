@@ -63,8 +63,6 @@ class RouteDiscoveryServiceProvider extends PackageServiceProvider
         collect(config('route-discovery.discover_views_in_directory'))
             ->each(function(array|string $directories, int|string $prefix) {
                 if (is_numeric($prefix)) {
-                    $directories = $prefix;
-
                     $prefix = '';
                 }
 
