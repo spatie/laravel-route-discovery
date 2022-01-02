@@ -32,7 +32,7 @@ class RouteDiscoveryServiceProvider extends PackageServiceProvider
     {
         collect(config('route-discovery.discover_controllers_in_directory'))
             ->each(
-                fn(string $directory) => Discover::controllers()->in($directory)
+                fn (string $directory) => Discover::controllers()->in($directory)
             );
 
         return $this;

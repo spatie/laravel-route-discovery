@@ -1,11 +1,10 @@
 <?php
 
 use Illuminate\Routing\ViewController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\SingleController\MyController;
 
-it('can discover controllers in a directory', function() {
+it('can discover controllers in a directory', function () {
     config()->set('route-discovery.discover_controllers_in_directory', [
-        $this->getTestPath('TestClasses/Discovery/SingleController')
+        $this->getTestPath('TestClasses/Discovery/SingleController'),
     ]);
 
     $this->registerControllersFromConfigFile();
