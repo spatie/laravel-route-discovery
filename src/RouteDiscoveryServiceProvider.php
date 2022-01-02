@@ -41,7 +41,6 @@ class RouteDiscoveryServiceProvider extends PackageServiceProvider
 
     protected function shouldRegisterRoutes(): bool
     {
-
         if ($this->app->routesAreCached()) {
             return false;
         }
@@ -61,15 +60,15 @@ class RouteDiscoveryServiceProvider extends PackageServiceProvider
     public function registerRoutesForViews(): self
     {
         collect(config('route-discovery.discover_views_in_directory'))
-            ->each(function(array|string $directories, int|string $prefix) {
+            ->each(function (array|string $directories, int|string $prefix) {
                 if (is_numeric($prefix)) {
                     $prefix = '';
                 }
 
                 $directories = Arr::wrap($directories);
 
-                foreach($directories as $directory) {
-                    Route::prefix($prefix)->group(function() use ($prefix, $directory) {
+                foreach ($directories as $directory) {
+                    Route::prefix($prefix)->group(function () use ($prefix, $directory) {
                         Discover::views()->in($directory);
                     });
                 }
