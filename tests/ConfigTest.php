@@ -1,6 +1,17 @@
 <?php
 
 use Illuminate\Routing\ViewController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\SingleController\MyController;
+
+it('can discover controllers in a directory', function() {
+    config()->set('route-discovery.discover_controllers_in_directory', [
+        $this->getTestPath('TestClasses/Discovery/SingleController')
+    ]);
+
+    $this->registerControllersFromConfigFile();
+
+    expect(true)->toBeTrue();
+});
 
 it('can discover a single directory with a prefix', function () {
     config()->set('route-discovery.discover_views_in_directory', [

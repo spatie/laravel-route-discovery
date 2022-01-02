@@ -122,6 +122,13 @@ class TestCase extends Orchestra
         return app()->router->getRoutes();
     }
 
+    protected function registerControllersFromConfigFile(): self
+    {
+        (new RouteDiscoveryServiceProvider($this->app))->registerRoutesForControllers();
+
+        return $this;
+    }
+
     protected function registerViewsFromConfigFile(): self
     {
         (new RouteDiscoveryServiceProvider($this->app))->registerRoutesForViews();

@@ -19,42 +19,23 @@ class RouteDiscoveryServiceProvider extends PackageServiceProvider
 
     public function packageRegistered()
     {
-        $this->registerRoutes();
-    }
-
-    protected function registerRoutes(): void
-    {
-        if (! $this->shouldRegisterRoutes()) {
+        if ($this->app->routesAreCached()) {
             return;
         }
 
-        $this->registerRoutesForViews();
-
-        /*
-        $routeRegistrar = (new OldRouteRegistrar(app()->router))
-            ->useRootNamespace(app()->getNamespace())
-            ->useMiddleware(config('route-attributes.middleware') ?? []);
-
-        collect($this->getRouteDirectories())->each(fn (string $directory) => $routeRegistrar->registerDirectory($directory));
-        */
+        $this
+            ->registerRoutesForControllers()
+            ->registerRoutesForViews();
     }
 
-    protected function shouldRegisterRoutes(): bool
+    public function registerRoutesForControllers(): self
     {
-        if ($this->app->routesAreCached()) {
-            return false;
-        }
+        collect(config('route-discovery.discover_controllers_in_directory'))
+            ->each(
+                fn(string $directory) => Discover::controllers()->in($directory)
+            );
 
-        return true;
-    }
-
-    protected function getRouteDirectories(): array
-    {
-        $testClassDirectory = __DIR__ . '/../tests/TestClasses';
-
-        return app()->runningUnitTests() && file_exists($testClassDirectory)
-            ? (array)$testClassDirectory
-            : config('route-attributes.directories');
+        return $this;
     }
 
     public function registerRoutesForViews(): self
