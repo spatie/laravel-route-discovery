@@ -3,12 +3,9 @@
 namespace Spatie\RouteDiscovery;
 
 use ReflectionClass;
-use Spatie\RouteDiscovery\Attributes\Domain;
-use Spatie\RouteDiscovery\Attributes\DomainFromConfig;
 use Spatie\RouteDiscovery\Attributes\Group;
 use Spatie\RouteDiscovery\Attributes\Middleware;
 use Spatie\RouteDiscovery\Attributes\Prefix;
-use Spatie\RouteDiscovery\Attributes\Resource;
 use Spatie\RouteDiscovery\Attributes\RouteAttribute;
 use Spatie\RouteDiscovery\Attributes\Where;
 
@@ -29,26 +26,6 @@ class ClassRouteAttributes
         }
 
         return $attribute->prefix;
-    }
-
-    public function domain(): ?string
-    {
-        /** @var \Spatie\RouteDiscovery\Attributes\Domain $attribute */
-        if (! $attribute = $this->getAttribute(Domain::class)) {
-            return null;
-        }
-
-        return $attribute->domain;
-    }
-
-    public function domainFromConfig(): ?string
-    {
-        /** @var \Spatie\RouteDiscovery\Attributes\DomainFromConfig $attribute */
-        if (! $attribute = $this->getAttribute(DomainFromConfig::class)) {
-            return null;
-        }
-
-        return config($attribute->domain);
     }
 
     public function groups(): array
@@ -75,56 +52,6 @@ class ClassRouteAttributes
         }
 
         return $groups;
-    }
-
-    public function resource(): ?string
-    {
-        /** @var \Spatie\RouteDiscovery\Attributes\Resource $attribute */
-        if (! $attribute = $this->getAttribute(Resource::class)) {
-            return null;
-        }
-
-        return $attribute->resource;
-    }
-
-    public function apiResource(): ?string
-    {
-        /** @var \Spatie\RouteDiscovery\Attributes\Resource $attribute */
-        if (! $attribute = $this->getAttribute(Resource::class)) {
-            return null;
-        }
-
-        return $attribute->apiResource;
-    }
-
-    public function except(): string | array | null
-    {
-        /** @var \Spatie\RouteDiscovery\Attributes\Resource $attribute */
-        if (! $attribute = $this->getAttribute(Resource::class)) {
-            return null;
-        }
-
-        return $attribute->except;
-    }
-
-    public function only(): string | array | null
-    {
-        /** @var \Spatie\RouteDiscovery\Attributes\Resource $attribute */
-        if (! $attribute = $this->getAttribute(Resource::class)) {
-            return null;
-        }
-
-        return $attribute->only;
-    }
-
-    public function names(): string | array | null
-    {
-        /** @var \Spatie\RouteDiscovery\Attributes\Resource $attribute */
-        if (! $attribute = $this->getAttribute(Resource::class)) {
-            return null;
-        }
-
-        return $attribute->names;
     }
 
     public function middleware(): array

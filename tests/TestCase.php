@@ -24,11 +24,6 @@ class TestCase extends Orchestra
 
         $router = app()->router;
 
-        $this->oldRouteRegistrar = (new OldRouteRegistrar($router))
-            ->useBasePath($this->getTestPath())
-            ->useMiddleware([AnotherTestMiddleware::class])
-            ->useRootNamespace('Spatie\RouteDiscovery\Tests\\');
-
         $this->routeRegistrar = (new RouteRegistrar($router))
             ->useBasePath($this->getTestPath())
             ->useMiddleware([AnotherTestMiddleware::class])
@@ -92,7 +87,7 @@ class TestCase extends Orchestra
                 if ($routeMethod !== $controllerMethod) {
                     return false;
                 }
-                if (array_diff($route->middleware(), array_merge($middleware, $this->oldRouteRegistrar->middleware()))) {
+                if (array_diff($route->middleware(), array_merge($middleware, $this->routeRegistrar->middleware()))) {
                     return false;
                 }
 

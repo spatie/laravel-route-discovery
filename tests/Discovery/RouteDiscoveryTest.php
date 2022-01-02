@@ -104,7 +104,7 @@ it('can automatically discovery a model route', function () {
 
 it('will only automatically register public methods', function () {
     $this
-        ->oldRouteRegistrar
+        ->routeRegistrar
         ->registerDirectory($this->getTestPath('TestClasses/Discovery/ControllerWithNonPublicMethods'));
 
     $this
