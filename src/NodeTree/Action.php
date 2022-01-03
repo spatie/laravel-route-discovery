@@ -2,6 +2,9 @@
 
 namespace Spatie\RouteDiscovery\NodeTree;
 
+use ReflectionAttribute;
+use Spatie\RouteDiscovery\Attributes\Route;
+use Spatie\RouteDiscovery\Attributes\RouteAttribute;
 use function collect;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -88,5 +91,16 @@ class Action
             'show', 'store', 'update',
             'destroy', 'delete',
         ];
+    }
+
+    public function getRouteAttribute(): ?Route
+    {
+        $attributes = $this->method->getAttributes(Route::class, ReflectionAttribute::IS_INSTANCEOF);
+
+        if (! count($attributes)) {
+            return null;
+        }
+
+        return $attributes[0]->newInstance();
     }
 }
