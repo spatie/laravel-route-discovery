@@ -10,6 +10,5 @@ class OverrideHttpMethodController
     #[Route(method: 'delete')]
     public function edit(User $user)
     {
-
     }
 }

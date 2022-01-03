@@ -23,7 +23,7 @@ class RouteRegistrar
 
     protected string $rootNamespace;
 
-    /** @var array<int, class-string>  */
+    /** @var array<int, class-string> */
     protected array $middleware = [];
 
     protected string $registeringDirectory = '';
