@@ -8,6 +8,7 @@ use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Nesting\Nested\ChildCont
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Nesting\ParentController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\NonPublicMethods\NonPublicMethodsController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\OverrideHttpMethod\OverrideHttpMethodController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\OverrideUri\OverrideUriController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\ResourceMethods\ResourceMethodsController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\RouteName\CustomRouteNameController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Single\MyController;
@@ -204,5 +205,19 @@ it('can add middleware to a method', function () {
             controllerMethod: 'noExtraMiddleware',
             uri: 'middleware-on-method/no-extra-middleware',
             middleware: [],
+        );
+});
+
+it('can override the uri', function () {
+    $this
+        ->routeRegistrar
+        ->registerDirectory(controllersPath('OverrideUri'));
+
+    $this
+        ->assertRegisteredRoutesCount(1)
+        ->assertRouteRegistered(
+            OverrideUriController::class,
+            controllerMethod: 'myMethod',
+            uri: 'override-uri/alternative-uri',
         );
 });

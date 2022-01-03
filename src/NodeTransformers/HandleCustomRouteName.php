@@ -21,9 +21,11 @@ class HandleCustomRouteName implements NodeTransformer
                     return;
                 }
 
-                if ($name = $routeAttribute->name) {
-                    $action->name = $name;
+                if (! $name = $routeAttribute->name) {
+                   return;
                 }
+
+                $action->name = $name;
             });
         });
     }

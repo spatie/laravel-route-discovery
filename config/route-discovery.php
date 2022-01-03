@@ -1,11 +1,5 @@
 <?php
 
-use Spatie\RouteDiscovery\NodeTransformers\AddControllerUriToActions;
-use Spatie\RouteDiscovery\NodeTransformers\FixUrisOfNestedControllers;
-use Spatie\RouteDiscovery\NodeTransformers\HandleCustomHttpMethods;
-use Spatie\RouteDiscovery\NodeTransformers\HandleCustomMiddleware;
-use Spatie\RouteDiscovery\NodeTransformers\HandleCustomRouteName;
-
 return [
     /*
      * Routes will be registered for all controllers found in
@@ -30,10 +24,11 @@ return [
      * In most cases, you shouldn't change these
      */
     'node_tree_transformers' => [
-        AddControllerUriToActions::class,
-        HandleCustomRouteName::class,
-        HandleCustomMiddleware::class,
-        HandleCustomHttpMethods::class,
-        FixUrisOfNestedControllers::class,
+        Spatie\RouteDiscovery\NodeTransformers\AddControllerUriToActions::class,
+        Spatie\RouteDiscovery\NodeTransformers\HandleCustomRouteName::class,
+        Spatie\RouteDiscovery\NodeTransformers\HandleCustomMiddleware::class,
+        Spatie\RouteDiscovery\NodeTransformers\HandleCustomHttpMethods::class,
+        Spatie\RouteDiscovery\NodeTransformers\FixUrisOfNestedControllers::class,
+        Spatie\RouteDiscovery\NodeTransformers\HandleCustomUri::class,
     ]
 ];

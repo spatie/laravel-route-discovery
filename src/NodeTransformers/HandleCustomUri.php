@@ -3,6 +3,7 @@
 namespace Spatie\RouteDiscovery\NodeTransformers;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use ReflectionAttribute;
 use Spatie\RouteDiscovery\Attributes\Route;
 use Spatie\RouteDiscovery\Attributes\RouteAttribute;
@@ -10,7 +11,7 @@ use Spatie\RouteDiscovery\NodeTree\Action;
 use Spatie\RouteDiscovery\NodeTree\Node;
 use Throwable;
 
-class HandleCustomHttpMethods implements NodeTransformer
+class HandleCustomUri implements NodeTransformer
 {
     /** @param Collection<Node> $nodes */
     public function transform(Collection $nodes): void
@@ -21,11 +22,13 @@ class HandleCustomHttpMethods implements NodeTransformer
                     return;
                 }
 
-                if (! $httpMethods = $routeAttribute->methods) {
-                   return;
+
+                if (! $routeAttributeUri = $routeAttribute->uri) {
+                    return;
                 }
 
-                return $action->methods = $httpMethods;
+                $baseUri = Str::beforeLast($action->uri, '/');
+                $action->uri =  $baseUri . '/' . $routeAttributeUri;
             });
         });
     }
