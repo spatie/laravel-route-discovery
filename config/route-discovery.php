@@ -24,8 +24,8 @@ return [
      * In most cases, you shouldn't change these
      */
     'pending_route_transformers' => [
-        Spatie\RouteDiscovery\PendingRouteTransformers\AddControllerUriToActions::class,
         Spatie\RouteDiscovery\PendingRouteTransformers\HandleDoNotDiscover::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\AddControllerUriToActions::class,
         Spatie\RouteDiscovery\PendingRouteTransformers\HandleCustomRouteName::class,
         Spatie\RouteDiscovery\PendingRouteTransformers\HandleCustomMiddleware::class,
         Spatie\RouteDiscovery\PendingRouteTransformers\HandleCustomHttpMethods::class,
