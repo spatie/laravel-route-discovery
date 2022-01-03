@@ -7,11 +7,8 @@ use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\Arr;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\LaravelRay\RayServiceProvider;
-use Spatie\RouteDiscovery\OldRouteRegistrar;
 use Spatie\RouteDiscovery\RouteDiscoveryServiceProvider;
 use Spatie\RouteDiscovery\RouteRegistrar;
-use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\AnotherTestMiddleware;
-use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\OtherTestMiddleware;
 
 class TestCase extends Orchestra
 {
