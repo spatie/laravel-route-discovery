@@ -6,6 +6,7 @@ use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NestedWithParametersContro
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Nesting\Nested\ChildController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Nesting\ParentController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NonPublicMethods\NonPublicMethodsController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\OverrideHttpMethod\OverrideHttpMethodController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\ResourceMethods\ResourceMethodsController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\RouteName\CustomRouteNameController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Single\MyController;
@@ -165,6 +166,20 @@ it('will register routes with the correct http verbs for resourceful methods', f
             controllerMethod: 'destroy',
             uri: 'resource-methods/{user}',
             httpMethods: ['delete'],
-        )
-    ;
+        );
+});
+
+it('can override the http method', function () {
+    $this
+        ->routeRegistrar
+        ->registerDirectory($this->getTestPath('TestClasses/Discovery/OverrideHttpMethod'));
+
+    $this
+        ->assertRegisteredRoutesCount(1)
+        ->assertRouteRegistered(
+            OverrideHttpMethodController::class,
+            controllerMethod: 'edit',
+            uri: 'override-http-method/edit/{user}',
+            httpMethods: ['delete'],
+        );
 });

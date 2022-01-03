@@ -9,10 +9,18 @@ use Illuminate\Support\Arr;
 #[Attribute(Attribute::TARGET_METHOD)]
 class Route implements RouteAttribute
 {
+    /** @var array<int, string>  */
     public array $methods;
 
+    /** @var array<int, class-string> */
     public array $middleware;
 
+    /**
+     * @param array<int, string>|string $method
+     * @param string|null $uri
+     * @param string|null $name
+     * @param array<int, class-string>|string $middleware
+     */
     public function __construct(
         array | string $method = [],
         public ?string $uri = null,

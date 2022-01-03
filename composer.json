@@ -22,8 +22,12 @@
         "spatie/laravel-package-tools": "^1.10"
     },
     "require-dev": {
+        "nunomaduro/larastan": "^1.0",
         "orchestra/testbench": "^6.0",
         "pestphp/pest": "^1.20",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
         "spatie/laravel-ray": "^1.27"
     },
     "autoload": {
@@ -38,6 +42,7 @@
         }
     },
     "scripts": {
+        "analyse": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/phpunit --colors=always",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
     },
