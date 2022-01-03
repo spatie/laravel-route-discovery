@@ -4,8 +4,8 @@ namespace Spatie\RouteDiscovery\PendingRouteTransformers;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRoute;
+use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 
 class FixUrisOfNestedControllers implements PendingRouteTransformer
 {

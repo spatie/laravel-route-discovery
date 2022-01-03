@@ -9,6 +9,5 @@ class DoNotDiscoverController
 {
     public function doNotDiscoverThisController()
     {
-
     }
 }

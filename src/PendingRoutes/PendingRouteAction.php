@@ -2,12 +2,12 @@
 
 namespace Spatie\RouteDiscovery\PendingRoutes;
 
-use Spatie\RouteDiscovery\Attributes\DiscoveryAttribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use ReflectionAttribute;
 use ReflectionMethod;
 use ReflectionParameter;
+use Spatie\RouteDiscovery\Attributes\DiscoveryAttribute;
 use Spatie\RouteDiscovery\Attributes\Route;
 
 class PendingRouteAction
@@ -96,7 +96,6 @@ class PendingRouteAction
     {
         return $this->getAttribute(Route::class);
     }
-
 
     /**
      * @param class-string<DiscoveryAttribute> $attributeClass

@@ -4,10 +4,10 @@ namespace Spatie\RouteDiscovery;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\Collection;
-use Spatie\RouteDiscovery\PendingRouteTransformers\PendingRouteTransformer;
-use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRoute;
+use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRouteFactory;
+use Spatie\RouteDiscovery\PendingRouteTransformers\PendingRouteTransformer;
 use SplFileInfo;
 use Symfony\Component\Finder\Finder;
 
@@ -69,7 +69,7 @@ class RouteRegistrar
         );
 
         $pendingRoutes = collect($files)
-            ->map(fn(SplFileInfo $file) => $pendingRouteFactory->make($file))
+            ->map(fn (SplFileInfo $file) => $pendingRouteFactory->make($file))
             ->filter();
 
         collect((new Finder())->directories()->depth(0)->in($directory))
@@ -97,7 +97,7 @@ class RouteRegistrar
         $transformers = collect($transformers)
             ->map(fn (string $transformerClass): PendingRouteTransformer => app($transformerClass));
 
-        foreach($transformers as $transformer) {
+        foreach ($transformers as $transformer) {
             $pendingRoutes = $transformer->transform($pendingRoutes);
         }
 

@@ -266,4 +266,3 @@ it('can avoid discovering a controller', function () {
             uri: 'do-not-discover-this-method/method',
         );
 });
-
