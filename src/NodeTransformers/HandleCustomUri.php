@@ -4,12 +4,8 @@ namespace Spatie\RouteDiscovery\NodeTransformers;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use ReflectionAttribute;
-use Spatie\RouteDiscovery\Attributes\Route;
-use Spatie\RouteDiscovery\Attributes\RouteAttribute;
 use Spatie\RouteDiscovery\NodeTree\Action;
 use Spatie\RouteDiscovery\NodeTree\Node;
-use Throwable;
 
 class HandleCustomUri implements NodeTransformer
 {
@@ -28,7 +24,7 @@ class HandleCustomUri implements NodeTransformer
                 }
 
                 $baseUri = Str::beforeLast($action->uri, '/');
-                $action->uri =  $baseUri . '/' . $routeAttributeUri;
+                $action->uri = $baseUri . '/' . $routeAttributeUri;
             });
         });
     }
