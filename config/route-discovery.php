@@ -21,7 +21,7 @@ return [
      * After having discovered all controllers, these classes will manipulate the routes
      * before registering them to Laravel.
      *
-     * In most cases, you shouldn't change these
+     * In most cases, you shouldn't change these.
      */
     'pending_route_transformers' => [
         Spatie\RouteDiscovery\PendingRouteTransformers\HandleDoNotDiscover::class,
