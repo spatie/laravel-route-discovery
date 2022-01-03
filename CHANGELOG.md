@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-route-discovery` will be documented in this file
 
+## 0.0.1 - 2022-01-03
+
+- experimental release
+
 ## 1.9.0 - 2021-10-04
 
 - add support for the names parameter to the Resource attribute (#56)
