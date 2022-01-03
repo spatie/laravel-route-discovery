@@ -44,6 +44,11 @@ class PendingRoute
         return $this->namespace() . '\\' . $this->shortControllerName();
     }
 
+    /**
+     * @param class-string $attributeClass
+     *
+     * @return ?DiscoveryAttribute
+     */
     public function getAttribute(string $attributeClass): ?DiscoveryAttribute
     {
         $attributes = $this->class->getAttributes($attributeClass, ReflectionAttribute::IS_INSTANCEOF);

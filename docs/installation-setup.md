@@ -41,4 +41,4 @@ return [
 
 ## A word on performance
 
-Because the internals of this package heavily use PHP reflection, there is a small performance hit, which locally in most cases isn't notable. In a production environment, we highly recommend [caching your routes](https://laravel.com/docs/8.x/routing#route-caching). 
+Discovering routes during each application request may have a small impact on performance. For increased performance, we highly recommend [caching your routes](https://laravel.com/docs/8.x/routing#route-caching) as part of your deployment process.
