@@ -1,22 +1,22 @@
 <?php
 
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\MiddlewareOnMethod\MiddlewareOnMethodController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Model\ModelController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NestedWithParametersController\Photos\CommentsController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NestedWithParametersController\PhotosController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Nesting\Nested\ChildController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Nesting\ParentController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NonPublicMethods\NonPublicMethodsController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\OverrideHttpMethod\OverrideHttpMethodController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\ResourceMethods\ResourceMethodsController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\RouteName\CustomRouteNameController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Single\MyController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\MiddlewareOnMethod\MiddlewareOnMethodController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Model\ModelController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\NestedWithParametersController\Photos\CommentsController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\NestedWithParametersController\PhotosController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Nesting\Nested\ChildController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Nesting\ParentController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\NonPublicMethods\NonPublicMethodsController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\OverrideHttpMethod\OverrideHttpMethodController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\ResourceMethods\ResourceMethodsController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\RouteName\CustomRouteNameController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Single\MyController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\TestMiddleware;
 
 it('can automatically discovery a simple route', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/Discovery/Single'));
+        ->registerDirectory(controllersPath('Single'));
 
     $this->assertRegisteredRoutesCount(1);
 
@@ -30,7 +30,7 @@ it('can automatically discovery a simple route', function () {
 it('can automatically discovery a route with a custom name', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/Discovery/RouteName'));
+        ->registerDirectory(controllersPath('RouteName'));
     $this->assertRegisteredRoutesCount(1);
 
     $this->assertRouteRegistered(
@@ -44,7 +44,7 @@ it('can automatically discovery a route with a custom name', function () {
 it('can automatically discover a nested route without model parameters', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/Discovery/Nesting'));
+        ->registerDirectory(controllersPath('Nesting'));
 
     $this->assertRegisteredRoutesCount(2);
 
@@ -64,7 +64,7 @@ it('can automatically discover a nested route without model parameters', functio
 it('can automatically discover a nested route with model parameters', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/Discovery/NestedWithParametersController'));
+        ->registerDirectory(controllersPath('NestedWithParametersController'));
 
     $this->assertRegisteredRoutesCount(4);
 
@@ -95,7 +95,7 @@ it('can automatically discover a nested route with model parameters', function (
 it('can automatically discovery a model route', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/Discovery/Model'));
+        ->registerDirectory(controllersPath('Model'));
 
     $this
         ->assertRegisteredRoutesCount(1)
@@ -109,7 +109,7 @@ it('can automatically discovery a model route', function () {
 it('will only automatically register public methods', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/Discovery/NonPublicMethods'));
+        ->registerDirectory(controllersPath('NonPublicMethods'));
 
     $this
         ->assertRegisteredRoutesCount(1)
@@ -123,7 +123,7 @@ it('will only automatically register public methods', function () {
 it('will register routes with the correct http verbs for resourceful methods', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/Discovery/ResourceMethods'));
+        ->registerDirectory(controllersPath('ResourceMethods'));
 
     $this
         ->assertRegisteredRoutesCount(7)
@@ -174,7 +174,7 @@ it('will register routes with the correct http verbs for resourceful methods', f
 it('can override the http method', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/Discovery/OverrideHttpMethod'));
+        ->registerDirectory(controllersPath('OverrideHttpMethod'));
 
     $this
         ->assertRegisteredRoutesCount(1)
@@ -189,7 +189,7 @@ it('can override the http method', function () {
 it('can add middleware to a method', function() {
     $this
         ->routeRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/Discovery/MiddlewareOnMethod'));
+        ->registerDirectory(controllersPath('MiddlewareOnMethod'));
 
     $this
         ->assertRegisteredRoutesCount(2)

@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\RouteDiscovery\Tests\TestClasses\Discovery\MiddlewareOnMethod;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Controllers\MiddlewareOnMethod;
 
 use Spatie\RouteDiscovery\Attributes\Route;
 use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\TestMiddleware;

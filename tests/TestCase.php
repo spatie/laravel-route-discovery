@@ -11,11 +11,10 @@ use Spatie\RouteDiscovery\OldRouteRegistrar;
 use Spatie\RouteDiscovery\RouteDiscoveryServiceProvider;
 use Spatie\RouteDiscovery\RouteRegistrar;
 use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\AnotherTestMiddleware;
+use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\OtherTestMiddleware;
 
 class TestCase extends Orchestra
 {
-    protected OldRouteRegistrar $oldRouteRegistrar;
-
     protected RouteRegistrar $routeRegistrar;
 
     protected function setUp(): void
@@ -26,7 +25,6 @@ class TestCase extends Orchestra
 
         $this->routeRegistrar = (new RouteRegistrar($router))
             ->useBasePath($this->getTestPath())
-            ->useMiddleware([AnotherTestMiddleware::class])
             ->useRootNamespace('Spatie\RouteDiscovery\Tests\\');
     }
 
@@ -87,7 +85,8 @@ class TestCase extends Orchestra
                 if ($routeMethod !== $controllerMethod) {
                     return false;
                 }
-                if (array_diff($route->middleware(), array_merge($middleware, $this->routeRegistrar->middleware()))) {
+
+                if (array_diff($route->middleware(), $middleware)) {
                     return false;
                 }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\RouteDiscovery\Tests\TestClasses\Discovery\OverrideHttpMethod;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Controllers\OverrideHttpMethod;
 
 use Illuminate\Foundation\Auth\User;
 use Spatie\RouteDiscovery\Attributes\Route;

@@ -3,7 +3,6 @@
 namespace Spatie\RouteDiscovery;
 
 use Illuminate\Routing\Router;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Spatie\RouteDiscovery\NodeTransformers\AddControllerUriToActions;
 use Spatie\RouteDiscovery\NodeTransformers\FixUrisOfNestedControllers;
@@ -22,9 +21,6 @@ class RouteRegistrar
     protected string $basePath;
 
     protected string $rootNamespace;
-
-    /** @var array<int, class-string> */
-    protected array $middleware = [];
 
     protected string $registeringDirectory = '';
 
@@ -47,26 +43,6 @@ class RouteRegistrar
         $this->rootNamespace = $rootNamespace;
 
         return $this;
-    }
-
-    /**
-     * @param string|array<int, class-string> $middleware
-     *
-     * @return $this
-     */
-    public function useMiddleware(string|array $middleware): self
-    {
-        $this->middleware = Arr::wrap($middleware);
-
-        return $this;
-    }
-
-    /**
-     * @return array<int, class-string>
-     */
-    public function middleware(): array
-    {
-        return $this->middleware ?? [];
     }
 
     public function registerDirectory(string $directory): void

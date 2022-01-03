@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Nesting\Nested;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Nesting\Nested;
 
 class ChildController
 {

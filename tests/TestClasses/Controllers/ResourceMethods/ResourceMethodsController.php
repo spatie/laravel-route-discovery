@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\RouteDiscovery\Tests\TestClasses\Discovery\ResourceMethods;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Controllers\ResourceMethods;
 
 use Illuminate\Http\Request;
 use Spatie\RouteDiscovery\Tests\TestClasses\Models\User;

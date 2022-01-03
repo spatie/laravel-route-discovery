@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Nesting;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Single;
 
-class ParentController
+class MyController
 {
     public function index()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NestedWithParametersController\Photos;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Controllers\NestedWithParametersController\Photos;
 
 use Spatie\RouteDiscovery\Tests\TestClasses\Models\Comment;
 

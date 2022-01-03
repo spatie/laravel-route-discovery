@@ -4,7 +4,7 @@ use Illuminate\Routing\ViewController;
 
 it('can discover controllers in a directory', function () {
     config()->set('route-discovery.discover_controllers_in_directory', [
-        $this->getTestPath('TestClasses/Discovery/Single'),
+        controllersPath('Single'),
     ]);
 
     $this->registerControllersFromConfigFile();
