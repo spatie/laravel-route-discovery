@@ -6,8 +6,10 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Collection;
 use Spatie\RouteDiscovery\NodeTransformers\AddControllerUriToActions;
 use Spatie\RouteDiscovery\NodeTransformers\FixUrisOfNestedControllers;
+use Spatie\RouteDiscovery\NodeTransformers\HandleCustomHttpMethods;
+use Spatie\RouteDiscovery\NodeTransformers\HandleCustomMiddleware;
 use Spatie\RouteDiscovery\NodeTransformers\NodeTransformer;
-use Spatie\RouteDiscovery\NodeTransformers\ProcessRouteAttributes;
+use Spatie\RouteDiscovery\NodeTransformers\HandleCustomRouteName;
 use Spatie\RouteDiscovery\NodeTree\Action;
 use Spatie\RouteDiscovery\NodeTree\Node;
 use Spatie\RouteDiscovery\NodeTree\NodeFactory;
@@ -83,7 +85,7 @@ class RouteRegistrar
             })
             ->filter()
             /** @phpstan-ignore-next-line */
-            ->each(fn (Node $node) => $nodes->push($node));
+            ->each(fn(Node $node) => $nodes->push($node));
 
         return $nodes;
     }
@@ -91,12 +93,9 @@ class RouteRegistrar
     /** @param Collection<Node> $nodes */
     protected function transformNodes(Collection $nodes): void
     {
-        collect([
-            new AddControllerUriToActions(),
-            new ProcessRouteAttributes(),
-            new FixUrisOfNestedControllers(),
-        ])
-        ->each(fn (NodeTransformer $middleware) => $middleware->transform($nodes));
+        collect(config('route-discovery.node_tree_transformers'))
+            ->map(fn(string $transformerClass) => app($transformerClass))
+            ->each(fn(NodeTransformer $middleware) => $middleware->transform($nodes));
     }
 
     protected function registerRoutes(Collection $nodes): void
