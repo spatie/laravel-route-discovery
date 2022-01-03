@@ -8,12 +8,10 @@ class DoNotDiscoverThisMethodController
 {
     public function method()
     {
-
     }
 
     #[DoNotDiscover]
     public function doNotDiscoverMethod()
     {
-
     }
 }

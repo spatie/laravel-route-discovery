@@ -3,8 +3,8 @@
 namespace Spatie\RouteDiscovery\PendingRouteTransformers;
 
 use Illuminate\Support\Collection;
-use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRoute;
+use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 
 class HandleCustomRouteName implements PendingRouteTransformer
 {
