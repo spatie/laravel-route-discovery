@@ -186,7 +186,7 @@ it('can override the http method', function () {
         );
 });
 
-it('can add middleware to a method', function() {
+it('can add middleware to a method', function () {
     $this
         ->routeRegistrar
         ->registerDirectory($this->getTestPath('TestClasses/Discovery/MiddlewareOnMethod'));

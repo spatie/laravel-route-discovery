@@ -10,11 +10,9 @@ class MiddlewareOnMethodController
     #[Route(middleware: TestMiddleware::class)]
     public function extraMiddleware()
     {
-
     }
 
     public function noExtraMiddleware()
     {
-
     }
 }
