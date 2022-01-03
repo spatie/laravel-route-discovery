@@ -7,19 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use ReflectionMethod;
 use ReflectionParameter;
-use Spatie\RouteDiscovery\Attributes\WhereAttribute;
 
 class Action
 {
     public ReflectionMethod $method;
     public string $uri;
-    /** @var array<int, string>  */
+    /** @var array<int, string> */
     public array $methods = [];
 
-    /** @var array{class-string, string}  */
+    /** @var array{class-string, string} */
     public array $action;
 
-    /** @var array<int, class-string>  */
+    /** @var array<int, class-string> */
     public array $middleware = [];
 
     /** @var array<int, \Spatie\RouteDiscovery\Attributes\WhereAttribute> */
