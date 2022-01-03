@@ -18,7 +18,7 @@ class HandleCustomHttpMethods implements NodeTransformer
                 }
 
                 if (! $httpMethods = $routeAttribute->methods) {
-                   return;
+                    return;
                 }
 
                 return $action->methods = $httpMethods;
