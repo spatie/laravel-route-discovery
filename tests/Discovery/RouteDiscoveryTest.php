@@ -7,6 +7,7 @@ use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\NestedWithParametersCont
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Nesting\Nested\ChildController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Nesting\ParentController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\NonPublicMethods\NonPublicMethodsController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\OverrideFullUri\OverrideFullUriController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\OverrideHttpMethod\OverrideHttpMethodController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\OverrideUri\OverrideUriController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\ResourceMethods\ResourceMethodsController;
@@ -219,5 +220,19 @@ it('can override the uri', function () {
             OverrideUriController::class,
             controllerMethod: 'myMethod',
             uri: 'override-uri/alternative-uri',
+        );
+});
+
+it('can override the full uri', function () {
+    $this
+        ->routeRegistrar
+        ->registerDirectory(controllersPath('OverrideFullUri'));
+
+    $this
+        ->assertRegisteredRoutesCount(1)
+        ->assertRouteRegistered(
+            OverrideFullUriController::class,
+            controllerMethod: 'myMethod',
+            uri: 'alternative-uri',
         );
 });

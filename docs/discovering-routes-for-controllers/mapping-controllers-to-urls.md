@@ -65,9 +65,9 @@ class NewsController
 
 ## Customizing the URL
 
-You can customize the generated URL by using adding a `Route` attribute to your method.
+You can override the last segment of the generated URL by using adding a `Route` attribute to your method and passing a value to the `uri` parameter.
 
-For this controller, the `/alternative-uri` route will be registered.
+For this controller, the `/news/alternative-uri` route will be registered instead of `/news/my-method`.
 
 ```php
 namespace App\Http\Controllers;
@@ -80,6 +80,23 @@ class NewsController
     public function myMethod() { /* ... */ }
 }
 ```
+
+If you want override the whole URL, pass a value to the `fullUri` method. 
+
+For this controller, the `/alternative-uri` route will be registered instead of `/news/my-method`.
+
+```php
+namespace App\Http\Controllers;
+
+use Spatie\RouteDiscovery\Attributes\Route;
+
+class NewsController
+{
+    #[Route(fullUri: 'alternative-uri')]
+    public function myMethod() { /* ... */ }
+}
+```
+
 
 ## HTTP verbs
 

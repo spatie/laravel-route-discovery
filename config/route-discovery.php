@@ -30,5 +30,6 @@ return [
         Spatie\RouteDiscovery\NodeTransformers\HandleCustomHttpMethods::class,
         Spatie\RouteDiscovery\NodeTransformers\FixUrisOfNestedControllers::class,
         Spatie\RouteDiscovery\NodeTransformers\HandleCustomUri::class,
+        Spatie\RouteDiscovery\NodeTransformers\HandleCustomFullUri::class,
     ]
 ];

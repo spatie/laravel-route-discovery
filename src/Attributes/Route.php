@@ -18,12 +18,14 @@ class Route implements RouteAttribute
     /**
      * @param array<int, string>|string $method
      * @param string|null $uri
+     * @param string|null $fullUri
      * @param string|null $name
      * @param array<int, class-string>|string $middleware
      */
     public function __construct(
         array | string $method = [],
         public ?string $uri = null,
+        public ?string $fullUri = null,
         public ?string $name = null,
         array | string $middleware = [],
     ) {
