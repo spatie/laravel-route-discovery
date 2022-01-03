@@ -22,8 +22,8 @@ class Route implements RouteAttribute
         $methods = Arr::wrap($method);
 
         $this->methods = collect($methods)
-            ->map(fn(string $method) => strtoupper($method))
-            ->filter(fn(string $method) => in_array($method, Router::$verbs))
+            ->map(fn (string $method) => strtoupper($method))
+            ->filter(fn (string $method) => in_array($method, Router::$verbs))
             ->toArray();
 
         $this->middleware = Arr::wrap($middleware);

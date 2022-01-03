@@ -1,11 +1,11 @@
 <?php
 
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NonPublicMethods\NonPublicMethodsController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Model\ModelController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Nesting\Nested\ChildController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Nesting\ParentController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NestedWithParametersController\Photos\CommentsController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NestedWithParametersController\PhotosController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Nesting\Nested\ChildController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Nesting\ParentController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NonPublicMethods\NonPublicMethodsController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\ResourceMethods\ResourceMethodsController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\RouteName\CustomRouteNameController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Single\MyController;
@@ -117,7 +117,7 @@ it('will only automatically register public methods', function () {
         );
 });
 
-it('will register routes with the correct http verbs for resourceful methods', function() {
+it('will register routes with the correct http verbs for resourceful methods', function () {
     $this
         ->routeRegistrar
         ->registerDirectory($this->getTestPath('TestClasses/Discovery/ResourceMethods'));
