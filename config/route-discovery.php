@@ -23,13 +23,14 @@ return [
      *
      * In most cases, you shouldn't change these
      */
-    'node_tree_transformers' => [
-        Spatie\RouteDiscovery\NodeTransformers\AddControllerUriToActions::class,
-        Spatie\RouteDiscovery\NodeTransformers\HandleCustomRouteName::class,
-        Spatie\RouteDiscovery\NodeTransformers\HandleCustomMiddleware::class,
-        Spatie\RouteDiscovery\NodeTransformers\HandleCustomHttpMethods::class,
-        Spatie\RouteDiscovery\NodeTransformers\FixUrisOfNestedControllers::class,
-        Spatie\RouteDiscovery\NodeTransformers\HandleCustomUri::class,
-        Spatie\RouteDiscovery\NodeTransformers\HandleCustomFullUri::class,
-    ]
+    'pending_route_transformers' => [
+        Spatie\RouteDiscovery\PendingRouteTransformers\AddControllerUriToActions::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\HandleDoNotDiscover::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\HandleCustomRouteName::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\HandleCustomMiddleware::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\HandleCustomHttpMethods::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\FixUrisOfNestedControllers::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\HandleCustomUri::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\HandleCustomFullUri::class,
+    ],
 ];

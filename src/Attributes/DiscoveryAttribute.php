@@ -2,6 +2,6 @@
 
 namespace Spatie\RouteDiscovery\Attributes;
 
-interface RouteAttribute
+interface DiscoveryAttribute
 {
 }

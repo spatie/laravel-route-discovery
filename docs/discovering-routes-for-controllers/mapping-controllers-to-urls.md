@@ -18,7 +18,6 @@ class NewsController
 }
 ```
 
-
 Of course, multiple methods in a controller will result in multiple routes being registered.
 
 For this controller, `/news/my-method` and `/news/my-other-method` routes will be registered.

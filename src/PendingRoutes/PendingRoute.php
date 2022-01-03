@@ -1,20 +1,26 @@
 <?php
 
-namespace Spatie\RouteDiscovery\NodeTree;
+namespace Spatie\RouteDiscovery\PendingRoutes;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use ReflectionAttribute;
+use ReflectionClass;
+use Spatie\RouteDiscovery\Attributes\DiscoveryAttribute;
 use SplFileInfo;
 
-class Node
+class PendingRoute
 {
     /**
-     * @param \SplFileInfo $fileInfo
+     * @param SplFileInfo $fileInfo
+     * @param ReflectionClass $class
+     * @param string $uri
      * @param string $fullQualifiedClassName
-     * @param \Illuminate\Support\Collection<\Spatie\RouteDiscovery\NodeTree\Action> $actions
+     * @param Collection<PendingRouteAction> $actions
      */
     public function __construct(
         public SplFileInfo $fileInfo,
+        public ReflectionClass $class,
         public string $uri,
         public string $fullQualifiedClassName,
         public Collection $actions,
@@ -36,5 +42,16 @@ class Node
     public function childNamespace(): string
     {
         return $this->namespace() . '\\' . $this->shortControllerName();
+    }
+
+    public function getAttribute(string $attributeClass): ?DiscoveryAttribute
+    {
+        $attributes = $this->class->getAttributes($attributeClass, ReflectionAttribute::IS_INSTANCEOF);
+
+        if (! count($attributes)) {
+            return null;
+        }
+
+        return $attributes[0]->newInstance();
     }
 }

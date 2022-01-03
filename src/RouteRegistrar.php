@@ -4,10 +4,10 @@ namespace Spatie\RouteDiscovery;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\Collection;
-use Spatie\RouteDiscovery\NodeTransformers\NodeTransformer;
-use Spatie\RouteDiscovery\NodeTree\Action;
-use Spatie\RouteDiscovery\NodeTree\Node;
-use Spatie\RouteDiscovery\NodeTree\NodeFactory;
+use Spatie\RouteDiscovery\PendingRouteTransformers\PendingRouteTransformer;
+use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
+use Spatie\RouteDiscovery\PendingRoutes\PendingRoute;
+use Spatie\RouteDiscovery\PendingRoutes\PendingRouteFactory;
 use SplFileInfo;
 use Symfony\Component\Finder\Finder;
 
@@ -46,60 +46,68 @@ class RouteRegistrar
     {
         $this->registeringDirectory = $directory;
 
-        $nodes = $this->convertToNodes($directory);
+        $pendingRoutes = $this->convertToPendingRoutes($directory);
 
-        $this->transformNodes($nodes);
+        $pendingRoutes = $this->transformNodes($pendingRoutes);
 
-        $this->registerRoutes($nodes);
+        $this->registerRoutes($pendingRoutes);
     }
 
     /**
      * @param string $directory
      *
-     * @return Collection<\Spatie\RouteDiscovery\NodeTree\Node>
+     * @return Collection<\Spatie\RouteDiscovery\PendingRoutes\PendingRoute>
      */
-    protected function convertToNodes(string $directory): Collection
+    protected function convertToPendingRoutes(string $directory): Collection
     {
         $files = (new Finder())->files()->depth(0)->name('*.php')->in($directory);
 
-        $nodeFactory = new NodeFactory(
+        $pendingRouteFactory = new PendingRouteFactory(
             $this->basePath,
             $this->rootNamespace,
             $this->registeringDirectory,
         );
 
-        $nodes = collect($files)
-            ->map(function (SplFileInfo $file) use ($nodeFactory) {
-                return $nodeFactory->make($file);
-            })
+        $pendingRoutes = collect($files)
+            ->map(fn(SplFileInfo $file) => $pendingRouteFactory->make($file))
             ->filter();
 
         collect((new Finder())->directories()->depth(0)->in($directory))
             ->flatMap(function (SplFileInfo $subDirectory) {
-                return $this->convertToNodes($subDirectory);
+                return $this->convertToPendingRoutes($subDirectory);
             })
             ->filter()
             /** @phpstan-ignore-next-line */
-            ->each(fn (Node $node) => $nodes->push($node));
+            ->each(fn (PendingRoute $pendingRoute) => $pendingRoutes->push($pendingRoute));
 
-        return $nodes;
+        return $pendingRoutes;
     }
 
-    /** @param Collection<Node> $nodes */
-    protected function transformNodes(Collection $nodes): void
+    /**
+     * @param Collection<PendingRoute> $pendingRoutes
+     *
+     * @return Collection<PendingRoute> $pendingRoutes
+     */
+    protected function transformNodes(Collection $pendingRoutes): Collection
     {
-        /** @var array<int, class-string<NodeTransformer>> $transformers */
-        $transformers = config('route-discovery.node_tree_transformers');
+        /** @var array<int, class-string<PendingRouteTransformer>> $transformers */
+        $transformers = config('route-discovery.pending_route_transformers');
 
-        collect($transformers)
-            ->map(fn (string $transformerClass): NodeTransformer => app($transformerClass))
-            ->each(fn (NodeTransformer $transformer) => $transformer->transform($nodes));
+        /** @var Collection<int, PendingRouteTransformer> */
+        $transformers = collect($transformers)
+            ->map(fn (string $transformerClass): PendingRouteTransformer => app($transformerClass));
+
+        foreach($transformers as $transformer) {
+            $pendingRoutes = $transformer->transform($pendingRoutes);
+        }
+
+        return $pendingRoutes;
     }
 
-    protected function registerRoutes(Collection $nodes): void
+    protected function registerRoutes(Collection $pendingRoutes): void
     {
-        $nodes->each(function (Node $node) {
-            $node->actions->each(function (Action $action) {
+        $pendingRoutes->each(function (PendingRoute $pendingRoute) {
+            $pendingRoute->actions->each(function (PendingRouteAction $action) {
                 $route = $this->router->addRoute($action->methods, $action->uri, $action->action);
 
                 $route->middleware($action->middleware);

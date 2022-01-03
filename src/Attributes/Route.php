@@ -7,7 +7,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Arr;
 
 #[Attribute(Attribute::TARGET_METHOD)]
-class Route implements RouteAttribute
+class Route implements DiscoveryAttribute
 {
     /** @var array<int, string> */
     public array $methods;

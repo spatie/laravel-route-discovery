@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\RouteDiscovery\NodeTree;
+namespace Spatie\RouteDiscovery\PendingRoutes;
 
-use function collect;
+use Spatie\RouteDiscovery\Attributes\DiscoveryAttribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use ReflectionAttribute;
@@ -10,7 +10,7 @@ use ReflectionMethod;
 use ReflectionParameter;
 use Spatie\RouteDiscovery\Attributes\Route;
 
-class Action
+class PendingRouteAction
 {
     public ReflectionMethod $method;
     public string $uri;
@@ -94,7 +94,18 @@ class Action
 
     public function getRouteAttribute(): ?Route
     {
-        $attributes = $this->method->getAttributes(Route::class, ReflectionAttribute::IS_INSTANCEOF);
+        return $this->getAttribute(Route::class);
+    }
+
+
+    /**
+     * @param class-string<DiscoveryAttribute> $attributeClass
+     *
+     * @return ?\Spatie\RouteDiscovery\Attributes\DiscoveryAttribute
+     */
+    public function getAttribute(string $attributeClass): ?DiscoveryAttribute
+    {
+        $attributes = $this->method->getAttributes($attributeClass, ReflectionAttribute::IS_INSTANCEOF);
 
         if (! count($attributes)) {
             return null;

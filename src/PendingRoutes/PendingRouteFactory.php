@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\RouteDiscovery\NodeTree;
+namespace Spatie\RouteDiscovery\PendingRoutes;
 
 use function collect;
 use Illuminate\Support\Str;
@@ -8,7 +8,7 @@ use ReflectionClass;
 use ReflectionMethod;
 use SplFileInfo;
 
-class NodeFactory
+class PendingRouteFactory
 {
     public function __construct(
         public string $basePath,
@@ -17,7 +17,7 @@ class NodeFactory
     ) {
     }
 
-    public function make(SplFileInfo $fileInfo): ?Node
+    public function make(SplFileInfo $fileInfo): ?PendingRoute
     {
         $fullyQualifiedClassName = $this->fullQualifiedClassNameFromFile($fileInfo);
 
@@ -36,13 +36,13 @@ class NodeFactory
                 return $method->isPublic();
             })
             ->map(function (ReflectionMethod $method) use ($fullyQualifiedClassName) {
-                return new Action($method, $fullyQualifiedClassName);
+                return new PendingRouteAction($method, $fullyQualifiedClassName);
             });
 
         $uri = $this->discoverUri($class);
 
 
-        return new Node($fileInfo, $uri, $fullyQualifiedClassName, $actions);
+        return new PendingRoute($fileInfo, $class, $uri, $fullyQualifiedClassName, $actions);
     }
 
     protected function discoverUri(ReflectionClass $class): string

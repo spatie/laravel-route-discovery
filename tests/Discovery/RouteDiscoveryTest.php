@@ -1,5 +1,7 @@
 <?php
 
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\DoNotDiscoverController\DoNotDiscoverThisMethodController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\DoNotDiscoverMethod\DoNotDiscoverMethodController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\MiddlewareOnMethod\MiddlewareOnMethodController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\Model\ModelController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Controllers\NestedWithParametersController\Photos\CommentsController;
@@ -236,3 +238,32 @@ it('can override the full uri', function () {
             uri: 'alternative-uri',
         );
 });
+
+it('can avoid discovering a method', function () {
+    $this
+        ->routeRegistrar
+        ->registerDirectory(controllersPath('DoNotDiscoverMethod'));
+
+    $this
+        ->assertRegisteredRoutesCount(1)
+        ->assertRouteRegistered(
+            DoNotDiscoverMethodController::class,
+            controllerMethod: 'method',
+            uri: 'do-not-discover-method/method',
+        );
+});
+
+it('can avoid discovering a controller', function () {
+    $this
+        ->routeRegistrar
+        ->registerDirectory(controllersPath('DoNotDiscoverController'));
+
+    $this
+        ->assertRegisteredRoutesCount(1)
+        ->assertRouteRegistered(
+            DoNotDiscoverThisMethodController::class,
+            controllerMethod: 'method',
+            uri: 'do-not-discover-this-method/method',
+        );
+});
+
