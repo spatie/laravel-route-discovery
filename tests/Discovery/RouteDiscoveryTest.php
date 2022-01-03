@@ -1,5 +1,6 @@
 <?php
 
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\MiddlewareOnMethod\MiddlewareOnMethodController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Model\ModelController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NestedWithParametersController\Photos\CommentsController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NestedWithParametersController\PhotosController;
@@ -10,6 +11,7 @@ use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\OverrideHttpMethod\Overrid
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\ResourceMethods\ResourceMethodsController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\RouteName\CustomRouteNameController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Single\MyController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Middleware\TestMiddleware;
 
 it('can automatically discovery a simple route', function () {
     $this
@@ -181,5 +183,26 @@ it('can override the http method', function () {
             controllerMethod: 'edit',
             uri: 'override-http-method/edit/{user}',
             httpMethods: ['delete'],
+        );
+});
+
+it('can add middleware to a method', function() {
+    $this
+        ->routeRegistrar
+        ->registerDirectory($this->getTestPath('TestClasses/Discovery/MiddlewareOnMethod'));
+
+    $this
+        ->assertRegisteredRoutesCount(2)
+        ->assertRouteRegistered(
+            MiddlewareOnMethodController::class,
+            controllerMethod: 'extraMiddleware',
+            uri: 'middleware-on-method/extra-middleware',
+            middleware: [TestMiddleware::class],
+        )
+        ->assertRouteRegistered(
+            MiddlewareOnMethodController::class,
+            controllerMethod: 'noExtraMiddleware',
+            uri: 'middleware-on-method/no-extra-middleware',
+            middleware: [],
         );
 });
