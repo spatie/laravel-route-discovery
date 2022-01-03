@@ -3,12 +3,8 @@
 namespace Spatie\RouteDiscovery\NodeTransformers;
 
 use Illuminate\Support\Collection;
-use ReflectionAttribute;
-use Spatie\RouteDiscovery\Attributes\Route;
-use Spatie\RouteDiscovery\Attributes\RouteAttribute;
 use Spatie\RouteDiscovery\NodeTree\Action;
 use Spatie\RouteDiscovery\NodeTree\Node;
-use Throwable;
 
 class ProcessRouteAttributes implements NodeTransformer
 {
@@ -19,7 +15,7 @@ class ProcessRouteAttributes implements NodeTransformer
             $node->actions->each(function (Action $action) {
                 $routeAttribute = $action->getRouteAttribute();
 
-                if (!$routeAttribute) {
+                if (! $routeAttribute) {
                     return null;
                 }
 
@@ -32,7 +28,6 @@ class ProcessRouteAttributes implements NodeTransformer
                 }
 
                 $action->middleware = $routeAttribute->middleware;
-
             });
         });
     }
