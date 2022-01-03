@@ -97,7 +97,6 @@ class NewsController
 }
 ```
 
-
 ## HTTP verbs
 
 By default, all registered routes are `GET` routes.
