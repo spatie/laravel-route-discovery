@@ -23,6 +23,7 @@ class RouteRegistrar
 
     protected string $rootNamespace;
 
+    /** @var array<int, class-string>  */
     protected array $middleware = [];
 
     protected string $registeringDirectory = '';
@@ -48,6 +49,11 @@ class RouteRegistrar
         return $this;
     }
 
+    /**
+     * @param string|array<int, class-string> $middleware
+     *
+     * @return $this
+     */
     public function useMiddleware(string|array $middleware): self
     {
         $this->middleware = Arr::wrap($middleware);
@@ -55,6 +61,9 @@ class RouteRegistrar
         return $this;
     }
 
+    /**
+     * @return array<int, class-string>
+     */
     public function middleware(): array
     {
         return $this->middleware ?? [];
@@ -87,7 +96,7 @@ class RouteRegistrar
         );
 
         $nodes = collect($files)
-            ->map(function (SplFileInfo $file) use ($nodeFactory, $directory) {
+            ->map(function (SplFileInfo $file) use ($nodeFactory) {
                 return $nodeFactory->make($file);
             })
             ->filter();
@@ -97,12 +106,14 @@ class RouteRegistrar
                 return $this->convertToNodes($subDirectory);
             })
             ->filter()
+            /** @phpstan-ignore-next-line */
             ->each(fn (Node $node) => $nodes->push($node));
 
         return $nodes;
     }
 
-    protected function transformNodes($nodes): void
+    /** @param Collection<Node> $nodes */
+    protected function transformNodes(Collection $nodes): void
     {
         collect([
             new AddControllerUriToActions(),
@@ -120,6 +131,7 @@ class RouteRegistrar
 
                 $route->middleware($action->middleware);
 
+                /** @phpstan-ignore-next-line */
                 $route->name($action->name);
 
                 if (count($action->wheres)) {

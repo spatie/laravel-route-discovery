@@ -17,7 +17,7 @@ class RouteDiscoveryServiceProvider extends PackageServiceProvider
             ->hasConfigFile();
     }
 
-    public function packageRegistered()
+    public function packageRegistered(): void
     {
         if ($this->app->routesAreCached()) {
             return;
@@ -49,7 +49,7 @@ class RouteDiscoveryServiceProvider extends PackageServiceProvider
                 $directories = Arr::wrap($directories);
 
                 foreach ($directories as $directory) {
-                    Route::prefix($prefix)->group(function () use ($prefix, $directory) {
+                    Route::prefix($prefix)->group(function () use ($directory) {
                         Discover::views()->in($directory);
                     });
                 }

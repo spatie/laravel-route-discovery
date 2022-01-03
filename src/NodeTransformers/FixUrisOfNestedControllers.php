@@ -23,9 +23,11 @@ class FixUrisOfNestedControllers implements NodeTransformer
                 return $action->method->name === 'show';
             });
 
-            if (! $parentAction) {
+            /*
+            if (! (bool)$parentAction) {
                 return;
             }
+            */
 
             $childNode->actions->each(function (Action $action) use ($parentNode, $parentAction) {
                 $result = Str::replace($parentNode->uri, $parentAction->uri, $action->uri);

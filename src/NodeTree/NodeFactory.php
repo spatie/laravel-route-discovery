@@ -42,17 +42,17 @@ class NodeFactory
         $uri = $this->discoverUri($class);
 
 
-        return new Node($fileInfo, $uri, $fullyQualifiedClassName, $actions, collect());
+        return new Node($fileInfo, $uri, $fullyQualifiedClassName, $actions);
     }
 
-    protected function discoverUri(ReflectionClass $class): ?string
+    protected function discoverUri(ReflectionClass $class): string
     {
-        $parts = Str::of($class->getFileName())
+        $parts = Str::of((string)$class->getFileName())
             ->after($this->registeringDirectory)
             ->beforeLast('Controller')
             ->explode('/');
 
-        return collect($parts)
+        return (string)collect($parts)
             ->filter()
             ->map(fn (string $part) => Str::of($part)->kebab())
             ->implode('/');
@@ -60,7 +60,7 @@ class NodeFactory
 
     protected function fullQualifiedClassNameFromFile(SplFileInfo $file): string
     {
-        $class = trim(Str::replaceFirst($this->basePath, '', $file->getRealPath()), DIRECTORY_SEPARATOR);
+        $class = trim(Str::replaceFirst($this->basePath, '', (string)$file->getRealPath()), DIRECTORY_SEPARATOR);
 
         $class = str_replace(
             [DIRECTORY_SEPARATOR, 'App\\'],

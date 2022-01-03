@@ -9,7 +9,7 @@ use Symfony\Component\Finder\Finder;
 
 class DiscoverViews
 {
-    public function in(string $directory)
+    public function in(string $directory): void
     {
         $files = (new Finder())->files()->name('*.blade.php')->in($directory);
 
@@ -18,7 +18,7 @@ class DiscoverViews
         });
     }
 
-    protected function registerRouteForView(SplFileInfo $file, string $baseDirectory)
+    protected function registerRouteForView(SplFileInfo $file, string $baseDirectory): void
     {
         $uri = Str::of($file->getPathname())
             ->after($baseDirectory)

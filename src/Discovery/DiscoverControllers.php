@@ -31,8 +31,9 @@ class DiscoverControllers
         return $this;
     }
 
-    public function in(string $directory)
+    public function in(string $directory): void
     {
+        /** @phpstan-ignore-next-line  */
         $router = app()->router;
 
         (new RouteRegistrar($router))

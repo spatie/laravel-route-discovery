@@ -16,7 +16,7 @@ class ProcessRouteAttributes implements NodeTransformer
     public function transform(Collection $nodes): void
     {
         $nodes->each(function (Node $node) {
-            $node->actions->each(function (Action $action) use ($node) {
+            $node->actions->each(function (Action $action) {
                 $attributes = $action->method->getAttributes(RouteAttribute::class, ReflectionAttribute::IS_INSTANCEOF);
 
                 foreach ($attributes as $attribute) {
