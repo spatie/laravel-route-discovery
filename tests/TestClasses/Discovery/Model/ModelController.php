@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\RouteDiscovery\Tests\TestClasses\Discovery\ModelController;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Model;
 
 use Spatie\RouteDiscovery\Tests\TestClasses\Models\User;
 

@@ -3,13 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use Spatie\RouteDiscovery\Discovery\Discover;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\CustomMethod\CustomMethodController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\SingleController\MyController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Single\MyController;
 
 it('can discover controller in a directory', function () {
     Discover::controllers()
         ->useRootNamespace('Spatie\RouteDiscovery\Tests\\')
         ->useBasePath($this->getTestPath())
-        ->in($this->getTestPath('TestClasses/Discovery/SingleController'));
+        ->in($this->getTestPath('TestClasses/Discovery/Single'));
 
     $this
         ->assertRegisteredRoutesCount(1)
@@ -40,7 +40,7 @@ it('can use a prefix when discovering routes', function () {
         Discover::controllers()
             ->useRootNamespace('Spatie\RouteDiscovery\Tests\\')
             ->useBasePath(test()->getTestPath())
-            ->in(test()->getTestPath('TestClasses/Discovery/SingleController'));
+            ->in(test()->getTestPath('TestClasses/Discovery/Single'));
     });
 
     $this

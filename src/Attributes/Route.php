@@ -14,20 +14,18 @@ class Route implements RouteAttribute
     public array $middleware;
 
     public function __construct(
-        array | string $methods = [],
+        array | string $method = [],
         public ?string $uri = null,
         public ?string $name = null,
         array | string $middleware = [],
     ) {
-        $this->methods = array_map(
-            static fn (string $verb) => in_array(
-                $upperVerb = strtoupper($verb),
-                Router::$verbs
-            )
-            ? $upperVerb
-            : $verb,
-            Arr::wrap($methods)
-        );
+        $methods = Arr::wrap($method);
+
+        $this->methods = collect($methods)
+            ->map(fn(string $method) => strtoupper($method))
+            ->filter(fn(string $method) => in_array($method, Router::$verbs))
+            ->toArray();
+
         $this->middleware = Arr::wrap($middleware);
     }
 

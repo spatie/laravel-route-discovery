@@ -1,18 +1,19 @@
 <?php
 
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\ControllerWithNonPublicMethods\NonPublicMethodsController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\ModelController\ModelController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NestedController\Nested\ChildController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NestedController\ParentController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NonPublicMethods\NonPublicMethodsController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Model\ModelController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Nesting\Nested\ChildController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Nesting\ParentController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NestedWithParametersController\Photos\CommentsController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\NestedWithParametersController\PhotosController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\ResourceMethods\ResourceMethodsController;
 use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\RouteName\CustomRouteNameController;
-use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\SingleController\MyController;
+use Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Single\MyController;
 
 it('can automatically discovery a simple route', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/Discovery/SingleController'));
+        ->registerDirectory($this->getTestPath('TestClasses/Discovery/Single'));
 
     $this->assertRegisteredRoutesCount(1);
 
@@ -40,7 +41,7 @@ it('can automatically discovery a route with a custom name', function () {
 it('can automatically discover a nested route without model parameters', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/Discovery/NestedController'));
+        ->registerDirectory($this->getTestPath('TestClasses/Discovery/Nesting'));
 
     $this->assertRegisteredRoutesCount(2);
 
@@ -91,7 +92,7 @@ it('can automatically discover a nested route with model parameters', function (
 it('can automatically discovery a model route', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/Discovery/ModelController'));
+        ->registerDirectory($this->getTestPath('TestClasses/Discovery/Model'));
 
     $this
         ->assertRegisteredRoutesCount(1)
@@ -105,7 +106,7 @@ it('can automatically discovery a model route', function () {
 it('will only automatically register public methods', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory($this->getTestPath('TestClasses/Discovery/ControllerWithNonPublicMethods'));
+        ->registerDirectory($this->getTestPath('TestClasses/Discovery/NonPublicMethods'));
 
     $this
         ->assertRegisteredRoutesCount(1)
@@ -114,4 +115,56 @@ it('will only automatically register public methods', function () {
             controllerMethod: 'index',
             uri: 'non-public-methods',
         );
+});
+
+it('will register routes with the correct http verbs for resourceful methods', function() {
+    $this
+        ->routeRegistrar
+        ->registerDirectory($this->getTestPath('TestClasses/Discovery/ResourceMethods'));
+
+    $this
+        ->assertRegisteredRoutesCount(7)
+        ->assertRouteRegistered(
+            ResourceMethodsController::class,
+            controllerMethod: 'index',
+            uri: 'resource-methods',
+            httpMethods: ['get'],
+        )
+        ->assertRouteRegistered(
+            ResourceMethodsController::class,
+            controllerMethod: 'show',
+            uri: 'resource-methods/{user}',
+            httpMethods: ['get'],
+        )
+        ->assertRouteRegistered(
+            ResourceMethodsController::class,
+            controllerMethod: 'create',
+            uri: 'resource-methods/create',
+            httpMethods: ['get'],
+        )
+        ->assertRouteRegistered(
+            ResourceMethodsController::class,
+            controllerMethod: 'store',
+            uri: 'resource-methods',
+            httpMethods: ['post'],
+        )
+        ->assertRouteRegistered(
+            ResourceMethodsController::class,
+            controllerMethod: 'edit',
+            uri: 'resource-methods/edit/{user}',
+            httpMethods: ['get'],
+        )
+        ->assertRouteRegistered(
+            ResourceMethodsController::class,
+            controllerMethod: 'update',
+            uri: 'resource-methods/{user}',
+            httpMethods: ['put', 'patch'],
+        )
+        ->assertRouteRegistered(
+            ResourceMethodsController::class,
+            controllerMethod: 'destroy',
+            uri: 'resource-methods/{user}',
+            httpMethods: ['delete'],
+        )
+    ;
 });

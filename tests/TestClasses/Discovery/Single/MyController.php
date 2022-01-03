@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\RouteDiscovery\Tests\TestClasses\Discovery\SingleController;
+namespace Spatie\RouteDiscovery\Tests\TestClasses\Discovery\Single;
 
 class MyController
 {

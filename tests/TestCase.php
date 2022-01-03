@@ -73,10 +73,10 @@ class TestCase extends Orchestra
                         return false;
                     }
                 }
+
                 if ($route->uri() !== $uri) {
                     return false;
                 }
-
                 $routeController = $route->getAction(0) ?? get_class($route->getController());
 
                 if ($routeController !== $controller) {
