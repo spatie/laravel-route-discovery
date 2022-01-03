@@ -2,14 +2,13 @@
 
 namespace Spatie\RouteDiscovery\NodeTree;
 
-use ReflectionAttribute;
-use Spatie\RouteDiscovery\Attributes\Route;
-use Spatie\RouteDiscovery\Attributes\RouteAttribute;
 use function collect;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use ReflectionAttribute;
 use ReflectionMethod;
 use ReflectionParameter;
+use Spatie\RouteDiscovery\Attributes\Route;
 
 class Action
 {

@@ -93,9 +93,12 @@ class RouteRegistrar
     /** @param Collection<Node> $nodes */
     protected function transformNodes(Collection $nodes): void
     {
-        collect(config('route-discovery.node_tree_transformers'))
-            ->map(fn(string $transformerClass) => app($transformerClass))
-            ->each(fn(NodeTransformer $middleware) => $middleware->transform($nodes));
+        /** @var array<int, class-string<NodeTransformer>> $transformers */
+        $transformers = config('route-discovery.node_tree_transformers');
+
+        collect($transformers)
+            ->map(fn(string $transformerClass): NodeTransformer => app($transformerClass))
+            ->each(fn(NodeTransformer $transformer) => $transformer->transform($nodes));
     }
 
     protected function registerRoutes(Collection $nodes): void
