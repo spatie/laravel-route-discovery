@@ -9,17 +9,18 @@ it('can discover views in a directory', function () {
     $this->assertRegisteredRoutesCount(6);
 
     collect([
-        '/',
-        'home',
-        'long-name',
-        'contact',
-        'nested',
-        'nested/another',
-    ])->each(function (string $uri) {
+        '/' => 'home',
+        'home' => 'home',
+        'long-name' => 'long-name',
+        'contact' => 'contact',
+        'nested' => 'nested',
+        'nested/another' => 'nested.another',
+    ])->each(function (string $name, string $uri) {
         $this->assertRouteRegistered(
             ViewController::class,
             controllerMethod: '\\' . ViewController::class,
             uri: $uri,
+            name: $name,
         );
     });
 });
