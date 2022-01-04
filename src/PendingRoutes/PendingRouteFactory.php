@@ -50,7 +50,7 @@ class PendingRouteFactory
         $parts = Str::of((string)$class->getFileName())
             ->after($this->registeringDirectory)
             ->beforeLast('Controller')
-            ->explode('/');
+            ->explode(DIRECTORY_SEPARATOR);
 
         return (string)collect($parts)
             ->filter()

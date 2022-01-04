@@ -24,11 +24,11 @@ class DiscoverViews
             ->after($baseDirectory)
             ->beforeLast('.blade.php');
 
-        $view = $uri->replace('/', '.');
+        $view = $uri->replace(DIRECTORY_SEPARATOR, '.');
 
-        $uri = Str::replaceLast('/index', '/', (string)$uri);
+        $uri = Str::replaceLast(DIRECTORY_SEPARATOR . 'index', DIRECTORY_SEPARATOR, (string)$uri);
 
-        $uri = collect(explode('/', $uri))
+        $uri = collect(explode(DIRECTORY_SEPARATOR, $uri))
             ->map(function (string $uriSegment) {
                 return Str::kebab($uriSegment);
             })
