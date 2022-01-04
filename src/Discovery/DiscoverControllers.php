@@ -33,10 +33,10 @@ class DiscoverControllers
 
     public function in(string $directory): void
     {
-        /** @phpstan-ignore-next-line  */
+        /** @phpstan-ignore-next-line */
         $router = app()->router;
 
-        (new RouteRegistrar($router))
+        app(RouteRegistrar::class, [$router])
             ->useRootNamespace($this->rootNamespace)
             ->useBasePath($this->basePath)
             ->registerDirectory($directory);
