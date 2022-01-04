@@ -18,7 +18,6 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Single\MyControl
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Middleware\TestMiddleware;
 
 it('can automatically discovery a simple route', function () {
-
     $this
         ->routeRegistrar
         ->registerDirectory(controllersPath('Single'));
