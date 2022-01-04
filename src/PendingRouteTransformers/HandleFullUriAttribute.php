@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRoute;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 
-class HandleCustomFullUri implements PendingRouteTransformer
+class HandleFullUriAttribute implements PendingRouteTransformer
 {
     /**
      * @param Collection<PendingRoute> $pendingRoutes

@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRoute;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 
-class HandleCustomMiddleware implements PendingRouteTransformer
+class HandleHttpMethodsAttribute implements PendingRouteTransformer
 {
     /**
      * @param Collection<PendingRoute> $pendingRoutes
@@ -16,14 +16,17 @@ class HandleCustomMiddleware implements PendingRouteTransformer
     public function transform(Collection $pendingRoutes): Collection
     {
         $pendingRoutes->each(function (PendingRoute $pendingRoute) {
-            $pendingRoute->actions->each(function (PendingRouteAction $action) use ($pendingRoute) {
-                if ($pendingRouteAttribute = $pendingRoute->getRouteAttribute()) {
-                    $action->addMiddleware($pendingRouteAttribute->middleware);
+            /** @phpstan-ignore-next-line */
+            $pendingRoute->actions->each(function (PendingRouteAction $action) {
+                if (! $routeAttribute = $action->getRouteAttribute()) {
+                    return;
                 }
 
-                if ($actionRouteAttribute = $action->getRouteAttribute()) {
-                    $action->addMiddleware($actionRouteAttribute->middleware);
+                if (! $httpMethods = $routeAttribute->methods) {
+                    return;
                 }
+
+                return $action->methods = $httpMethods;
             });
         });
 

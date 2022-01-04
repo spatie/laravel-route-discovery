@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRoute;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 
-class FixUrisOfNestedControllers implements PendingRouteTransformer
+class HandleUrisOfNestedControllers implements PendingRouteTransformer
 {
     /**
      * @param Collection<PendingRoute> $pendingRoutes

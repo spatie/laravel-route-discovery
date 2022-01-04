@@ -3,11 +3,10 @@
 namespace Spatie\RouteDiscovery\PendingRouteTransformers;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRoute;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 
-class HandleCustomUri implements PendingRouteTransformer
+class HandleMiddlewareAttribute implements PendingRouteTransformer
 {
     /**
      * @param Collection<PendingRoute> $pendingRoutes
@@ -17,18 +16,14 @@ class HandleCustomUri implements PendingRouteTransformer
     public function transform(Collection $pendingRoutes): Collection
     {
         $pendingRoutes->each(function (PendingRoute $pendingRoute) {
-            $pendingRoute->actions->each(function (PendingRouteAction $action) {
-                if (! $routeAttribute = $action->getRouteAttribute()) {
-                    return;
+            $pendingRoute->actions->each(function (PendingRouteAction $action) use ($pendingRoute) {
+                if ($pendingRouteAttribute = $pendingRoute->getRouteAttribute()) {
+                    $action->addMiddleware($pendingRouteAttribute->middleware);
                 }
 
-
-                if (! $routeAttributeUri = $routeAttribute->uri) {
-                    return;
+                if ($actionRouteAttribute = $action->getRouteAttribute()) {
+                    $action->addMiddleware($actionRouteAttribute->middleware);
                 }
-
-                $baseUri = Str::beforeLast($action->uri, '/');
-                $action->uri = $baseUri . '/' . $routeAttributeUri;
             });
         });
 

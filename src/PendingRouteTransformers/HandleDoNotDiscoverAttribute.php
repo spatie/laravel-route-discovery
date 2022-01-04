@@ -7,7 +7,7 @@ use Spatie\RouteDiscovery\Attributes\DoNotDiscover;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRoute;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 
-class HandleDoNotDiscover implements PendingRouteTransformer
+class HandleDoNotDiscoverAttribute implements PendingRouteTransformer
 {
     /**
      * @param Collection<PendingRoute> $pendingRoutes

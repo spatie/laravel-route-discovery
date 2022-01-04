@@ -24,14 +24,14 @@ return [
      * In most cases, you shouldn't change these.
      */
     'pending_route_transformers' => [
-        Spatie\RouteDiscovery\PendingRouteTransformers\HandleDoNotDiscover::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\HandleDoNotDiscoverAttribute::class,
         Spatie\RouteDiscovery\PendingRouteTransformers\AddControllerUriToActions::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\HandleCustomRouteName::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\HandleCustomMiddleware::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\HandleCustomHttpMethods::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\FixUrisOfNestedControllers::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\HandleCustomUri::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\HandleCustomFullUri::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\HandleRouteNameAttribute::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\HandleMiddlewareAttribute::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\HandleHttpMethodsAttribute::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\HandleUrisOfNestedControllers::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\HandleUriAttribute::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\HandleFullUriAttribute::class,
         Spatie\RouteDiscovery\PendingRouteTransformers\AddDefaultRouteName::class,
     ],
 ];
