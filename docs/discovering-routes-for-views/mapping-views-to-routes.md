@@ -1,5 +1,5 @@
 ---
-title: Mapping views to URLs
+title: Mapping views to routes
 weight: 2
 ---
 

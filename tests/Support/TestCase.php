@@ -51,7 +51,7 @@ class TestCase extends Orchestra
         string $controller,
         string $controllerMethod = 'myMethod',
         string | array $httpMethods = ['get'],
-        string $uri = 'my-method',
+        string $uri = null,
         string | array $middleware = [],
         ?string $name = null,
         ?string $domain = null,
@@ -68,8 +68,11 @@ class TestCase extends Orchestra
                         return false;
                     }
                 }
-                if ($route->uri() !== $uri) {
-                    return false;
+
+                if ($uri !== null ) {
+                    if ($route->uri() !== $uri) {
+                        return false;
+                    }
                 }
                 $routeController = $route->getAction(0) ?? get_class($route->getController());
 

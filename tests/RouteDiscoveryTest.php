@@ -1,5 +1,7 @@
 <?php
 
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultRouteName\DefaultRouteNameController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultRouteName\Nested\AnotherDefaultRouteNameController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDiscoverController\DoNotDiscoverThisMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDiscoverMethod\DoNotDiscoverMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\MiddlewareOnMethod\MiddlewareOnMethodController;
@@ -13,7 +15,7 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\OverrideFullUri\
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\OverrideHttpMethod\OverrideHttpMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\OverrideUri\OverrideUriController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\ResourceMethods\ResourceMethodsController;
-use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\RouteName\CustomRouteNameController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\CustomRouteName\CustomRouteNameController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Single\MyController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Middleware\TestMiddleware;
 
@@ -34,7 +36,7 @@ it('can automatically discovery a simple route', function () {
 it('can automatically discovery a route with a custom name', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory(controllersPath('RouteName'));
+        ->registerDirectory(controllersPath('CustomRouteName'));
     $this->assertRegisteredRoutesCount(1);
 
     $this->assertRouteRegistered(
@@ -264,5 +266,39 @@ it('can avoid discovering a controller', function () {
             DoNotDiscoverThisMethodController::class,
             controllerMethod: 'method',
             uri: 'do-not-discover-this-method/method',
+        );
+});
+
+it('will add default route names if none is set', function () {
+    $this
+        ->routeRegistrar
+        ->registerDirectory(controllersPath('DefaultRouteName'));
+
+    $this
+        ->assertRegisteredRoutesCount(5)
+        ->assertRouteRegistered(
+            DefaultRouteNameController::class,
+            controllerMethod: 'method',
+            name: 'default-route-name.method',
+        )
+        ->assertRouteRegistered(
+            DefaultRouteNameController::class,
+            controllerMethod: 'edit',
+            name: 'default-route-name.edit',
+        )
+        ->assertRouteRegistered(
+            DefaultRouteNameController::class,
+            controllerMethod: 'specialMethod',
+            name: 'special-name',
+        )
+        ->assertRouteRegistered(
+            AnotherDefaultRouteNameController::class,
+            controllerMethod: 'method',
+            name: 'nested.another-default-route-name.method',
+        )
+        ->assertRouteRegistered(
+            AnotherDefaultRouteNameController::class,
+            controllerMethod: 'edit',
+            name: 'nested.another-default-route-name.edit',
         );
 });

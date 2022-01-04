@@ -1,5 +1,5 @@
 ---
-title: Mapping controllers to URLs
+title: Mapping controllers to routes
 weight: 2
 ---
 
@@ -117,6 +117,28 @@ class NewsController
 {
     #[Route(method: 'post')]
     public function myMethod() { /* ... */ }
+}
+```
+
+## Adding a route name
+
+By default, the package will automatically add route names for each route that is registered. For this we'll use the controller name and the method name. 
+
+For a `NewsController` with a method `myMethod`, the route name will be `news.my-method`. If that controller in a sub namespace, for example `App\Http\Controllers\Nested\NewsController`, the route name will become `nested.news.my-method`.
+
+You can customize the route name that will be added by adding a `Route` attribute and pass a string to the `name` argument.
+
+For the controller below, the discovered route will have the name `special-name`.
+
+```php
+namespace App\Http\Controllers;
+
+use Spatie\RouteDiscovery\Attributes\Route;
+
+class NewsController
+{
+    #[Route(name: 'special-name')]
+    public function specialMethod() { /* ... */ }
 }
 ```
 
