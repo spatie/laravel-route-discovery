@@ -78,6 +78,10 @@ class PendingRouteAction
     {
         $middleware = Arr::wrap($middleware);
 
+        $allMiddleware = array_merge($middleware, $this->middleware);
+
+        $this->middleware = array_unique($allMiddleware);
+
         return $this;
     }
 

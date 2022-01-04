@@ -5,7 +5,8 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultRouteName
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultRouteName\Nested\AnotherDefaultRouteNameController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDiscoverController\DoNotDiscoverThisMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDiscoverMethod\DoNotDiscoverMethodController;
-use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\MiddlewareOnMethod\MiddlewareOnMethodController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Middleware\MiddlewareOnControllerController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Middleware\MiddlewareOnMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Model\ModelController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\Photos\CommentsController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\PhotosController;
@@ -17,6 +18,7 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\OverrideHttpMeth
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\OverrideUri\OverrideUriController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\ResourceMethods\ResourceMethodsController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Single\MyController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Middleware\OtherTestMiddleware;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Middleware\TestMiddleware;
 
 it('can automatically discovery a simple route', function () {
@@ -192,23 +194,31 @@ it('can override the http method', function () {
         );
 });
 
-it('can add middleware to a method', function () {
+it('can add middleware to an entire controller and a single method', function () {
     $this
         ->routeRegistrar
-        ->registerDirectory(controllersPath('MiddlewareOnMethod'));
+        ->registerDirectory(controllersPath('Middleware'));
 
     $this
-        ->assertRegisteredRoutesCount(2)
+        ->assertRegisteredRoutesCount(4)
+        ->assertRouteRegistered(
+            MiddlewareOnControllerController::class,
+            controllerMethod: 'oneMiddleware',
+            middleware: [TestMiddleware::class],
+        )
+        ->assertRouteRegistered(
+            MiddlewareOnControllerController::class,
+            controllerMethod: 'twoMiddleware',
+            middleware: [TestMiddleware::class, OtherTestMiddleware::class],
+        )
         ->assertRouteRegistered(
             MiddlewareOnMethodController::class,
             controllerMethod: 'extraMiddleware',
-            uri: 'middleware-on-method/extra-middleware',
             middleware: [TestMiddleware::class],
         )
         ->assertRouteRegistered(
             MiddlewareOnMethodController::class,
             controllerMethod: 'noExtraMiddleware',
-            uri: 'middleware-on-method/no-extra-middleware',
             middleware: [],
         );
 });

@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use ReflectionAttribute;
 use ReflectionClass;
 use Spatie\RouteDiscovery\Attributes\DiscoveryAttribute;
+use Spatie\RouteDiscovery\Attributes\Route;
 use SplFileInfo;
 
 class PendingRoute
@@ -42,6 +43,11 @@ class PendingRoute
     public function childNamespace(): string
     {
         return $this->namespace() . '\\' . $this->shortControllerName();
+    }
+
+    public function getRouteAttribute(): ?Route
+    {
+        return $this->getAttribute(Route::class);
     }
 
     /**

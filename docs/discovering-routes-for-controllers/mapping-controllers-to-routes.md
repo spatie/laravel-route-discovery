@@ -142,6 +142,46 @@ class NewsController
 }
 ```
 
+## Adding middleware
+
+You can apply middleware to a route by adding a `Route` attribute and pass a middleware class to the `middleware` argument.
+
+```php
+namespace App\Http\Controllers;
+
+use Illuminate\Routing\Middleware\ValidateSignature;
+use Spatie\RouteDiscovery\Attributes\Route;
+
+class DownloadController
+{
+    #[Route(middleware: ValidateSignature::class)]
+    public function download() { /* ... */ }
+}
+```
+
+To apply a middleware on all methods of a controller, use the `Route` attribute at the class level. In the example below, the middleware will be applied on both the routes of both `download` and `otherMethod`.
+
+```php
+namespace App\Http\Controllers;
+
+use Illuminate\Routing\Middleware\ValidateSignature;
+use Spatie\RouteDiscovery\Attributes\Route;
+
+#[Route(middleware: ValidateSignature::class)]
+class DownloadController
+{
+    public function download() { /* ... */ }
+    
+    public function otherMethod() { /* ... */ }
+}
+```
+
+Instead of a string, you can also pass an array with middleware to the `middleware` argument of the `Route` attribute.
+
+```php
+#[Route(middleware: [ValidateSignature::class, AnotherMiddleware::class])]
+```
+
 ## Models as route parameters
 
 A URL segment will be used for a parameter of a method that accepts an eloquent model.

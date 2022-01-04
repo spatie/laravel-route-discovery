@@ -18,6 +18,7 @@ class AddDefaultRouteName implements PendingRouteTransformer
         $pendingRoutes->each(function (PendingRoute $pendingRoute) {
             $pendingRoute->actions
                 ->reject(fn (PendingRouteAction $action) => $action->name)
+                /** @phpstan-ignore-next-line */
                 ->each(fn (PendingRouteAction $action) => $action->name = $this->generateRouteName($action));
         });
 
