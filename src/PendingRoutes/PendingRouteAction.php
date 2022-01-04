@@ -72,7 +72,7 @@ class PendingRouteAction
     /**
      * @param array<class-string>|class-string $middleware
      *
-     * @return void
+     * @return self
      */
     public function addMiddleware(array|string $middleware): self
     {
