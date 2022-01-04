@@ -8,6 +8,5 @@ class HandleWheresAttribute implements PendingRouteTransformer
 {
     public function transform(Collection $pendingRoutes): Collection
     {
-
     }
 }
