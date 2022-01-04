@@ -69,7 +69,7 @@ class TestCase extends Orchestra
                     }
                 }
 
-                if ($uri !== null ) {
+                if ($uri !== null) {
                     if ($route->uri() !== $uri) {
                         return false;
                     }

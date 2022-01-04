@@ -8,11 +8,9 @@ class AnotherDefaultRouteNameController
 {
     public function method()
     {
-
     }
 
     public function edit(User $user)
     {
-
     }
 }
