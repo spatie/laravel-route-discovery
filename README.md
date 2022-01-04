@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-route-discovery.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-route-discovery)
 ![Tests](https://github.com/spatie/laravel-route-discovery/workflows/Tests/badge.svg)
-[![Type Coverage](https://shepherd.dev/github/spatie/laravel-route-discovery/coverage.svg)](https://shepherd.dev/github/spatie/laravel-route-discovery)
+[![PHPStan](https://github.com/spatie/laravel-route-discovery/actions/workflows/phpstan.yml/badge.svg)](https://github.com/spatie/laravel-route-discovery/actions/workflows/phpstan.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-route-discovery.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-route-discovery)
 
 This package will automatically discover and register routes of your app.
