@@ -6,7 +6,7 @@ use Attribute;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Arr;
 
-#[Attribute(Attribute::TARGET_METHOD)]
+#[Attribute(Attribute::TARGET_CLASS|Attribute::TARGET_METHOD)]
 class Route implements DiscoveryAttribute
 {
     /** @var array<int, string> */

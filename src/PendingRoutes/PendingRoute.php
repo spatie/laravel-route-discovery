@@ -45,9 +45,11 @@ class PendingRoute
     }
 
     /**
-     * @param class-string $attributeClass
+     * @template T of DiscoveryAttribute
      *
-     * @return ?DiscoveryAttribute
+     * @param class-string<T> $attributeClass
+     *
+     * @return ?T
      */
     public function getAttribute(string $attributeClass): ?DiscoveryAttribute
     {

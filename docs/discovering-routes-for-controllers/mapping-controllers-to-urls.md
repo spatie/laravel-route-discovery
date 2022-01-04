@@ -137,3 +137,41 @@ class UsersController
 }
 ```
 
+## Preventing routes from being discovered
+
+You can prevent a certain controller from being discovered by using the `DoNotDiscover` attribute.
+
+For this controller, only a route for the `anotherMethod` will be registered.
+
+```php
+namespace App\Http\Controllers;
+
+use Spatie\RouteDiscovery\Attributes\DoNotDiscover;
+
+class UsersController
+{
+    #[DoNotDiscover]
+    public function myMethod() { /* ... */}
+    
+    public function anotherMethod() { /* ... */}
+}
+```
+
+You can also prevent an entire controller from being discovered by adding the `DoNotDiscover` attribute on the class level. 
+
+For this controller, not a single route will be registered.
+
+```php
+namespace App\Http\Controllers;
+
+use Spatie\RouteDiscovery\Attributes\DoNotDiscover;
+
+#[DoNotDiscover]
+class UsersController
+{
+    public function myMethod() { /* ... */}
+    
+    public function anotherMethod() { /* ... */}
+}
+```
+``

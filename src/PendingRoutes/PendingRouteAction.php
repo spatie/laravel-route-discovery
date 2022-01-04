@@ -98,9 +98,11 @@ class PendingRouteAction
     }
 
     /**
-     * @param class-string<DiscoveryAttribute> $attributeClass
+     * @template T of DiscoveryAttribute
      *
-     * @return ?\Spatie\RouteDiscovery\Attributes\DiscoveryAttribute
+     * @param class-string<T> $attributeClass
+     *
+     * @return ?T
      */
     public function getAttribute(string $attributeClass): ?DiscoveryAttribute
     {
