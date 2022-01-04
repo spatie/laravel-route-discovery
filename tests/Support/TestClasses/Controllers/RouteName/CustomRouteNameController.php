@@ -9,6 +9,5 @@ class CustomRouteNameController
     #[Route(name:'this-is-a-custom-name')]
     public function index()
     {
-
     }
 }
