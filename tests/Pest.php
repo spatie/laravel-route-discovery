@@ -1,10 +1,10 @@
 <?php
 
-use Spatie\RouteDiscovery\Tests\TestCase;
+use Spatie\RouteDiscovery\Tests\Support\TestCase;
 
 uses(TestCase::class)->in(__DIR__);
 
 function controllersPath(string $directoryName): string
 {
-    return test()->getTestPath("TestClasses/Controllers/{$directoryName}");
+    return realpath(test()->getTestPath("Support/TestClasses/Controllers/{$directoryName}"));
 }

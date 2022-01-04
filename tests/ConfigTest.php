@@ -14,7 +14,7 @@ it('can discover controllers in a directory', function () {
 
 it('can discover a single directory with a prefix', function () {
     config()->set('route-discovery.discover_views_in_directory', [
-        'docs' => $this->getTestPath('TestClasses/resources/views'),
+        'docs' => $this->getTestPath('Support/TestClasses/resources/views'),
     ]);
 
     $this->registerViewsFromConfigFile();
@@ -28,7 +28,7 @@ it('can discover a single directory with a prefix', function () {
 
 it('can discover a single directory without a prefix', function () {
     config()->set('route-discovery.discover_views_in_directory', [
-        $this->getTestPath('TestClasses/resources/views'),
+        $this->getTestPath('Support/TestClasses/resources/views'),
     ]);
 
     $this->registerViewsFromConfigFile();

@@ -32,5 +32,6 @@ return [
         Spatie\RouteDiscovery\PendingRouteTransformers\FixUrisOfNestedControllers::class,
         Spatie\RouteDiscovery\PendingRouteTransformers\HandleCustomUri::class,
         Spatie\RouteDiscovery\PendingRouteTransformers\HandleCustomFullUri::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\AddDefaultRouteName::class,
     ],
 ];
