@@ -3,6 +3,7 @@
 namespace Spatie\RouteDiscovery\PendingRoutes;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use ReflectionAttribute;
 use ReflectionMethod;
@@ -66,6 +67,18 @@ class PendingRouteAction
         }
 
         return $uri;
+    }
+
+    /**
+     * @param array<class-string>|class-string $middleware
+     *
+     * @return void
+     */
+    public function addMiddleware(array|string $middleware): self
+    {
+        $middleware = Arr::wrap($middleware);
+
+        return $this;
     }
 
     /**
