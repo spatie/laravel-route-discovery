@@ -23,7 +23,7 @@ class DiscoverViews
         $view = $this->determineView($file, $baseDirectory);
         $uri = $this->determineUri($file, $baseDirectory);
         $name = $this->determineName($file, $baseDirectory);
-dump($name);
+        dump($name);
         Route::view($uri, $view)->name($name);
     }
 
