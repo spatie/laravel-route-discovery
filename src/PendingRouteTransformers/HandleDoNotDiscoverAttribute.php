@@ -17,11 +17,11 @@ class HandleDoNotDiscoverAttribute implements PendingRouteTransformer
     public function transform(Collection $pendingRoutes): Collection
     {
         return $pendingRoutes
-            ->reject(fn (PendingRoute $pendingRoute) => $pendingRoute->getAttribute(DoNotDiscover::class))
+            ->reject(fn(PendingRoute $pendingRoute) => $pendingRoute->getAttribute(DoNotDiscover::class))
             ->each(function (PendingRoute $pendingRoute) {
                 $pendingRoute->actions = $pendingRoute
-                ->actions
-                ->reject(fn (PendingRouteAction $action) => $action->getAttribute(DoNotDiscover::class));
+                    ->actions
+                    ->reject(fn(PendingRouteAction $action) => $action->getAttribute(DoNotDiscover::class));
             });
     }
 }
