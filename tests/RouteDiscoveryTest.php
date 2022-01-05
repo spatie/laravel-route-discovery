@@ -348,4 +348,3 @@ it('can handle a domain attribute', function () {
             domain: 'second.example.com',
         );
 });
-
