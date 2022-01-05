@@ -10,6 +10,5 @@ class WhereAttributeController
     #[WhereUuid('user')]
     public function edit(User $user)
     {
-
     }
 }

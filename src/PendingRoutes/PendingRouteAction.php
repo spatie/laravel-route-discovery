@@ -11,7 +11,6 @@ use ReflectionParameter;
 use Spatie\RouteDiscovery\Attributes\DiscoveryAttribute;
 use Spatie\RouteDiscovery\Attributes\Route;
 use Spatie\RouteDiscovery\Attributes\Where;
-use Spatie\RouteDiscovery\Attributes\WhereAttribute;
 
 class PendingRouteAction
 {

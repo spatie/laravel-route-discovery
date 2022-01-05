@@ -315,7 +315,7 @@ it('will add default route names if none is set', function () {
         );
 });
 
-it('can handle a where attribute', function() {
+it('can handle a where attribute', function () {
     $this
         ->routeRegistrar
         ->registerDirectory(controllersPath('Where'));

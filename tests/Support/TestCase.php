@@ -99,7 +99,7 @@ class TestCase extends Orchestra
                     return false;
                 }
 
-                if ($wheres !== null ) {
+                if ($wheres !== null) {
                     if ($wheres !== $route->wheres) {
                         return false;
                     }

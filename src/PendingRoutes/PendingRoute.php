@@ -8,7 +8,6 @@ use ReflectionAttribute;
 use ReflectionClass;
 use Spatie\RouteDiscovery\Attributes\DiscoveryAttribute;
 use Spatie\RouteDiscovery\Attributes\Route;
-use Spatie\RouteDiscovery\Attributes\WhereAttribute;
 use SplFileInfo;
 
 class PendingRoute
