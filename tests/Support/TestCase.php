@@ -55,7 +55,7 @@ class TestCase extends Orchestra
         string | array $middleware = [],
         ?string $name = null,
         ?string $domain = null,
-        ?array $wheres = []
+        ?array $wheres = null
     ): self {
         if (! is_array($middleware)) {
             $middleware = Arr::wrap($middleware);
@@ -99,8 +99,10 @@ class TestCase extends Orchestra
                     return false;
                 }
 
-                if ($wheres !== $route->wheres) {
-                    return false;
+                if ($wheres !== null ) {
+                    if ($wheres !== $route->wheres) {
+                        return false;
+                    }
                 }
 
                 return true;

@@ -199,6 +199,47 @@ class UsersController
 }
 ```
 
+## Route parameter constraints
+
+You can constraint the format of a route parameter by apply one of the `Where` attributes on a method or class.
+
+In this following example this route will be registered: `/users/edit/{user}`. By adding the `WhereUuid` attribute, we make sure that only UUIDs will match the `{user}` parameter.
+
+```php
+namespace App\Http\Controllers;
+
+use Spatie\RouteDiscovery\Attributes\Route;
+use Spatie\RouteDiscovery\Attributes\WhereUuid;
+
+class UsersController
+{
+    #[WhereUuid('user')]
+    public function edit(User $user) { /* ... */ }
+}
+```
+
+The package ships with these `Where` attributes:
+
+- `Spatie\RouteDiscovery\Attributes\WhereAlpha`
+- `Spatie\RouteDiscovery\Attributes\WhereAlphaNumeric`
+- `Spatie\RouteDiscovery\Attributes\WhereNumeric`
+- `Spatie\RouteDiscovery\Attributes\WhereUuid`
+
+You can also specify your own regex, by using the `Where` attribute.
+
+```php
+namespace App\Http\Controllers;
+
+use Spatie\RouteDiscovery\Attributes\Route;
+use Spatie\RouteDiscovery\Attributes\Where;
+
+class UsersController
+{
+    #[Where('user', constraint: '[0-9]+')]
+    public function edit(User $user) { /* ... */ }
+}
+```
+
 ## Preventing routes from being discovered
 
 You can prevent a certain controller from being discovered by using the `DoNotDiscover` attribute.

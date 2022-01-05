@@ -4,7 +4,7 @@ namespace Spatie\RouteDiscovery\Attributes;
 
 use Attribute;
 
-#[Attribute(Attribute::TARGET_METHOD | Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
+#[Attribute(Attribute::TARGET_METHOD | Attribute::TARGET_CLASS)]
 class Where implements WhereAttribute
 {
     public function __construct(

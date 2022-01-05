@@ -1,5 +1,6 @@
 <?php
 
+use Spatie\RouteDiscovery\Attributes\WhereUuid;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\CustomRouteName\CustomRouteNameController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultRouteName\DefaultRouteNameController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultRouteName\Nested\AnotherDefaultRouteNameController;
@@ -18,6 +19,7 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\OverrideHttpMeth
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\OverrideUri\OverrideUriController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\ResourceMethods\ResourceMethodsController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Single\MyController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Where\WhereAttributeController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Middleware\OtherTestMiddleware;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Middleware\TestMiddleware;
 
@@ -310,5 +312,19 @@ it('will add default route names if none is set', function () {
             AnotherDefaultRouteNameController::class,
             controllerMethod: 'edit',
             name: 'nested.another-default-route-name.edit',
+        );
+});
+
+it('can handle a where attribute', function() {
+    $this
+        ->routeRegistrar
+        ->registerDirectory(controllersPath('Where'));
+
+    $this
+        ->assertRegisteredRoutesCount(1)
+        ->assertRouteRegistered(
+            WhereAttributeController::class,
+            controllerMethod: 'edit',
+            wheres: ['user' => (new WhereUuid(''))->constraint],
         );
 });

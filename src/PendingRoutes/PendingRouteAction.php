@@ -10,6 +10,8 @@ use ReflectionMethod;
 use ReflectionParameter;
 use Spatie\RouteDiscovery\Attributes\DiscoveryAttribute;
 use Spatie\RouteDiscovery\Attributes\Route;
+use Spatie\RouteDiscovery\Attributes\Where;
+use Spatie\RouteDiscovery\Attributes\WhereAttribute;
 
 class PendingRouteAction
 {
@@ -69,6 +71,13 @@ class PendingRouteAction
         return $uri;
     }
 
+    public function addWhere(Where $whereAttribute): self
+    {
+        $this->wheres[$whereAttribute->param] = $whereAttribute->constraint;
+
+        return $this;
+    }
+
     /**
      * @param array<class-string>|class-string $middleware
      *
@@ -121,7 +130,7 @@ class PendingRouteAction
      *
      * @return ?TDiscoveryAttribute
      */
-    public function getAttribute(string $attributeClass): ?DiscoveryAttribute
+    public function getAttribute(string $attributeClass): DiscoveryAttribute|WhereAttribute|null
     {
         $attributes = $this->method->getAttributes($attributeClass, ReflectionAttribute::IS_INSTANCEOF);
 

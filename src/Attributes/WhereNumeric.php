@@ -5,8 +5,8 @@ namespace Spatie\RouteDiscovery\Attributes;
 
 use Attribute;
 
-#[Attribute(Attribute::TARGET_METHOD | Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
-class WhereNumber extends Where
+#[Attribute(Attribute::TARGET_METHOD | Attribute::TARGET_CLASS)]
+class WhereNumeric extends Where
 {
     public function __construct(string $param)
     {

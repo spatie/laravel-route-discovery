@@ -26,12 +26,13 @@ return [
     'pending_route_transformers' => [
         Spatie\RouteDiscovery\PendingRouteTransformers\HandleDoNotDiscoverAttribute::class,
         Spatie\RouteDiscovery\PendingRouteTransformers\AddControllerUriToActions::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\HandleUrisOfNestedControllers::class,
         Spatie\RouteDiscovery\PendingRouteTransformers\HandleRouteNameAttribute::class,
         Spatie\RouteDiscovery\PendingRouteTransformers\HandleMiddlewareAttribute::class,
         Spatie\RouteDiscovery\PendingRouteTransformers\HandleHttpMethodsAttribute::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\HandleUrisOfNestedControllers::class,
         Spatie\RouteDiscovery\PendingRouteTransformers\HandleUriAttribute::class,
         Spatie\RouteDiscovery\PendingRouteTransformers\HandleFullUriAttribute::class,
+        Spatie\RouteDiscovery\PendingRouteTransformers\HandleWheresAttribute::class,
         Spatie\RouteDiscovery\PendingRouteTransformers\AddDefaultRouteName::class,
     ],
 ];
