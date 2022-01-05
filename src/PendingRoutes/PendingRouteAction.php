@@ -29,6 +29,8 @@ class PendingRouteAction
     public array $wheres = [];
     public ?string $name = null;
 
+    public ?string $domain = null;
+
     /**
      * @param ReflectionMethod $method
      * @param class-string $controllerClass
@@ -76,6 +78,8 @@ class PendingRouteAction
 
         return $this;
     }
+
+
 
     /**
      * @param array<class-string>|class-string $middleware

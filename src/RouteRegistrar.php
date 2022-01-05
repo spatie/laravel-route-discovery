@@ -118,6 +118,10 @@ class RouteRegistrar
                 if (count($action->wheres)) {
                     $route->setWheres($action->wheres);
                 }
+
+                if ($action->domain) {
+                    $route->domain($action->domain);
+                }
             });
         });
     }

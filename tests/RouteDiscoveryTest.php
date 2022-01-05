@@ -4,6 +4,7 @@ use Spatie\RouteDiscovery\Attributes\WhereUuid;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\CustomRouteName\CustomRouteNameController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultRouteName\DefaultRouteNameController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultRouteName\Nested\AnotherDefaultRouteNameController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Domain\DomainController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDiscoverController\DoNotDiscoverThisMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDiscoverMethod\DoNotDiscoverMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Middleware\MiddlewareOnControllerController;
@@ -328,3 +329,23 @@ it('can handle a where attribute', function () {
             wheres: ['user' => (new WhereUuid(''))->constraint],
         );
 });
+
+it('can handle a domain attribute', function () {
+    $this
+        ->routeRegistrar
+        ->registerDirectory(controllersPath('Domain'));
+
+    $this
+        ->assertRegisteredRoutesCount(2)
+        ->assertRouteRegistered(
+            DomainController::class,
+            controllerMethod: 'method',
+            domain: 'first.example.com',
+        )
+        ->assertRouteRegistered(
+            DomainController::class,
+            controllerMethod: 'anotherMethod',
+            domain: 'second.example.com',
+        );
+});
+

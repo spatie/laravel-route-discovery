@@ -240,6 +240,28 @@ class UsersController
 }
 ```
 
+## Setting a domain
+
+You can specify which domain the routes should be registered by passing a value to the `domain` parameter of the `Route` attribute. This can be done on both the class and method level.
+
+Using this controller, the route to `firstMethod` will only listen for request to the `first.example.com` domain, the `secondMethod` to the `second.example.com` domain.
+
+```php
+namespace App\Http\Controllers;
+
+use Illuminate\Routing\Middleware\ValidateSignature;
+use Spatie\RouteDiscovery\Attributes\Route;
+
+#[Route(domain: 'first.example.com')]
+class ExampleController
+{
+    public function firstMethod() { /* ... */ }
+    
+    #[Route(domain: 'second.example.com')]
+    public function secondMethod() { /* ... */ }
+}
+```
+
 ## Preventing routes from being discovered
 
 You can prevent a certain controller from being discovered by using the `DoNotDiscover` attribute.
@@ -277,4 +299,3 @@ class UsersController
     public function anotherMethod() { /* ... */}
 }
 ```
-``
