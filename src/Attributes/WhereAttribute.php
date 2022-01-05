@@ -3,6 +3,6 @@
 
 namespace Spatie\RouteDiscovery\Attributes;
 
-interface WhereAttribute
+interface WhereAttribute extends DiscoveryAttribute
 {
 }

@@ -26,7 +26,7 @@ class PendingRouteAction
     /** @var array<int, class-string> */
     public array $middleware = [];
 
-    /** @var array<int, \Spatie\RouteDiscovery\Attributes\WhereAttribute> */
+    /** @var array<string, string> */
     public array $wheres = [];
     public ?string $name = null;
 
@@ -130,7 +130,7 @@ class PendingRouteAction
      *
      * @return ?TDiscoveryAttribute
      */
-    public function getAttribute(string $attributeClass): DiscoveryAttribute|WhereAttribute|null
+    public function getAttribute(string $attributeClass): ?DiscoveryAttribute
     {
         $attributes = $this->method->getAttributes($attributeClass, ReflectionAttribute::IS_INSTANCEOF);
 
