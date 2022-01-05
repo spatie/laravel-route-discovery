@@ -79,8 +79,6 @@ class PendingRouteAction
         return $this;
     }
 
-
-
     /**
      * @param array<class-string>|class-string $middleware
      *

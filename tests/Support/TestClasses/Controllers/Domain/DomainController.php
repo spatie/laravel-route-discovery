@@ -9,12 +9,10 @@ class DomainController
 {
     public function method()
     {
-
     }
 
     #[Route(domain: 'second.example.com')]
     public function anotherMethod()
     {
-
     }
 }
