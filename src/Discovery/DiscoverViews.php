@@ -18,28 +18,29 @@ class DiscoverViews
         });
     }
 
-    protected function registerRouteForView(SplFileInfo $file, string $baseDirectory): void
+    protected function registerRouteForView(SplFileInfo $file, string $directory): void
     {
-        $view = $this->determineView($file, $baseDirectory);
-        $uri = $this->determineUri($file, $baseDirectory);
-        $name = $this->determineName($file, $baseDirectory);
+        $view = $this->determineView($file, $directory);
+        $uri = $this->determineUri($file, $directory);
+        $name = $this->determineName($file, $directory);
 
         Route::view($uri, $view)->name($name);
     }
 
-    protected function determineView(SplFileInfo $file, string $baseDirectory): string
+    protected function determineView(SplFileInfo $file, string $directory): string
     {
-        $uri = Str::of($file->getPathname())
-            ->after($baseDirectory)
-            ->beforeLast('.blade.php');
+        $viewPath = Str::of($file->getPathname())
+            ->after(resource_path('views'))
+            ->beforeLast('.blade.php')
+            ->ltrim('/');
 
-        return $uri->replace(DIRECTORY_SEPARATOR, '.');
+        return $viewPath->replace(DIRECTORY_SEPARATOR, '.');
     }
 
-    protected function determineUri(SplFileInfo $file, string $baseDirectory): string
+    protected function determineUri(SplFileInfo $file, string $directory): string
     {
         $uri = Str::of($file->getPathname())
-            ->after($baseDirectory)
+            ->after($directory)
             ->beforeLast('.blade.php');
 
         $uri = Str::replaceLast(DIRECTORY_SEPARATOR . 'index', DIRECTORY_SEPARATOR, (string)$uri);
