@@ -9,6 +9,5 @@ class MiddleController
     #[Route(fullUri: '{parameter}/extra')]
     public function invoke()
     {
-
     }
 }

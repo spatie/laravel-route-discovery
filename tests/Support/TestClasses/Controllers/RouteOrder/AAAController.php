@@ -9,6 +9,5 @@ class AAAController
     #[Route(fullUri: '{parameter}')]
     public function invoke()
     {
-
     }
 }
