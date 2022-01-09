@@ -6,6 +6,5 @@ class InvokableController
 {
     public function __invoke()
     {
-
     }
 }
