@@ -81,6 +81,10 @@ class TestCase extends Orchestra
                 }
                 $routeMethod = $route->getAction(1) ?? $route->getActionMethod();
 
+                if ($route->getActionMethod() === get_class($route->getController())) {
+                    $routeMethod = '__invokable';
+                }
+
                 if ($routeMethod !== $controllerMethod) {
                     return false;
                 }

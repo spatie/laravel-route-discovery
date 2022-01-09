@@ -108,7 +108,7 @@ class RouteRegistrar
     {
         $pendingRoutes->each(function (PendingRoute $pendingRoute) {
             $pendingRoute->actions->each(function (PendingRouteAction $action) {
-                $route = $this->router->addRoute($action->methods, $action->uri, $action->action);
+                $route = $this->router->addRoute($action->methods, $action->uri, $action->action());
 
                 $route->middleware($action->middleware);
 

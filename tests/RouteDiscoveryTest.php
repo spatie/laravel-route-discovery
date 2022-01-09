@@ -7,6 +7,7 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultRouteName
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Domain\DomainController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDiscoverController\DoNotDiscoverThisMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDiscoverMethod\DoNotDiscoverMethodController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Invokable\InvokableController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Middleware\MiddlewareOnControllerController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Middleware\MiddlewareOnMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Model\ModelController;
@@ -346,5 +347,19 @@ it('can handle a domain attribute', function () {
             DomainController::class,
             controllerMethod: 'anotherMethod',
             domain: 'second.example.com',
+        );
+});
+
+it('can register an invokable controller', function() {
+    $this
+        ->routeRegistrar
+        ->registerDirectory(controllersPath('Invokable'));
+
+    $this
+        ->assertRegisteredRoutesCount(1)
+        ->assertRouteRegistered(
+            InvokableController::class,
+            uri: 'invokable',
+            controllerMethod: '__invokable',
         );
 });

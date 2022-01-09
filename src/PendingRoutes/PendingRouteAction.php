@@ -56,7 +56,7 @@ class PendingRouteAction
 
         $uri = '';
 
-        if (! in_array($this->method->getName(), $this->commonControllerMethodNames())) {
+        if (!in_array($this->method->getName(), $this->commonControllerMethodNames())) {
             $uri = Str::kebab($this->method->getName());
         }
 
@@ -119,6 +119,13 @@ class PendingRouteAction
         ];
     }
 
+    public function action(): string|array
+    {
+        return $this->action[1] === '__invoke'
+            ? $this->action[0]
+            : $this->action;
+    }
+
     public function getRouteAttribute(): ?Route
     {
         return $this->getAttribute(Route::class);
@@ -135,7 +142,7 @@ class PendingRouteAction
     {
         $attributes = $this->method->getAttributes($attributeClass, ReflectionAttribute::IS_INSTANCEOF);
 
-        if (! count($attributes)) {
+        if (!count($attributes)) {
             return null;
         }
 
