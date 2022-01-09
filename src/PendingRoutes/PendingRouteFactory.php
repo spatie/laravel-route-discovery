@@ -54,7 +54,7 @@ class PendingRouteFactory
 
         return (string)collect($parts)
             ->filter()
-            ->reject(function(string $part) {
+            ->reject(function (string $part) {
                 return strtolower($part) === 'index';
             })
             ->map(fn (string $part) => Str::of($part)->kebab())
