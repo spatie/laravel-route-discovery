@@ -9,6 +9,11 @@ use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 
 class HandleWheresAttribute implements PendingRouteTransformer
 {
+    /**
+     * @param Collection<PendingRoute> $pendingRoutes
+     *
+     * @return Collection<PendingRoute>
+     */
     public function transform(Collection $pendingRoutes): Collection
     {
         $pendingRoutes->each(function (PendingRoute $pendingRoute) {

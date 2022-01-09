@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Routing\Route;
 use Spatie\RouteDiscovery\Attributes\WhereUuid;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\CustomRouteName\CustomRouteNameController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultRouteName\DefaultRouteNameController;
@@ -378,4 +379,22 @@ it('can register an invokable controller', function () {
             uri: 'invokable',
             controllerMethod: '__invoke',
         );
+});
+
+it('will make sure the routes whose uri start with parameters will be registered last', function() {
+    $this
+        ->routeRegistrar
+        ->registerDirectory(controllersPath('RouteOrder'));
+
+    $this->assertRegisteredRoutesCount(3);
+
+    $registeredUris = collect(app()->router->getRoutes())
+        ->map(fn(Route $route) => $route->uri)
+        ->toArray();
+
+    expect($registeredUris)->toEqual([
+        'z-z-z',
+        '{parameter}/extra',
+        '{parameter}',
+    ]);
 });
