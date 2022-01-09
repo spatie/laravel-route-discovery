@@ -14,6 +14,8 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Model\ModelContr
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\Photos\CommentsController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\PhotosController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Nesting\Nested\ChildController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Nesting\Nested\Deepest\IndexController as DeepestIndexController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Nesting\Nested\IndexController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Nesting\ParentController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NonPublicMethods\NonPublicMethodsController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\OverrideFullUri\OverrideFullUriController;
@@ -58,8 +60,9 @@ it('can automatically discover a nested route without model parameters', functio
         ->routeRegistrar
         ->registerDirectory(controllersPath('Nesting'));
 
-    $this->assertRegisteredRoutesCount(2);
+    $this->assertRegisteredRoutesCount(4);
 
+    /*
     $this->assertRouteRegistered(
         ParentController::class,
         controllerMethod: 'index',
@@ -67,9 +70,22 @@ it('can automatically discover a nested route without model parameters', functio
     );
 
     $this->assertRouteRegistered(
+        IndexController::class,
+        controllerMethod: 'index',
+        uri: 'nested',
+    );
+
+    $this->assertRouteRegistered(
         ChildController::class,
         controllerMethod: 'index',
         uri: 'nested/child',
+    );
+    */
+
+    $this->assertRouteRegistered(
+        DeepestIndexController::class,
+        controllerMethod: '__invoke',
+        uri: 'nested/deepest',
     );
 });
 
@@ -360,6 +376,6 @@ it('can register an invokable controller', function() {
         ->assertRouteRegistered(
             InvokableController::class,
             uri: 'invokable',
-            controllerMethod: '__invokable',
+            controllerMethod: '__invoke',
         );
 });
