@@ -56,7 +56,7 @@ class PendingRouteAction
 
         $uri = '';
 
-        if (!in_array($this->method->getName(), $this->commonControllerMethodNames())) {
+        if (! in_array($this->method->getName(), $this->commonControllerMethodNames())) {
             $uri = Str::kebab($this->method->getName());
         }
 
@@ -142,7 +142,7 @@ class PendingRouteAction
     {
         $attributes = $this->method->getAttributes($attributeClass, ReflectionAttribute::IS_INSTANCEOF);
 
-        if (!count($attributes)) {
+        if (! count($attributes)) {
             return null;
         }
 

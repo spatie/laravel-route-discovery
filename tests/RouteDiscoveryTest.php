@@ -366,7 +366,7 @@ it('can handle a domain attribute', function () {
         );
 });
 
-it('can register an invokable controller', function() {
+it('can register an invokable controller', function () {
     $this
         ->routeRegistrar
         ->registerDirectory(controllersPath('Invokable'));
