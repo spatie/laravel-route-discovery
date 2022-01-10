@@ -381,7 +381,7 @@ it('can register an invokable controller', function () {
         );
 });
 
-it('will make sure the routes whose uri start with parameters will be registered last', function() {
+it('will make sure the routes whose uri start with parameters will be registered last', function () {
     $this
         ->routeRegistrar
         ->registerDirectory(controllersPath('RouteOrder'));
@@ -389,7 +389,7 @@ it('will make sure the routes whose uri start with parameters will be registered
     $this->assertRegisteredRoutesCount(3);
 
     $registeredUris = collect(app()->router->getRoutes())
-        ->map(fn(Route $route) => $route->uri)
+        ->map(fn (Route $route) => $route->uri)
         ->toArray();
 
     expect($registeredUris)->toEqual([
