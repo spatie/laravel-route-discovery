@@ -14,7 +14,7 @@ composer require spatie/laravel-route-discovery
 Optionally, you can publish the `route-discovery` config file with this command.
 
 ```bash
-php artisan vendor:publish --tag="route-discover-config"
+php artisan vendor:publish --tag="route-discovery-config"
 ```
 
 This is the content of the published config file:
