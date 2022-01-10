@@ -23,18 +23,7 @@ return [
      *
      * In most cases, you shouldn't change these.
      */
-    'pending_route_transformers' => [
-        Spatie\RouteDiscovery\PendingRouteTransformers\HandleDoNotDiscoverAttribute::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\AddControllerUriToActions::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\HandleUrisOfNestedControllers::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\HandleRouteNameAttribute::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\HandleMiddlewareAttribute::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\HandleHttpMethodsAttribute::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\HandleUriAttribute::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\HandleFullUriAttribute::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\HandleWheresAttribute::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\AddDefaultRouteName::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\HandleDomainAttribute::class,
-        Spatie\RouteDiscovery\PendingRouteTransformers\MoveRoutesStartingWithParametersLast::class,
-    ],
+    'pending_route_transformers' => array_merge([
+
+    ], Spatie\RouteDiscovery\Config::defaultRouteTransformers()),
 ];
