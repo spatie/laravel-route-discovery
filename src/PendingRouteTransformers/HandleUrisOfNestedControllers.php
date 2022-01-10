@@ -23,16 +23,14 @@ class HandleUrisOfNestedControllers implements PendingRouteTransformer
                 return;
             }
 
-            /** @var PendingRouteAction $parentAction */
+            /** @var PendingRouteAction|null $parentAction */
             $parentAction = $parentPendingRoute->actions->first(function (PendingRouteAction $action) {
-                return $action->method->name === 'show';
+                return in_array($action->method->name, ['show', 'edit', 'update', 'destroy', 'delete']);
             });
 
-            /*
-            if (! (bool)$parentAction) {
+            if (is_null($parentAction)) {
                 return;
             }
-            */
 
             $childNode->actions->each(function (PendingRouteAction $action) use ($parentPendingRoute, $parentAction) {
                 $result = Str::replace($parentPendingRoute->uri, $parentAction->uri, $action->uri);

@@ -119,6 +119,9 @@ class PendingRouteAction
         ];
     }
 
+    /**
+     * @return string|array{string, string}
+     */
     public function action(): string|array
     {
         return $this->action[1] === '__invoke'
