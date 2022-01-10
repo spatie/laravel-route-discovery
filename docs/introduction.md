@@ -3,8 +3,6 @@ title: Introduction
 weight: 1
 ---
 
-**THIS PACKAGE IS IN DEVELOPMENT, DON'T USE IT (FOR NOW)**
-
 This package can automatically discover routes for controllers and views in your Laravel application.
 
 You can specify which controller and view directories need to be automatically registered, and you can still use a regular routes file in combination with route discovery. Using PHP attributes you can manipulate discover routes: you can set a route name, add some middleware, or ...
