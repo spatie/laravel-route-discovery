@@ -63,7 +63,6 @@ it('can automatically discover a nested route without model parameters', functio
 
     $this->assertRegisteredRoutesCount(4);
 
-    /*
     $this->assertRouteRegistered(
         ParentController::class,
         controllerMethod: 'index',
@@ -81,7 +80,6 @@ it('can automatically discover a nested route without model parameters', functio
         controllerMethod: 'index',
         uri: 'nested/child',
     );
-    */
 
     $this->assertRouteRegistered(
         DeepestIndexController::class,
