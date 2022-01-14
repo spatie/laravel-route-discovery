@@ -48,7 +48,7 @@ class RouteRegistrar
 
         $pendingRoutes = $this->convertToPendingRoutes($directory);
 
-        $pendingRoutes = $this->transformNodes($pendingRoutes);
+        $pendingRoutes = $this->transformPendingRoutes($pendingRoutes);
 
         $this->registerRoutes($pendingRoutes);
     }
@@ -88,7 +88,7 @@ class RouteRegistrar
      *
      * @return Collection<PendingRoute> $pendingRoutes
      */
-    protected function transformNodes(Collection $pendingRoutes): Collection
+    protected function transformPendingRoutes(Collection $pendingRoutes): Collection
     {
         /** @var array<int, class-string<PendingRouteTransformer>> $transformers */
         $transformers = config('route-discovery.pending_route_transformers');
