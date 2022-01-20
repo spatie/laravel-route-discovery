@@ -19,7 +19,7 @@ class PendingRouteFactory
 
     public function make(SplFileInfo $fileInfo): ?PendingRoute
     {
-        $fullyQualifiedClassName = $this->fullQualifiedClassNameFromFile($fileInfo);
+        $fullyQualifiedClassName = $this->fullyQualifiedClassNameFromFile($fileInfo);
 
         if (! class_exists($fullyQualifiedClassName)) {
             return null;
@@ -61,7 +61,7 @@ class PendingRouteFactory
             ->implode('/');
     }
 
-    protected function fullQualifiedClassNameFromFile(SplFileInfo $file): string
+    protected function fullyQualifiedClassNameFromFile(SplFileInfo $file): string
     {
         $class = trim(Str::replaceFirst($this->basePath, '', (string)$file->getRealPath()), DIRECTORY_SEPARATOR);
 
