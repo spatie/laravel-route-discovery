@@ -5,7 +5,21 @@ weight: 1
 
 This package can automatically discover and register routes for a directory containing controllers.
 
+## Via the routes file
+
+You can enable route discovery via the routes file.
+
+```php
+// in a routes file
+
+use Spatie\RouteDiscovery\Discovery\Discover;
+
+Discover::controllers()->in(app_path('Http/Controllers'));
+```
+
 ## Via the config file
+
+Alternatively, you can discover routes using the config file.
 
 First, you need to publish the config file. This will create a file at `config/route-discovery.php`
 
@@ -30,17 +44,6 @@ Here you can uncomment the line to register controllers in the `app_path('Http/C
 // ...
 ```
 
-## Via the routes file
-
-You can also enable route discovery via the routes file.
-
-```php
-// in a routes file
-
-use Spatie\RouteDiscovery\Discovery\Discover;
-
-Discover::controllers()->in(app_path('Http/Controllers'));
-```
 
 
 

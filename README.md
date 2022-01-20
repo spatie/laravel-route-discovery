@@ -5,7 +5,33 @@
 [![PHPStan](https://github.com/spatie/laravel-route-discovery/actions/workflows/phpstan.yml/badge.svg)](https://github.com/spatie/laravel-route-discovery/actions/workflows/phpstan.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-route-discovery.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-route-discovery)
 
-This package will automatically discover and register routes of your app.
+This package can automatically discover routes for controllers and views in your Laravel application. This isn't an all-in approach. While using use auto discovery, you can still register routes like you're used to.
+
+```php
+// typically in a routes file
+
+Discover::controllers()->in($whateverDirectoryYouPrefer);
+Discover::views()->in($whateverDirectoryYouPrefer);
+
+// other routes
+```
+
+Using PHP attributes you can manipulate discovered routes: you can set a route name, add some middleware, or ...
+
+Here's how you would add middleware to a controller whose's route will be auto discovered.
+
+```php
+namespace App\Http\Controllers;
+
+use Illuminate\Routing\Middleware\ValidateSignature;
+use Spatie\RouteDiscovery\Attributes\Route;
+
+class MyController
+{
+    #[Route(middleware: ValidateSignature::class)]
+    public function myMethod() { /* ... */ }
+}
+```
 
 ## Support us
 
@@ -18,6 +44,10 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 ## Documentation
 
 You'll find full documentation [at the Spatie website](https://spatie.be/docs/laravel-route-discovery).
+
+## A note on performance
+
+Discovering routes during each application request may have a small impact on performance. For increased performance, we highly recommend [caching your routes](https://laravel.com/docs/8.x/routing#route-caching) as part of your deployment process.
 
 ## Testing
 
