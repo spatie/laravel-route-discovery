@@ -22,7 +22,6 @@ class HandleUriAttribute implements PendingRouteTransformer
                     return;
                 }
 
-
                 if (! $routeAttributeUri = $routeAttribute->uri) {
                     return;
                 }

@@ -23,7 +23,8 @@ return [
      *
      * In most cases, you shouldn't change these.
      */
-    'pending_route_transformers' => array_merge([
-
-    ], Spatie\RouteDiscovery\Config::defaultRouteTransformers()),
+    'pending_route_transformers' => [
+        ...Spatie\RouteDiscovery\Config::defaultRouteTransformers(),
+        //
+    ],
 ];

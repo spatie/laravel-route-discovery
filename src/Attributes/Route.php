@@ -39,9 +39,4 @@ class Route implements DiscoveryAttribute
 
         $this->middleware = Arr::wrap($middleware);
     }
-
-    public static function new(): self
-    {
-        return new self;
-    }
 }

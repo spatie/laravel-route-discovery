@@ -3,7 +3,7 @@
 namespace Spatie\RouteDiscovery\PendingRouteTransformers;
 
 use Illuminate\Support\Collection;
-use Spatie\RouteDiscovery\Attributes\WhereAttribute;
+use Spatie\RouteDiscovery\Attributes\Where;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRoute;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 
@@ -18,13 +18,11 @@ class HandleWheresAttribute implements PendingRouteTransformer
     {
         $pendingRoutes->each(function (PendingRoute $pendingRoute) {
             $pendingRoute->actions->each(function (PendingRouteAction $action) use ($pendingRoute) {
-                if ($pendingRouteWhereAttribute = $pendingRoute->getAttribute(WhereAttribute::class)) {
-                    /** @phpstan-ignore-next-line */
+                if ($pendingRouteWhereAttribute = $pendingRoute->getAttribute(Where::class)) {
                     $action->addWhere($pendingRouteWhereAttribute);
                 }
 
-                if ($actionWhereAttribute = $action->getAttribute(WhereAttribute::class)) {
-                    /** @phpstan-ignore-next-line */
+                if ($actionWhereAttribute = $action->getAttribute(Where::class)) {
                     $action->addWhere($actionWhereAttribute);
                 }
             });

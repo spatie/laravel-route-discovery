@@ -2,7 +2,6 @@
 
 namespace Spatie\RouteDiscovery\PendingRoutes;
 
-use function collect;
 use Illuminate\Support\Str;
 use ReflectionClass;
 use ReflectionMethod;
@@ -19,7 +18,7 @@ class PendingRouteFactory
 
     public function make(SplFileInfo $fileInfo): ?PendingRoute
     {
-        $fullyQualifiedClassName = $this->fullQualifiedClassNameFromFile($fileInfo);
+        $fullyQualifiedClassName = $this->fullyQualifiedClassNameFromFile($fileInfo);
 
         if (! class_exists($fullyQualifiedClassName)) {
             return null;
@@ -41,18 +40,17 @@ class PendingRouteFactory
 
         $uri = $this->discoverUri($class);
 
-
         return new PendingRoute($fileInfo, $class, $uri, $fullyQualifiedClassName, $actions);
     }
 
     protected function discoverUri(ReflectionClass $class): string
     {
-        $parts = Str::of((string)$class->getFileName())
+        $parts = Str::of((string) $class->getFileName())
             ->after($this->registeringDirectory)
             ->beforeLast('Controller')
             ->explode(DIRECTORY_SEPARATOR);
 
-        return (string)collect($parts)
+        return collect($parts)
             ->filter()
             ->reject(function (string $part) {
                 return strtolower($part) === 'index';
@@ -61,7 +59,7 @@ class PendingRouteFactory
             ->implode('/');
     }
 
-    protected function fullQualifiedClassNameFromFile(SplFileInfo $file): string
+    protected function fullyQualifiedClassNameFromFile(SplFileInfo $file): string
     {
         $class = trim(Str::replaceFirst($this->basePath, '', (string)$file->getRealPath()), DIRECTORY_SEPARATOR);
 

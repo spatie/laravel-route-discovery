@@ -201,19 +201,19 @@ class UsersController
 
 ## Route parameter constraints
 
-You can constraint the format of a route parameter by apply one of the `Where` attributes on a method or class.
+You can constrain the format of a route parameter with the `Where` attribute.
 
-In this following example this route will be registered: `/users/edit/{user}`. By adding the `WhereUuid` attribute, we make sure that only UUIDs will match the `{user}` parameter.
+In this following example this route will be registered: `/users/edit/{user}`. By adding the `Where::uuid` constraint to the `Where` attribute, we make sure that only UUIDs will match the `{user}` parameter.
 
 ```php
 namespace App\Http\Controllers;
 
 use Spatie\RouteDiscovery\Attributes\Route;
-use Spatie\RouteDiscovery\Attributes\WhereUuid;
+use Spatie\RouteDiscovery\Attributes\Where;
 
 class UsersController
 {
-    #[WhereUuid('user')]
+    #[Where('user', constraint: Where::uuid)]
     public function edit(User $user) { /* ... */ }
 }
 ```
