@@ -109,7 +109,9 @@ class PendingRouteAction
         };
     }
 
-    /** @return array<int, string> */
+    /**
+     * @return array<int, string>
+     */
     protected function commonControllerMethodNames(): array
     {
         return [
