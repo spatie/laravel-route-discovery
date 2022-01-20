@@ -26,7 +26,7 @@ return [
      * these directories.
      */
     'discover_controllers_in_directory' => [
-        app_path('Http/Controllers'),
+        // app_path('Http/Controllers'),
     ],
 
     /*

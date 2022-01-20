@@ -7,9 +7,15 @@ This package can automatically discover and register routes for a directory cont
 
 ## Via the config file
 
+First, you need to publish the config file. This will create a file at `config/route-discovery.php`
+
+```bash
+php artisan vendor:publish --tag="route-discovery-config"
+```
+
 In the `discover_controllers_in_directory` key of the `route-discovery` config file, you can specify a directory that contains controllers.
 
-By default, all controllers in the `app_path('Http/Controllers')` will be registered.
+Here you can uncomment the line to register controllers in the `app_path('Http/Controllers')` directory. Of course you can use any directory you want.
 
 ```php
 // config/route-discovery
@@ -21,13 +27,12 @@ By default, all controllers in the `app_path('Http/Controllers')` will be regist
 'discover_controllers_in_directory' => [
     app_path('Http/Controllers'),
 ],
-
 // ...
 ```
 
 ## Via the routes file
 
-You can also enable route discovery via the routes file. If you want to go this... route 🥁, first remove all entries in the `discover_controllers_in_directory` key of the `route-discovery` config file.
+You can also enable route discovery via the routes file.
 
 ```php
 // in a routes file
