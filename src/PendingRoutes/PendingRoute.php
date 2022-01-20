@@ -16,26 +16,26 @@ class PendingRoute
      * @param SplFileInfo $fileInfo
      * @param ReflectionClass $class
      * @param string $uri
-     * @param string $fullQualifiedClassName
+     * @param string $fullyQualifiedClassName
      * @param Collection<PendingRouteAction> $actions
      */
     public function __construct(
         public SplFileInfo $fileInfo,
         public ReflectionClass $class,
         public string $uri,
-        public string $fullQualifiedClassName,
+        public string $fullyQualifiedClassName,
         public Collection $actions,
     ) {
     }
 
     public function namespace(): string
     {
-        return Str::beforeLast($this->fullQualifiedClassName, '\\');
+        return Str::beforeLast($this->fullyQualifiedClassName, '\\');
     }
 
     public function shortControllerName(): string
     {
-        return Str::of($this->fullQualifiedClassName)
+        return Str::of($this->fullyQualifiedClassName)
             ->afterLast('\\')
             ->beforeLast('Controller');
     }
