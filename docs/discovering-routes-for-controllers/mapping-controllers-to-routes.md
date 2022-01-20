@@ -218,12 +218,12 @@ class UsersController
 }
 ```
 
-The package ships with these `Where` attributes:
+The package ships with these `Where` constraint constants:
 
-- `Spatie\RouteDiscovery\Attributes\WhereAlpha`
-- `Spatie\RouteDiscovery\Attributes\WhereAlphaNumeric`
-- `Spatie\RouteDiscovery\Attributes\WhereNumeric`
-- `Spatie\RouteDiscovery\Attributes\WhereUuid`
+- `Where::alpha`
+- `Where::numeric`
+- `Where::alphanumeric`
+- `Where::uuid`
 
 You can also specify your own regex, by using the `Where` attribute.
 
