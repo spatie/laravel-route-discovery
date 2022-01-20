@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Routing\Route;
-use Spatie\RouteDiscovery\Attributes\WhereUuid;
+use Spatie\RouteDiscovery\Attributes\Where;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\CustomRouteName\CustomRouteNameController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultRouteName\DefaultRouteNameController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultRouteName\Nested\AnotherDefaultRouteNameController;
@@ -342,7 +342,7 @@ it('can handle a where attribute', function () {
         ->assertRouteRegistered(
             WhereAttributeController::class,
             controllerMethod: 'edit',
-            wheres: ['user' => (new WhereUuid(''))->constraint],
+            wheres: ['user' => (new Where('', Where::uuid))->constraint],
         );
 });
 
