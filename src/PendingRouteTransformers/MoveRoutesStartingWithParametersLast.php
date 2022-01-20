@@ -29,7 +29,7 @@ class MoveRoutesStartingWithParametersLast implements PendingRouteTransformer
                     return PHP_INT_MAX;
                 }
 
-                return  PHP_INT_MAX - count(explode('/', $action->uri));
+                return PHP_INT_MAX - count(explode('/', $action->uri));
             });
         })
             ->values();
