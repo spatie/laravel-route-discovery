@@ -16,7 +16,6 @@ class HandleHttpMethodsAttribute implements PendingRouteTransformer
     public function transform(Collection $pendingRoutes): Collection
     {
         $pendingRoutes->each(function (PendingRoute $pendingRoute) {
-            /** @phpstan-ignore-next-line */
             $pendingRoute->actions->each(function (PendingRouteAction $action) {
                 if (! $routeAttribute = $action->getRouteAttribute()) {
                     return;
