@@ -52,7 +52,7 @@ class PendingRouteFactory
             ->beforeLast('Controller')
             ->explode(DIRECTORY_SEPARATOR);
 
-        return (string)collect($parts)
+        return collect($parts)
             ->filter()
             ->reject(function (string $part) {
                 return strtolower($part) === 'index';
