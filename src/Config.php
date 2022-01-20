@@ -17,6 +17,9 @@ use Spatie\RouteDiscovery\PendingRouteTransformers\MoveRoutesStartingWithParamet
 
 class Config
 {
+    /**
+     * @return array<class-string>
+     */
     public static function defaultRouteTransformers(): array
     {
         return [
