@@ -2,7 +2,6 @@
 
 namespace Spatie\RouteDiscovery\PendingRoutes;
 
-use function collect;
 use Illuminate\Support\Str;
 use ReflectionClass;
 use ReflectionMethod;
@@ -40,7 +39,6 @@ class PendingRouteFactory
             });
 
         $uri = $this->discoverUri($class);
-
 
         return new PendingRoute($fileInfo, $class, $uri, $fullyQualifiedClassName, $actions);
     }
