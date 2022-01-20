@@ -26,7 +26,7 @@ class HandleHttpMethodsAttribute implements PendingRouteTransformer
                     return;
                 }
 
-                return $action->methods = $httpMethods;
+                $action->methods = $httpMethods;
             });
         });
 
