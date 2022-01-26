@@ -2,10 +2,10 @@
 
 namespace Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultController;
 
-class WelcomeController extends Controller
+class ControllerThatExtendsDefaultController extends ControllerWithDefaultLaravelTraits
 {
     public function index()
     {
-        return 'I am a Welcome Controller.';
+        return 'Default controller';
     }
 }

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Spatie\RouteDiscovery\Discovery\Discover;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\CustomMethod\CustomMethodController;
-use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultController\WelcomeController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultController\ControllerThatExtendsDefaultController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Single\MyController;
 
 it('can discover controller in a directory', function () {
@@ -21,7 +21,7 @@ it('can discover controller in a directory', function () {
         );
 });
 
-it('does not discover routes on default and abstract controller', function () {
+it('does not discover routes for default Laravel skeleton controllers that have public methods', function () {
     Discover::controllers()
         ->useRootNamespace('Spatie\RouteDiscovery\Tests\\')
         ->useBasePath($this->getTestPath())
@@ -30,9 +30,9 @@ it('does not discover routes on default and abstract controller', function () {
     $this
         ->assertRegisteredRoutesCount(1)
         ->assertRouteRegistered(
-            WelcomeController::class,
+            ControllerThatExtendsDefaultController::class,
             controllerMethod: 'index',
-            uri: 'welcome',
+            uri: 'controller-that-extends-default',
         );
 });
 

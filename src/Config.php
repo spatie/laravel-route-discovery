@@ -9,7 +9,7 @@ use Spatie\RouteDiscovery\PendingRouteTransformers\HandleDoNotDiscoverAttribute;
 use Spatie\RouteDiscovery\PendingRouteTransformers\HandleFullUriAttribute;
 use Spatie\RouteDiscovery\PendingRouteTransformers\HandleHttpMethodsAttribute;
 use Spatie\RouteDiscovery\PendingRouteTransformers\HandleMiddlewareAttribute;
-use Spatie\RouteDiscovery\PendingRouteTransformers\HandleRejectDefaultControllerMethodRoutes;
+use Spatie\RouteDiscovery\PendingRouteTransformers\RejectDefaultControllerMethodRoutes;
 use Spatie\RouteDiscovery\PendingRouteTransformers\HandleRouteNameAttribute;
 use Spatie\RouteDiscovery\PendingRouteTransformers\HandleUriAttribute;
 use Spatie\RouteDiscovery\PendingRouteTransformers\HandleUrisOfNestedControllers;
@@ -24,6 +24,7 @@ class Config
     public static function defaultRouteTransformers(): array
     {
         return [
+            RejectDefaultControllerMethodRoutes::class,
             HandleDoNotDiscoverAttribute::class,
             AddControllerUriToActions::class,
             HandleUrisOfNestedControllers::class,
@@ -36,7 +37,6 @@ class Config
             AddDefaultRouteName::class,
             HandleDomainAttribute::class,
             MoveRoutesStartingWithParametersLast::class,
-            HandleRejectDefaultControllerMethodRoutes::class,
         ];
     }
 }
