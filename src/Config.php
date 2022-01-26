@@ -9,12 +9,12 @@ use Spatie\RouteDiscovery\PendingRouteTransformers\HandleDoNotDiscoverAttribute;
 use Spatie\RouteDiscovery\PendingRouteTransformers\HandleFullUriAttribute;
 use Spatie\RouteDiscovery\PendingRouteTransformers\HandleHttpMethodsAttribute;
 use Spatie\RouteDiscovery\PendingRouteTransformers\HandleMiddlewareAttribute;
-use Spatie\RouteDiscovery\PendingRouteTransformers\RejectDefaultControllerMethodRoutes;
 use Spatie\RouteDiscovery\PendingRouteTransformers\HandleRouteNameAttribute;
 use Spatie\RouteDiscovery\PendingRouteTransformers\HandleUriAttribute;
 use Spatie\RouteDiscovery\PendingRouteTransformers\HandleUrisOfNestedControllers;
 use Spatie\RouteDiscovery\PendingRouteTransformers\HandleWheresAttribute;
 use Spatie\RouteDiscovery\PendingRouteTransformers\MoveRoutesStartingWithParametersLast;
+use Spatie\RouteDiscovery\PendingRouteTransformers\RejectDefaultControllerMethodRoutes;
 
 class Config
 {
