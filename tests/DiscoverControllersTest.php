@@ -21,7 +21,7 @@ it('can discover controller in a directory', function () {
         );
 });
 
-it('does not discover routes on base controller extension', function () {
+it('does not discover routes on default and abstract controller', function () {
     Discover::controllers()
         ->useRootNamespace('Spatie\RouteDiscovery\Tests\\')
         ->useBasePath($this->getTestPath())
