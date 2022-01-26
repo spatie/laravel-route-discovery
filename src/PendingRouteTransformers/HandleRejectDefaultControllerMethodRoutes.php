@@ -33,8 +33,9 @@ class HandleRejectDefaultControllerMethodRoutes implements PendingRouteTransform
             // Remove every action that is from the default or abstract controller.
             $pendingRoute->actions = $pendingRoute
                 ->actions
-                ->reject(fn(PendingRouteAction $pendingRouteAction) => in_array(
-                    $pendingRouteAction->method->class, $this->candidates
+                ->reject(fn (PendingRouteAction $pendingRouteAction) => in_array(
+                    $pendingRouteAction->method->class,
+                    $this->candidates
                 ));
         });
     }
