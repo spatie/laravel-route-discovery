@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Spatie\RouteDiscovery\Discovery\Discover;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\CustomMethod\CustomMethodController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultController\WelcomeController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Single\MyController;
 
 it('can discover controller in a directory', function () {
@@ -17,6 +18,21 @@ it('can discover controller in a directory', function () {
             MyController::class,
             controllerMethod: 'index',
             uri: 'my',
+        );
+});
+
+it('does not discover routes on base controller extension', function () {
+    Discover::controllers()
+        ->useRootNamespace('Spatie\RouteDiscovery\Tests\\')
+        ->useBasePath($this->getTestPath())
+        ->in(controllersPath('DefaultController'));
+
+    $this
+        ->assertRegisteredRoutesCount(1)
+        ->assertRouteRegistered(
+            WelcomeController::class,
+            controllerMethod: 'index',
+            uri: 'welcome',
         );
 });
 
