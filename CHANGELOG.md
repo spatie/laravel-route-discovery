@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-route-discovery` will be documented in this file
 
+## 1.0.0 - 2022-02-07
+
+- initial release
+
 ## 0.12.0 - 2022-01-20
 
 - experimental release
