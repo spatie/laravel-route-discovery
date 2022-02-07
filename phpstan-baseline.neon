@@ -1,0 +1,7 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Class App\\\\Http\\\\Controllers\\\\Controller not found\\.$#"
+			count: 1
+			path: src/PendingRouteTransformers/RejectDefaultControllerMethodRoutes.php
+

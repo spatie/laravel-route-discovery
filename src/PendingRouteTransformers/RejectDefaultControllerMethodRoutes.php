@@ -11,6 +11,9 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultControlle
 
 class RejectDefaultControllerMethodRoutes implements PendingRouteTransformer
 {
+    /**
+     * @var array<int, string>
+     */
     public array $rejectMethodsInClasses = [
         ControllerWithDefaultLaravelTraits::class,
         DefaultAppController::class,
