@@ -46,7 +46,7 @@ class PendingRouteFactory
     protected function discoverUri(ReflectionClass $class): string
     {
         $parts = Str::of((string) $class->getFileName())
-            ->after($this->registeringDirectory)
+            ->after(str_replace('/', DIRECTORY_SEPARATOR, $this->registeringDirectory))
             ->beforeLast('Controller')
             ->explode(DIRECTORY_SEPARATOR);
 
