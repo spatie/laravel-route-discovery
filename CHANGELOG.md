@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-route-discovery` will be documented in this file
 
+## 1.0.1 - 2022-03-08
+
+## What's Changed
+
+- Change to allow forward-slashes in Windows by @vanyamil in https://github.com/spatie/laravel-route-discovery/pull/15
+
+## New Contributors
+
+- @vanyamil made their first contribution in https://github.com/spatie/laravel-route-discovery/pull/15
+
+**Full Changelog**: https://github.com/spatie/laravel-route-discovery/compare/1.0.0...1.0.1
+
 ## 1.0.0 - 2022-02-07
 
 - initial release
