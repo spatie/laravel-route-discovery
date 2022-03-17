@@ -27,7 +27,8 @@ class AddDefaultRouteName implements PendingRouteTransformer
 
     protected function generateRouteName(PendingRouteAction $pendingRouteAction): string
     {
-        return collect(explode('/', $pendingRouteAction->uri))
+        return collect([explode('/', $pendingRouteAction->uri), $pendingRouteAction->method->name])
+            ->flatten()
             ->reject(fn (string $segment) => str_starts_with($segment, '{'))
             ->join('.');
     }
