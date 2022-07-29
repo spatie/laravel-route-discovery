@@ -3,7 +3,7 @@ title: Introduction
 weight: 1
 ---
 
-This package can automatically discover routes for controllers and views in your Laravel application. This isn't an all-in approach. While using use auto discovery, you can still register routes like you're used to.
+This package can automatically discover routes for controllers and views in your Laravel application. This isn't an all-in approach. While using auto discovery, you can still register routes like you're used to.
 
 ```php
 // typically in a routes file
@@ -16,7 +16,7 @@ Discover::views()->in($whateverDirectoryYouPrefer);
 
 Using PHP attributes you can manipulate discovered routes: you can set a route name, add some middleware, or ... 
 
-Here's how you would add middleware to a controller whose's route will be auto discovered.
+Here's how you would add middleware to a controller whose route will be auto discovered.
 
 ```php
 namespace App\Http\Controllers;
