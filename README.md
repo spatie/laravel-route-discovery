@@ -2,7 +2,6 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-route-discovery.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-route-discovery)
 ![Tests](https://github.com/spatie/laravel-route-discovery/workflows/Tests/badge.svg)
-[![PHPStan](https://github.com/spatie/laravel-route-discovery/actions/workflows/phpstan.yml/badge.svg)](https://github.com/spatie/laravel-route-discovery/actions/workflows/phpstan.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-route-discovery.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-route-discovery)
 
 This package can automatically discover routes for controllers and views in your Laravel application. This isn't an all-in approach. While using use auto discovery, you can still register routes like you're used to.
