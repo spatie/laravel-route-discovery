@@ -7,6 +7,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use ReflectionAttribute;
 use ReflectionMethod;
+use ReflectionNamedType;
 use ReflectionParameter;
 use Spatie\RouteDiscovery\Attributes\DiscoveryAttribute;
 use Spatie\RouteDiscovery\Attributes\Route;
@@ -50,8 +51,8 @@ class PendingRouteAction
     {
         /** @var ReflectionParameter $modelParameter */
         $modelParameter = collect($this->method->getParameters())->first(function (ReflectionParameter $parameter) {
-            /** @phpstan-ignore-next-line */
-            return is_a($parameter->getType()?->getName(), Model::class, true);
+            $type = $parameter->getType();
+            return $type instanceof ReflectionNamedType && is_a($type->getName(), Model::class, true);
         });
 
         $uri = '';
