@@ -52,6 +52,7 @@ class PendingRouteAction
         /** @var ReflectionParameter $modelParameter */
         $modelParameter = collect($this->method->getParameters())->first(function (ReflectionParameter $parameter) {
             $type = $parameter->getType();
+
             return $type instanceof ReflectionNamedType && is_a($type->getName(), Model::class, true);
         });
 

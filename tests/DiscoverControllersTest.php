@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Spatie\RouteDiscovery\Discovery\Discover;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\CustomMethod\CustomMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultController\ControllerThatExtendsDefaultController;
-use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\UsesUnionTypes\UnionController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Single\MyController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\UsesUnionTypes\UnionController;
 
 it('can discover controller in a directory', function () {
     Discover::controllers()
@@ -69,7 +69,7 @@ it('can use a prefix when discovering routes', function () {
         );
 });
 
-it('can handle a union parameter', function() {
+it('can handle a union parameter', function () {
     Discover::controllers()
         ->useRootNamespace('Spatie\RouteDiscovery\Tests\\')
         ->useBasePath($this->getTestPath())
@@ -83,4 +83,3 @@ it('can handle a union parameter', function() {
             uri: 'union/example',
         );
 });
-
