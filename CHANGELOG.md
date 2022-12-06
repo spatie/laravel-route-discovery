@@ -2,6 +2,21 @@
 
 All notable changes to `laravel-route-discovery` will be documented in this file
 
+## 1.0.2 - 2022-12-06
+
+### What's Changed
+
+- Update introduction.md by @LeonvanderHaas in https://github.com/spatie/laravel-route-discovery/pull/19
+- Update questions-issues.md by @LeonvanderHaas in https://github.com/spatie/laravel-route-discovery/pull/20
+- Fix issue where union typed parameters caused discovery errors by @27pchrisl in https://github.com/spatie/laravel-route-discovery/pull/25
+
+### New Contributors
+
+- @LeonvanderHaas made their first contribution in https://github.com/spatie/laravel-route-discovery/pull/19
+- @27pchrisl made their first contribution in https://github.com/spatie/laravel-route-discovery/pull/25
+
+**Full Changelog**: https://github.com/spatie/laravel-route-discovery/compare/1.0.1...1.0.2
+
 ## 1.0.1 - 2022-03-08
 
 ## What's Changed
