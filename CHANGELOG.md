@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-route-discovery` will be documented in this file
 
+## 1.0.3 - 2023-02-15
+
+- support Laravel 10
+
 ## 1.0.2 - 2022-12-06
 
 ### What's Changed
