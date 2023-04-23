@@ -63,6 +63,8 @@ class PendingRouteFactory
     {
         $class = trim(Str::replaceFirst($this->basePath, '', (string)$file->getRealPath()), DIRECTORY_SEPARATOR);
 
+        $class = $this->customControllers($class);
+
         $class = str_replace(
             [DIRECTORY_SEPARATOR, 'App\\'],
             ['\\', app()->getNamespace()],
@@ -70,5 +72,23 @@ class PendingRouteFactory
         );
 
         return $this->rootNamespace . $class;
+    }
+
+    private function customControllers(string $class): string
+    {
+        // TODO: do some improvements here
+        $array = [
+            'packages/workbench/pbkip' => 'Workbench\Pbkip',
+            'packages/workbench/pbm' => 'Workbench\Pbm',
+            'packages/workbench/pbpbb' => 'Workbench\Pbpbb',
+        ];
+
+        foreach ($array as $key => $value) {
+            if (str_contains($class, $key)) {
+                $class = str_replace($key.'/src', $value, $class);
+            }
+        }
+
+        return $class;
     }
 }
