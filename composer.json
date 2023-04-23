@@ -1,5 +1,5 @@
 {
-    "name": "spatie/laravel-route-discovery",
+    "name": "ramaid/laravel-route-discovery",
     "description": "Auto register routes using PHP attributes",
     "keywords": [
         "spatie",
