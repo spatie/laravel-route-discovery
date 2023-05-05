@@ -78,14 +78,14 @@ class PendingRouteFactory
     {
         // TODO: do some improvements here
         $array = [
-            'packages/workbench/pbkip' => 'Workbench\Pbkip',
-            'packages/workbench/pbm' => 'Workbench\Pbm',
-            'packages/workbench/pbpbb' => 'Workbench\Pbpbb',
+            'packages'.DIRECTORY_SEPARATOR.'workbench'.DIRECTORY_SEPARATOR.'pbkip' => 'Workbench\Pbkip',
+            'packages'.DIRECTORY_SEPARATOR.'workbench'.DIRECTORY_SEPARATOR.'pbm' => 'Workbench\Pbm',
+            'packages'.DIRECTORY_SEPARATOR.'workbench'.DIRECTORY_SEPARATOR.'pbpbb' => 'Workbench\Pbpbb',
         ];
 
         foreach ($array as $key => $value) {
             if (str_contains($class, $key)) {
-                $class = str_replace($key.'/src', $value, $class);
+                $class = str_replace($key.DIRECTORY_SEPARATOR.'src', $value, $class);
             }
         }
 
