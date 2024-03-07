@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-route-discovery` will be documented in this file
 
+## 1.0.4 - 2024-03-07
+
+### What's Changed
+
+* Laravel 11.x Compatibility by @laravel-shift in https://github.com/spatie/laravel-route-discovery/pull/29
+
+### New Contributors
+
+* @laravel-shift made their first contribution in https://github.com/spatie/laravel-route-discovery/pull/29
+
+**Full Changelog**: https://github.com/spatie/laravel-route-discovery/compare/1.0.3...1.0.4
+
 ## 1.0.3 - 2023-02-15
 
 - support Laravel 10
