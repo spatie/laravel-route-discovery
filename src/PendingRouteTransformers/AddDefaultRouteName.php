@@ -31,7 +31,7 @@ class AddDefaultRouteName implements PendingRouteTransformer
             ->reject(fn (string $segment) => str_starts_with($segment, '{'))
             ->when(
                 $this->discoverMethodRouteName($pendingRouteAction),
-                fn($collection, $name) => $collection->push($name)
+                fn(Collection $collection, $name) => $name != $collection->last() ? $collection->push($name): $collection
             )
             ->join('.');
     }
