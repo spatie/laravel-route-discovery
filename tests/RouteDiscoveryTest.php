@@ -159,42 +159,49 @@ it('will register routes with the correct http verbs for resourceful methods', f
             controllerMethod: 'index',
             uri: 'resource-methods',
             httpMethods: ['get'],
+            name: 'resource-methods',
         )
         ->assertRouteRegistered(
             ResourceMethodsController::class,
             controllerMethod: 'show',
             uri: 'resource-methods/{user}',
             httpMethods: ['get'],
+            name: 'resource-methods.show',
         )
         ->assertRouteRegistered(
             ResourceMethodsController::class,
             controllerMethod: 'create',
             uri: 'resource-methods/create',
             httpMethods: ['get'],
+            name: 'resource-methods.create',
         )
         ->assertRouteRegistered(
             ResourceMethodsController::class,
             controllerMethod: 'store',
             uri: 'resource-methods',
             httpMethods: ['post'],
+            name: 'resource-methods.store',
         )
         ->assertRouteRegistered(
             ResourceMethodsController::class,
             controllerMethod: 'edit',
             uri: 'resource-methods/edit/{user}',
             httpMethods: ['get'],
+            name: 'resource-methods.edit',
         )
         ->assertRouteRegistered(
             ResourceMethodsController::class,
             controllerMethod: 'update',
             uri: 'resource-methods/{user}',
             httpMethods: ['put', 'patch'],
+            name: 'resource-methods.update',
         )
         ->assertRouteRegistered(
             ResourceMethodsController::class,
             controllerMethod: 'destroy',
             uri: 'resource-methods/{user}',
             httpMethods: ['delete'],
+            name: 'resource-methods.destroy',
         );
 });
 
