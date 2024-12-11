@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-route-discovery` will be documented in this file
 
+## 1.0.5 - 2024-12-11
+
+### What's Changed
+
+* fix resource method names by @ricventu in https://github.com/spatie/laravel-route-discovery/pull/32
+
+### New Contributors
+
+* @ricventu made their first contribution in https://github.com/spatie/laravel-route-discovery/pull/32
+
+**Full Changelog**: https://github.com/spatie/laravel-route-discovery/compare/1.0.4...1.0.5
+
 ## 1.0.4 - 2024-03-07
 
 ### What's Changed
