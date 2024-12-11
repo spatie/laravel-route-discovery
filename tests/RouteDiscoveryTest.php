@@ -23,6 +23,7 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\OverrideFullUri\
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\OverrideHttpMethod\OverrideHttpMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\OverrideUri\OverrideUriController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\ResourceMethods\ResourceMethodsController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\ResourceMethodsWithUri\ResourceMethodsWithUriController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Single\MyController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Where\WhereAttributeController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Middleware\OtherTestMiddleware;
@@ -147,7 +148,7 @@ it('will only automatically register public methods', function () {
         );
 });
 
-it('will register routes with the correct http verbs for resourceful methods', function () {
+it('will register routes with the correct http verbs and names for resourceful methods', function () {
     $this
         ->routeRegistrar
         ->registerDirectory(controllersPath('ResourceMethods'));
@@ -159,44 +160,117 @@ it('will register routes with the correct http verbs for resourceful methods', f
             controllerMethod: 'index',
             uri: 'resource-methods',
             httpMethods: ['get'],
+            name: 'resource-methods',
         )
         ->assertRouteRegistered(
             ResourceMethodsController::class,
             controllerMethod: 'show',
             uri: 'resource-methods/{user}',
             httpMethods: ['get'],
+            name: 'resource-methods.show',
         )
         ->assertRouteRegistered(
             ResourceMethodsController::class,
             controllerMethod: 'create',
             uri: 'resource-methods/create',
             httpMethods: ['get'],
+            name: 'resource-methods.create',
         )
         ->assertRouteRegistered(
             ResourceMethodsController::class,
             controllerMethod: 'store',
             uri: 'resource-methods',
             httpMethods: ['post'],
+            name: 'resource-methods.store',
         )
         ->assertRouteRegistered(
             ResourceMethodsController::class,
             controllerMethod: 'edit',
             uri: 'resource-methods/edit/{user}',
             httpMethods: ['get'],
+            name: 'resource-methods.edit',
         )
         ->assertRouteRegistered(
             ResourceMethodsController::class,
             controllerMethod: 'update',
             uri: 'resource-methods/{user}',
             httpMethods: ['put', 'patch'],
+            name: 'resource-methods.update',
         )
         ->assertRouteRegistered(
             ResourceMethodsController::class,
             controllerMethod: 'destroy',
             uri: 'resource-methods/{user}',
             httpMethods: ['delete'],
+            name: 'resource-methods.destroy',
         );
 });
+
+it('will register routes with the correct names for resourceful methods without adding already existing name for uri', function () {
+    $this
+        ->routeRegistrar
+        ->registerDirectory(controllersPath('ResourceMethodsWithUri'));
+
+    $this
+        ->assertRegisteredRoutesCount(8)
+        ->assertRouteRegistered(
+            ResourceMethodsWithUriController::class,
+            controllerMethod: 'index',
+            uri: 'resource-methods-with-uri',
+            httpMethods: ['get'],
+            name: 'resource-methods-with-uri',
+        )
+        ->assertRouteRegistered(
+            ResourceMethodsWithUriController::class,
+            controllerMethod: 'show',
+            uri: 'resource-methods-with-uri/show/{user}',
+            httpMethods: ['get'],
+            name: 'resource-methods-with-uri.show',
+        )
+        ->assertRouteRegistered(
+            ResourceMethodsWithUriController::class,
+            controllerMethod: 'create',
+            uri: 'resource-methods-with-uri/create',
+            httpMethods: ['get'],
+            name: 'resource-methods-with-uri.create',
+        )
+        ->assertRouteRegistered(
+            ResourceMethodsWithUriController::class,
+            controllerMethod: 'store',
+            uri: 'resource-methods-with-uri/store',
+            httpMethods: ['post'],
+            name: 'resource-methods-with-uri.store',
+        )
+        ->assertRouteRegistered(
+            ResourceMethodsWithUriController::class,
+            controllerMethod: 'edit',
+            uri: 'resource-methods-with-uri/edit/{user}',
+            httpMethods: ['get'],
+            name: 'resource-methods-with-uri.edit',
+        )
+        ->assertRouteRegistered(
+            ResourceMethodsWithUriController::class,
+            controllerMethod: 'update',
+            uri: 'resource-methods-with-uri/update/{user}',
+            httpMethods: ['put', 'patch'],
+            name: 'resource-methods-with-uri.update',
+        )
+        ->assertRouteRegistered(
+            ResourceMethodsWithUriController::class,
+            controllerMethod: 'destroy',
+            uri: 'resource-methods-with-uri/destroy/{user}',
+            httpMethods: ['delete'],
+            name: 'resource-methods-with-uri.destroy',
+        )
+        ->assertRouteRegistered(
+            ResourceMethodsWithUriController::class,
+            controllerMethod: 'delete',
+            uri: 'resource-methods-with-uri/delete/{user}',
+            httpMethods: ['delete'],
+            name: 'resource-methods-with-uri.delete',
+        );
+});
+
 
 it('can override the http method', function () {
     $this
