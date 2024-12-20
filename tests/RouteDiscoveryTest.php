@@ -12,6 +12,9 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Invokable\Invoka
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Middleware\MiddlewareOnControllerController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Middleware\MiddlewareOnMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Model\ModelController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\MultipleModel\MultipleModelController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\PhotosController as MpPhotosController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\Photos\CommentsController as MpCommentsController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\Photos\CommentsController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\PhotosController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Nesting\Nested\ChildController;
@@ -120,6 +123,43 @@ it('can automatically discover a nested route with model parameters', function (
     );
 });
 
+it('can automatically discover a nested route with multiple model parameters', function () {
+    $this
+        ->routeRegistrar
+        ->registerDirectory(controllersPath('NestedWithMultipleParametersController'));
+
+    $this->assertRegisteredRoutesCount(5);
+
+    $this->assertRouteRegistered(
+        MpPhotosController::class,
+        controllerMethod: 'show',
+        uri: 'photos/{photo}',
+    );
+
+    $this->assertRouteRegistered(
+        MpPhotosController::class,
+        controllerMethod: 'edit',
+        uri: 'photos/edit/{photo}',
+    );
+
+    $this->assertRouteRegistered(
+        MpCommentsController::class,
+        controllerMethod: 'show',
+        uri: 'photos/{photo}/comments/{comment}',
+    );
+    $this->assertRouteRegistered(
+        MpCommentsController::class,
+        controllerMethod: 'edit',
+        uri: 'photos/{photo}/comments/edit/{comment}',
+    );
+    $this->assertRouteRegistered(
+        MpCommentsController::class,
+        controllerMethod: 'store',
+        httpMethods: 'post',
+        uri: 'photos/{photo}/comments/{comment}',
+    );
+});
+
 it('can automatically discovery a model route', function () {
     $this
         ->routeRegistrar
@@ -131,6 +171,20 @@ it('can automatically discovery a model route', function () {
             ModelController::class,
             controllerMethod: 'edit',
             uri: 'model/edit/{user}',
+        );
+});
+
+it('can automatically discovery multiple model route', function () {
+    $this
+        ->routeRegistrar
+        ->registerDirectory(controllersPath('MultipleModel'));
+
+    $this
+        ->assertRegisteredRoutesCount(1)
+        ->assertRouteRegistered(
+            MultipleModelController::class,
+            controllerMethod: 'edit',
+            uri: 'multiple-model/edit/{user}/{photo}',
         );
 });
 

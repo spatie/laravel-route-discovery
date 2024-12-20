@@ -4,6 +4,7 @@ namespace Spatie\RouteDiscovery\PendingRouteTransformers;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use ReflectionParameter;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRoute;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 
@@ -33,8 +34,18 @@ class HandleUrisOfNestedControllers implements PendingRouteTransformer
             }
 
             $childNode->actions->each(function (PendingRouteAction $action) use ($parentPendingRoute, $parentAction) {
-                $result = Str::replace($parentPendingRoute->uri, $parentAction->uri, $action->uri);
-
+                $paramsToRemove = $action->modelParameters()
+                    ->filter(
+                        fn (ReflectionParameter $parameter) => $parentAction
+                        ->modelParameters()
+                        ->contains(
+                            fn (ReflectionParameter $parentParameter) => $parentParameter->getName() === $parameter->getName())
+                    );
+                $result = Str::of($action->uri)
+                    ->replace($paramsToRemove->implode(fn (ReflectionParameter $parameter) => "{{$parameter->getName()}}"), '')
+                    ->replace('//', '/')
+                    ->replace($parentPendingRoute->uri, $parentAction->uri)
+                    ->toString();
                 $action->uri = $result;
             });
         });
