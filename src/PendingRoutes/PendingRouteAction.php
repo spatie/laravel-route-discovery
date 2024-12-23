@@ -4,6 +4,7 @@ namespace Spatie\RouteDiscovery\PendingRoutes;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use ReflectionAttribute;
 use ReflectionMethod;
@@ -19,6 +20,9 @@ class PendingRouteAction
     public string $uri;
     /** @var array<int, string> */
     public array $methods = [];
+
+    /** @var Collection<ReflectionParameter> */
+    public Collection $modelParameters;
 
     /** @var array{class-string, string} */
     public array $action;
@@ -40,6 +44,8 @@ class PendingRouteAction
     {
         $this->method = $method;
 
+        $this->modelParameters = $this->modelParameters();
+
         $this->uri = $this->relativeUri();
 
         $this->methods = $this->discoverHttpMethods();
@@ -47,28 +53,33 @@ class PendingRouteAction
         $this->action = [$controllerClass, $method->name];
     }
 
-    public function relativeUri(): string
+    /**
+     * @return Collection<ReflectionParameter>
+     */
+    public function modelParameters(): Collection
     {
-        /** @var ReflectionParameter $modelParameter */
-        $modelParameter = collect($this->method->getParameters())->first(function (ReflectionParameter $parameter) {
+        return collect($this->method->getParameters())->filter(function (ReflectionParameter $parameter) {
             $type = $parameter->getType();
 
             return $type instanceof ReflectionNamedType && is_a($type->getName(), Model::class, true);
         });
+    }
 
+    public function relativeUri(): string
+    {
         $uri = '';
 
         if (! in_array($this->method->getName(), $this->commonControllerMethodNames())) {
             $uri = Str::kebab($this->method->getName());
         }
 
-        /** @phpstan-ignore-next-line */
-        if ($modelParameter) {
+        if ($this->modelParameters->isNotEmpty()) {
             if ($uri !== '') {
                 $uri .= '/';
             }
-
-            $uri .= "{{$modelParameter->getName()}}";
+            $uri .= $this->modelParameters
+                ->map(fn(ReflectionParameter $parameter) => "{{$parameter->getName()}}")
+                ->implode('/');
         }
 
         return $uri;
