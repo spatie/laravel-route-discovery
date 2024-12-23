@@ -77,7 +77,9 @@ class PendingRouteAction
             if ($uri !== '') {
                 $uri .= '/';
             }
-            $uri .= $this->modelParameters->implode(fn(ReflectionParameter $parameter) =>"{{$parameter->getName()}}", '/');
+            $uri .= $this->modelParameters
+                ->map(fn(ReflectionParameter $parameter) => "{{$parameter->getName()}}")
+                ->implode('/');
         }
 
         return $uri;
