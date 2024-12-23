@@ -4,7 +4,6 @@ namespace Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWith
 
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Models\Comment;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Models\Photo;
-use Spatie\RouteDiscovery\Tests\Support\TestClasses\Models\User;
 
 class CommentsController
 {

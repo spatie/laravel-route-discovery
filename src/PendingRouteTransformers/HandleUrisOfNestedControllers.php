@@ -39,7 +39,8 @@ class HandleUrisOfNestedControllers implements PendingRouteTransformer
                         fn (ReflectionParameter $parameter) => $parentAction
                         ->modelParameters()
                         ->contains(
-                            fn (ReflectionParameter $parentParameter) => $parentParameter->getName() === $parameter->getName())
+                            fn (ReflectionParameter $parentParameter) => $parentParameter->getName() === $parameter->getName()
+                        )
                     );
                 $result = Str::of($action->uri)
                     ->replace(
