@@ -128,35 +128,70 @@ it('can automatically discover a nested route with multiple model parameters', f
         ->routeRegistrar
         ->registerDirectory(controllersPath('NestedWithMultipleParametersController'));
 
-    $this->assertRegisteredRoutesCount(5);
+    $this->assertRegisteredRoutesCount(9);
 
     $this->assertRouteRegistered(
         MpPhotosController::class,
         controllerMethod: 'show',
         uri: 'photos/{photo}',
+        name: 'photos.show',
     );
 
     $this->assertRouteRegistered(
         MpPhotosController::class,
         controllerMethod: 'edit',
         uri: 'photos/edit/{photo}',
+        name: 'photos.edit',
     );
 
     $this->assertRouteRegistered(
         MpCommentsController::class,
-        controllerMethod: 'show',
-        uri: 'photos/{photo}/comments/{comment}',
+        controllerMethod: 'index',
+        httpMethods: 'get',
+        uri: 'photos/{photo}/comments',
+        name: 'photos.comments',
     );
     $this->assertRouteRegistered(
         MpCommentsController::class,
-        controllerMethod: 'edit',
-        uri: 'photos/{photo}/comments/edit/{comment}',
+        controllerMethod: 'show',
+        httpMethods: 'get',
+        uri: 'photos/{photo}/comments/{comment}',
+        name: 'photos.comments.show',
+    );
+    $this->assertRouteRegistered(
+        MpCommentsController::class,
+        controllerMethod: 'create',
+        httpMethods: 'get',
+        uri: 'photos/{photo}/comments/create',
+        name: 'photos.comments.create',
     );
     $this->assertRouteRegistered(
         MpCommentsController::class,
         controllerMethod: 'store',
         httpMethods: 'post',
+        uri: 'photos/{photo}/comments',
+        name: 'photos.comments.store',
+    );
+    $this->assertRouteRegistered(
+        MpCommentsController::class,
+        controllerMethod: 'edit',
+        httpMethods: 'get',
+        uri: 'photos/{photo}/comments/edit/{comment}',
+        name: 'photos.comments.edit',
+    );
+    $this->assertRouteRegistered(
+        MpCommentsController::class,
+        controllerMethod: 'update',
+        httpMethods: 'patch',
         uri: 'photos/{photo}/comments/{comment}',
+        name: 'photos.comments.update',
+    );
+    $this->assertRouteRegistered(
+        MpCommentsController::class,
+        controllerMethod: 'destroy',
+        httpMethods: ['delete'],
+        uri: 'photos/{photo}/comments/{comment}',
+        name: 'photos.comments.destroy',
     );
 });
 
