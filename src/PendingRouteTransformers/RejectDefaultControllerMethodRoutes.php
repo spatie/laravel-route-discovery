@@ -30,10 +30,16 @@ class RejectDefaultControllerMethodRoutes implements PendingRouteTransformer
         return $pendingRoutes->each(function (PendingRoute $pendingRoute) {
             $pendingRoute->actions = $pendingRoute
                 ->actions
-                ->reject(fn (PendingRouteAction $pendingRouteAction) => in_array(
-                    $pendingRouteAction->method->class,
-                    $this->rejectMethodsInClasses
-                ));
+                ->reject(function (PendingRouteAction $pendingRouteAction) {
+                    if($pendingRouteAction->method->name == "middleware" && is_subclass_of($pendingRouteAction->method->class, "Illuminate\\Routing\\Controllers\\HasMiddleware")){
+                        return true;
+                    }
+
+                    return in_array(
+                        $pendingRouteAction->method->class,
+                        $this->rejectMethodsInClasses
+                    );
+                });
         });
     }
 }
