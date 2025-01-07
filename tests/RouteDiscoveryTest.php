@@ -449,6 +449,10 @@ it('can avoid discovering a method', function () {
 });
 
 it('can avoid discovering the laravel middleware method', function () {
+    if(!interface_exists('Illuminate\Routing\Controllers\HasMiddleware')) {
+        $this->markTestSkipped("Laravel 9 or up is required to run this test.");
+    }
+    
     $this
         ->routeRegistrar
         ->registerDirectory(controllersPath('DoNotDiscoverMiddleware'));
