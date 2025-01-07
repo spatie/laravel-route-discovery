@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-route-discovery` will be documented in this file
 
+## 1.1.1 - 2024-12-30
+
+### What's Changed
+
+* Added filter to remove extra dot in nested route names by @ricventu in https://github.com/spatie/laravel-route-discovery/pull/34
+
+**Full Changelog**: https://github.com/spatie/laravel-route-discovery/compare/1.1.0...1.1.1
+
 ## 1.0.5 - 2024-12-11
 
 ### What's Changed

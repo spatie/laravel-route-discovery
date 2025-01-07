@@ -14,6 +14,9 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Invokable\Invoka
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Middleware\MiddlewareOnControllerController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Middleware\MiddlewareOnMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Model\ModelController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\MultipleModel\MultipleModelController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\Photos\CommentsController as MpCommentsController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\PhotosController as MpPhotosController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\Photos\CommentsController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\PhotosController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Nesting\Nested\ChildController;
@@ -122,6 +125,78 @@ it('can automatically discover a nested route with model parameters', function (
     );
 });
 
+it('can automatically discover a nested route with multiple model parameters', function () {
+    $this
+        ->routeRegistrar
+        ->registerDirectory(controllersPath('NestedWithMultipleParametersController'));
+
+    $this->assertRegisteredRoutesCount(9);
+
+    $this->assertRouteRegistered(
+        MpPhotosController::class,
+        controllerMethod: 'show',
+        uri: 'photos/{photo}',
+        name: 'photos.show',
+    );
+
+    $this->assertRouteRegistered(
+        MpPhotosController::class,
+        controllerMethod: 'edit',
+        uri: 'photos/edit/{photo}',
+        name: 'photos.edit',
+    );
+
+    $this->assertRouteRegistered(
+        MpCommentsController::class,
+        controllerMethod: 'index',
+        httpMethods: 'get',
+        uri: 'photos/{photo}/comments',
+        name: 'photos.comments',
+    );
+    $this->assertRouteRegistered(
+        MpCommentsController::class,
+        controllerMethod: 'show',
+        httpMethods: 'get',
+        uri: 'photos/{photo}/comments/{comment}',
+        name: 'photos.comments.show',
+    );
+    $this->assertRouteRegistered(
+        MpCommentsController::class,
+        controllerMethod: 'create',
+        httpMethods: 'get',
+        uri: 'photos/{photo}/comments/create',
+        name: 'photos.comments.create',
+    );
+    $this->assertRouteRegistered(
+        MpCommentsController::class,
+        controllerMethod: 'store',
+        httpMethods: 'post',
+        uri: 'photos/{photo}/comments',
+        name: 'photos.comments.store',
+    );
+    $this->assertRouteRegistered(
+        MpCommentsController::class,
+        controllerMethod: 'edit',
+        httpMethods: 'get',
+        uri: 'photos/{photo}/comments/edit/{comment}',
+        name: 'photos.comments.edit',
+    );
+    $this->assertRouteRegistered(
+        MpCommentsController::class,
+        controllerMethod: 'update',
+        httpMethods: 'patch',
+        uri: 'photos/{photo}/comments/{comment}',
+        name: 'photos.comments.update',
+    );
+    $this->assertRouteRegistered(
+        MpCommentsController::class,
+        controllerMethod: 'destroy',
+        httpMethods: ['delete'],
+        uri: 'photos/{photo}/comments/{comment}',
+        name: 'photos.comments.destroy',
+    );
+});
+
 it('can automatically discovery a model route', function () {
     $this
         ->routeRegistrar
@@ -133,6 +208,20 @@ it('can automatically discovery a model route', function () {
             ModelController::class,
             controllerMethod: 'edit',
             uri: 'model/edit/{user}',
+        );
+});
+
+it('can automatically discovery multiple model route', function () {
+    $this
+        ->routeRegistrar
+        ->registerDirectory(controllersPath('MultipleModel'));
+
+    $this
+        ->assertRegisteredRoutesCount(1)
+        ->assertRouteRegistered(
+            MultipleModelController::class,
+            controllerMethod: 'edit',
+            uri: 'multiple-model/edit/{user}/{photo}',
         );
 });
 

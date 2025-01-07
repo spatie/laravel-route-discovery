@@ -29,6 +29,7 @@ class AddDefaultRouteName implements PendingRouteTransformer
     {
         return collect(explode('/', $pendingRouteAction->uri))
             ->reject(fn (string $segment) => str_starts_with($segment, '{'))
+            ->filter()
             ->when(
                 $this->discoverMethodRouteName($pendingRouteAction),
                 fn (Collection $collection, $name) => $name != $collection->last() ? $collection->push($name) : $collection
