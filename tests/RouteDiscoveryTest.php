@@ -449,7 +449,7 @@ it('can avoid discovering a method', function () {
 });
 
 it('can avoid discovering the laravel middleware method', function () {
-    if(!interface_exists('Illuminate\Routing\Controllers\HasMiddleware')) {
+    if (! interface_exists('Illuminate\Routing\Controllers\HasMiddleware')) {
         $this->markTestSkipped("Laravel 9 or up is required to run this test.");
     }
     
@@ -579,7 +579,7 @@ it('will make sure the routes whose uri start with parameters will be registered
     $this->assertRegisteredRoutesCount(3);
 
     $registeredUris = collect(app()->router->getRoutes())
-        ->map(fn(Route $route) => $route->uri)
+        ->map(fn (Route $route) => $route->uri)
         ->toArray();
 
     expect($registeredUris)->toEqual([

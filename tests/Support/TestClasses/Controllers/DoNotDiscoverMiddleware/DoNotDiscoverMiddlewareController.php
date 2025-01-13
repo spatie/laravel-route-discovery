@@ -6,12 +6,12 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 
 class DoNotDiscoverMiddlewareController implements HasMiddleware
 {
-    public static function middleware(): array {
+    public static function middleware(): array
+    {
         return [];
     }
 
     public function method()
     {
     }
-
 }

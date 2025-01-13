@@ -4,12 +4,12 @@ namespace Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDisco
 
 class DiscoverMiddlewareIfNotLaravelMethodController
 {
-    public static function middleware(): array {
+    public static function middleware(): array
+    {
         return [];
     }
 
     public function method()
     {
     }
-
 }
