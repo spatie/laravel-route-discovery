@@ -8,6 +8,8 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DefaultRouteName
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Domain\DomainController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDiscoverController\DoNotDiscoverThisMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDiscoverMethod\DoNotDiscoverMethodController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDiscoverMiddleware\DiscoverMiddlewareIfNotLaravelMethodController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDiscoverMiddleware\DoNotDiscoverMiddlewareController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Invokable\InvokableController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Middleware\MiddlewareOnControllerController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Middleware\MiddlewareOnMethodController;
@@ -360,7 +362,6 @@ it('will register routes with the correct names for resourceful methods without 
         );
 });
 
-
 it('can override the http method', function () {
     $this
         ->routeRegistrar
@@ -444,6 +445,34 @@ it('can avoid discovering a method', function () {
             DoNotDiscoverMethodController::class,
             controllerMethod: 'method',
             uri: 'do-not-discover-method/method',
+        );
+});
+
+it('can avoid discovering the laravel middleware method', function () {
+    if(!interface_exists('Illuminate\Routing\Controllers\HasMiddleware')) {
+        $this->markTestSkipped("Laravel 9 or up is required to run this test.");
+    }
+    
+    $this
+        ->routeRegistrar
+        ->registerDirectory(controllersPath('DoNotDiscoverMiddleware'));
+
+    $this
+        ->assertRegisteredRoutesCount(3)
+        ->assertRouteRegistered(
+            DoNotDiscoverMiddlewareController::class,
+            controllerMethod: 'method',
+            uri: 'do-not-discover-middleware/method',
+        )
+        ->assertRouteRegistered(
+            DiscoverMiddlewareIfNotLaravelMethodController::class,
+            controllerMethod: 'method',
+            uri: 'discover-middleware-if-not-laravel-method/method',
+        )
+        ->assertRouteRegistered(
+            DiscoverMiddlewareIfNotLaravelMethodController::class,
+            controllerMethod: 'middleware',
+            uri: 'discover-middleware-if-not-laravel-method/middleware',
         );
 });
 
@@ -550,7 +579,7 @@ it('will make sure the routes whose uri start with parameters will be registered
     $this->assertRegisteredRoutesCount(3);
 
     $registeredUris = collect(app()->router->getRoutes())
-        ->map(fn (Route $route) => $route->uri)
+        ->map(fn(Route $route) => $route->uri)
         ->toArray();
 
     expect($registeredUris)->toEqual([
