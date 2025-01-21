@@ -16,6 +16,7 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\MultipleModel\Mu
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\Photos\CommentsController as MpCommentsController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\PhotosController as MpPhotosController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\Photos\CommentsController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\Photos\UsersController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\PhotosController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Nesting\Nested\ChildController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Nesting\Nested\Deepest\IndexController as DeepestIndexController;
@@ -97,7 +98,7 @@ it('can automatically discover a nested route with model parameters', function (
         ->routeRegistrar
         ->registerDirectory(controllersPath('NestedWithParametersController'));
 
-    $this->assertRegisteredRoutesCount(4);
+    $this->assertRegisteredRoutesCount(6);
 
     $this->assertRouteRegistered(
         PhotosController::class,
@@ -120,6 +121,17 @@ it('can automatically discover a nested route with model parameters', function (
         CommentsController::class,
         controllerMethod: 'edit',
         uri: 'photos/{photo}/comments/edit/{comment}',
+    );
+
+    $this->assertRouteRegistered(
+        UsersController::class,
+        controllerMethod: 'show',
+        uri: 'photos/{photo}/users/{user}',
+    );
+    $this->assertRouteRegistered(
+        UsersController::class,
+        controllerMethod: 'edit',
+        uri: 'photos/{photo}/users/edit/{user}',
     );
 });
 
