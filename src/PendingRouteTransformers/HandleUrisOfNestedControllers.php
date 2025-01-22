@@ -11,9 +11,9 @@ use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 class HandleUrisOfNestedControllers implements PendingRouteTransformer
 {
     /**
-     * @param Collection<PendingRoute> $pendingRoutes
+     * @param Collection<int, PendingRoute> $pendingRoutes
      *
-     * @return Collection<PendingRoute>
+     * @return Collection<int, PendingRoute>
      */
     public function transform(Collection $pendingRoutes): Collection
     {
@@ -60,9 +60,9 @@ class HandleUrisOfNestedControllers implements PendingRouteTransformer
     }
 
     /**
-     * @param Collection $pendingRoutes
+     * @param Collection<int, PendingRoute> $pendingRoutes
      * @param PendingRoute $parentRouteAction
-     * @return Collection<PendingRoute>
+     * @return Collection<int, PendingRoute>
      */
     protected function findChild(Collection $pendingRoutes, PendingRoute $parentRouteAction): Collection
     {
