@@ -11,16 +11,16 @@ use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 class HandleUrisOfNestedControllers implements PendingRouteTransformer
 {
     /**
-     * @param Collection<PendingRoute> $pendingRoutes
+     * @param Collection<int, PendingRoute> $pendingRoutes
      *
-     * @return Collection<PendingRoute>
+     * @return Collection<int, PendingRoute>
      */
     public function transform(Collection $pendingRoutes): Collection
     {
         $pendingRoutes->each(function (PendingRoute $parentPendingRoute) use ($pendingRoutes) {
-            $childNode = $this->findChild($pendingRoutes, $parentPendingRoute);
+            $childrenNodes = $this->findChild($pendingRoutes, $parentPendingRoute);
 
-            if (! $childNode) {
+            if (! $childrenNodes->count()) {
                 return;
             }
 
@@ -33,35 +33,42 @@ class HandleUrisOfNestedControllers implements PendingRouteTransformer
                 return;
             }
 
-            $childNode->actions->each(function (PendingRouteAction $action) use ($parentPendingRoute, $parentAction) {
-                $paramsToRemove = $action->modelParameters()
-                    ->filter(
-                        fn (ReflectionParameter $parameter) => $parentAction
-                        ->modelParameters()
-                        ->contains(
-                            fn (ReflectionParameter $parentParameter) => $parentParameter->getName() === $parameter->getName()
+            $childrenNodes->each(function (PendingRoute $childNode) use ($parentPendingRoute, $parentAction) {
+                $childNode->actions->each(function (PendingRouteAction $action) use ($parentPendingRoute, $parentAction) {
+                    $paramsToRemove = $action->modelParameters()
+                        ->filter(
+                            fn (ReflectionParameter $parameter) => $parentAction
+                            ->modelParameters()
+                            ->contains(
+                                fn (ReflectionParameter $parentParameter) => $parentParameter->getName() === $parameter->getName()
+                            )
+                        );
+                    $result = Str::of($action->uri)
+                        ->replace(
+                            $paramsToRemove->map(fn (ReflectionParameter $parameter) => "{{$parameter->getName()}}")->toArray(),
+                            ''
                         )
-                    );
-                $result = Str::of($action->uri)
-                    ->replace(
-                        $paramsToRemove->map(fn (ReflectionParameter $parameter) => "{{$parameter->getName()}}")->toArray(),
-                        ''
-                    )
-                    ->replace('//', '/')
-                    ->replace($parentPendingRoute->uri, $parentAction->uri);
+                        ->replace('//', '/')
+                        ->replace($parentPendingRoute->uri, $parentAction->uri);
 
-                $action->uri = $result;
+                    $action->uri = $result;
+                });
             });
         });
 
         return $pendingRoutes;
     }
 
-    protected function findChild(Collection $pendingRoutes, PendingRoute $parentRouteAction): ?PendingRoute
+    /**
+     * @param Collection<int, PendingRoute> $pendingRoutes
+     * @param PendingRoute $parentRouteAction
+     * @return Collection<int, PendingRoute>
+     */
+    protected function findChild(Collection $pendingRoutes, PendingRoute $parentRouteAction): Collection
     {
         $childNamespace = $parentRouteAction->childNamespace();
 
-        return $pendingRoutes->first(
+        return $pendingRoutes->filter(
             fn (PendingRoute $potentialChildRoute) => $potentialChildRoute->namespace() === $childNamespace
         );
     }
