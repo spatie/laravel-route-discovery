@@ -8,9 +8,8 @@ use Spatie\RouteDiscovery\PendingRoutes\PendingRoute;
 interface PendingRouteTransformer
 {
     /**
-     * @param Collection<PendingRoute> $pendingRoutes
-     *
-     * @return Collection<PendingRoute>
+     * @param Collection<int, PendingRoute> $pendingRoutes
+     * @return Collection<int, PendingRoute>
      */
     public function transform(Collection $pendingRoutes): Collection;
 }

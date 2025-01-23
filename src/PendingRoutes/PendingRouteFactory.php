@@ -43,6 +43,9 @@ class PendingRouteFactory
         return new PendingRoute($fileInfo, $class, $uri, $fullyQualifiedClassName, $actions);
     }
 
+    /**
+     * @param ReflectionClass<object> $class
+     */
     protected function discoverUri(ReflectionClass $class): string
     {
         $parts = Str::of((string) $class->getFileName())

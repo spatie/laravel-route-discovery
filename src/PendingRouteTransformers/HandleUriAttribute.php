@@ -10,9 +10,9 @@ use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 class HandleUriAttribute implements PendingRouteTransformer
 {
     /**
-     * @param Collection<PendingRoute> $pendingRoutes
+     * @param Collection<int, PendingRoute> $pendingRoutes
      *
-     * @return Collection<PendingRoute>
+     * @return Collection<int, PendingRoute>
      */
     public function transform(Collection $pendingRoutes): Collection
     {
@@ -22,12 +22,16 @@ class HandleUriAttribute implements PendingRouteTransformer
                     return;
                 }
 
-                if (! $routeAttributeUri = $routeAttribute->uri) {
+                if (! isset($routeAttribute->uri)) {
+                    return;
+                }
+
+                if (! $routeAttribute->uri) {
                     return;
                 }
 
                 $baseUri = Str::beforeLast($action->uri, '/');
-                $action->uri = $baseUri . '/' . $routeAttributeUri;
+                $action->uri = $baseUri . '/' . $routeAttribute->uri;
             });
         });
 

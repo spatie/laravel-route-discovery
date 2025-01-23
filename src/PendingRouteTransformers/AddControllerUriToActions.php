@@ -9,9 +9,9 @@ use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 class AddControllerUriToActions implements PendingRouteTransformer
 {
     /**
-     * @param Collection<PendingRoute> $pendingRoutes
+     * @param Collection<int, PendingRoute> $pendingRoutes
      *
-     * @return Collection<PendingRoute>
+     * @return Collection<int, PendingRoute>
      */
     public function transform(Collection $pendingRoutes): Collection
     {
