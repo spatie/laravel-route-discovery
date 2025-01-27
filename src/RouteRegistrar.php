@@ -56,7 +56,7 @@ class RouteRegistrar
     /**
      * @param string $directory
      *
-     * @return Collection<\Spatie\RouteDiscovery\PendingRoutes\PendingRoute>
+     * @return Collection<int, PendingRoute>
      */
     protected function convertToPendingRoutes(string $directory): Collection
     {
@@ -77,16 +77,15 @@ class RouteRegistrar
                 return $this->convertToPendingRoutes($subDirectory);
             })
             ->filter()
-            /** @phpstan-ignore-next-line */
             ->each(fn (PendingRoute $pendingRoute) => $pendingRoutes->push($pendingRoute));
 
         return $pendingRoutes;
     }
 
     /**
-     * @param Collection<PendingRoute> $pendingRoutes
+     * @param Collection<int, PendingRoute> $pendingRoutes
      *
-     * @return Collection<PendingRoute> $pendingRoutes
+     * @return Collection<int, PendingRoute>
      */
     protected function transformPendingRoutes(Collection $pendingRoutes): Collection
     {
@@ -104,6 +103,9 @@ class RouteRegistrar
         return $pendingRoutes;
     }
 
+    /**
+     * @param Collection<int, PendingRoute> $pendingRoutes
+     */
     protected function registerRoutes(Collection $pendingRoutes): void
     {
         $pendingRoutes->each(function (PendingRoute $pendingRoute) {
@@ -112,8 +114,9 @@ class RouteRegistrar
 
                 $route->middleware($action->middleware);
 
-                /** @phpstan-ignore-next-line */
-                $route->name($action->name);
+                if ($action->name !== null) {
+                    $route->name($action->name);
+                }
 
                 if (count($action->wheres)) {
                     $route->setWheres($action->wheres);

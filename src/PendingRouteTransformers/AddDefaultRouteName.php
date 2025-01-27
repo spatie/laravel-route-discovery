@@ -9,16 +9,15 @@ use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 class AddDefaultRouteName implements PendingRouteTransformer
 {
     /**
-     * @param Collection<PendingRoute> $pendingRoutes
+     * @param Collection<int, PendingRoute> $pendingRoutes
      *
-     * @return Collection<PendingRoute>
+     * @return Collection<int, PendingRoute>
      */
     public function transform(Collection $pendingRoutes): Collection
     {
         $pendingRoutes->each(function (PendingRoute $pendingRoute) {
             $pendingRoute->actions
-                ->reject(fn (PendingRouteAction $action) => $action->name)
-                /** @phpstan-ignore-next-line */
+                ->reject(fn (PendingRouteAction $action): bool => (bool)$action->name)
                 ->each(fn (PendingRouteAction $action) => $action->name = $this->generateRouteName($action));
         });
 
@@ -27,19 +26,24 @@ class AddDefaultRouteName implements PendingRouteTransformer
 
     protected function generateRouteName(PendingRouteAction $pendingRouteAction): string
     {
-        return collect(explode('/', $pendingRouteAction->uri))
+        /** @var array<int, non-empty-string> $segments */
+        $segments = collect(explode('/', $pendingRouteAction->uri))
             ->reject(fn (string $segment) => str_starts_with($segment, '{'))
             ->filter()
-            ->when(
-                $this->discoverMethodRouteName($pendingRouteAction),
-                fn (Collection $collection, $name) => $name != $collection->last() ? $collection->push($name) : $collection
-            )
-            ->join('.');
+            ->all();
+
+        $methodName = $this->discoverMethodRouteName($pendingRouteAction);
+        
+        if ($methodName !== null && $methodName !== end($segments)) {
+            $segments[] = $methodName;
+        }
+
+        return implode('.', $segments);
     }
 
     /**
      * @param PendingRouteAction $pendingRouteAction
-     * @return string|null
+     * @return non-empty-string|null
      */
     protected function discoverMethodRouteName(PendingRouteAction $pendingRouteAction): ?string
     {

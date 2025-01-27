@@ -21,7 +21,7 @@ class PendingRouteAction
     /** @var array<int, string> */
     public array $methods = [];
 
-    /** @var Collection<ReflectionParameter> */
+    /** @var Collection<int, ReflectionParameter> */
     public Collection $modelParameters;
 
     /** @var array{class-string, string} */
@@ -54,7 +54,7 @@ class PendingRouteAction
     }
 
     /**
-     * @return Collection<ReflectionParameter>
+     * @return Collection<int, ReflectionParameter>
      */
     public function modelParameters(): Collection
     {
@@ -144,7 +144,7 @@ class PendingRouteAction
             : $this->action;
     }
 
-    public function getRouteAttribute(): ?Route
+    public function getRouteAttribute(): ?DiscoveryAttribute
     {
         return $this->getAttribute(Route::class);
     }
@@ -154,7 +154,7 @@ class PendingRouteAction
      *
      * @param class-string<TDiscoveryAttribute> $attributeClass
      *
-     * @return ?TDiscoveryAttribute
+     * @return DiscoveryAttribute|null
      */
     public function getAttribute(string $attributeClass): ?DiscoveryAttribute
     {

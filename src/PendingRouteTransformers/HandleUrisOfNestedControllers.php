@@ -35,6 +35,7 @@ class HandleUrisOfNestedControllers implements PendingRouteTransformer
 
             $childrenNodes->each(function (PendingRoute $childNode) use ($parentPendingRoute, $parentAction) {
                 $childNode->actions->each(function (PendingRouteAction $action) use ($parentPendingRoute, $parentAction) {
+                    /** @var Collection<int, ReflectionParameter> $paramsToRemove */
                     $paramsToRemove = $action->modelParameters()
                         ->filter(
                             fn (ReflectionParameter $parameter) => $parentAction

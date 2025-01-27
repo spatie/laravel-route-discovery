@@ -14,10 +14,10 @@ class PendingRoute
 {
     /**
      * @param SplFileInfo $fileInfo
-     * @param ReflectionClass $class
+     * @param ReflectionClass<object> $class
      * @param string $uri
      * @param string $fullyQualifiedClassName
-     * @param Collection<PendingRouteAction> $actions
+     * @param Collection<int, PendingRouteAction> $actions
      */
     public function __construct(
         public SplFileInfo $fileInfo,
@@ -45,7 +45,7 @@ class PendingRoute
         return $this->namespace() . '\\' . $this->shortControllerName();
     }
 
-    public function getRouteAttribute(): ?Route
+    public function getRouteAttribute(): ?DiscoveryAttribute
     {
         return $this->getAttribute(Route::class);
     }
@@ -55,7 +55,7 @@ class PendingRoute
      *
      * @param class-string<TDiscoveryAttribute> $attributeClass
      *
-     * @return ?TDiscoveryAttribute
+     * @return DiscoveryAttribute|null
      */
     public function getAttribute(string $attributeClass): ?DiscoveryAttribute
     {

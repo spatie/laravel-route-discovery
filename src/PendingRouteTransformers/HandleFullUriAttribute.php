@@ -3,15 +3,16 @@
 namespace Spatie\RouteDiscovery\PendingRouteTransformers;
 
 use Illuminate\Support\Collection;
+use Spatie\RouteDiscovery\Attributes\Route;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRoute;
 use Spatie\RouteDiscovery\PendingRoutes\PendingRouteAction;
 
 class HandleFullUriAttribute implements PendingRouteTransformer
 {
     /**
-     * @param Collection<PendingRoute> $pendingRoutes
+     * @param Collection<int, PendingRoute> $pendingRoutes
      *
-     * @return Collection<PendingRoute>
+     * @return Collection<int, PendingRoute>
      */
     public function transform(Collection $pendingRoutes): Collection
     {
@@ -21,6 +22,7 @@ class HandleFullUriAttribute implements PendingRouteTransformer
                     return;
                 }
 
+                /** @var Route $routeAttribute */
                 if (! $routeAttributeFullUri = $routeAttribute->fullUri) {
                     return;
                 }
