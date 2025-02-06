@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-route-discovery` will be documented in this file
 
+## 1.3.1 - 2025-02-06
+
+### What's Changed
+
+* Fixed nested URL for multi-level nested controllers by @ricventu in https://github.com/spatie/laravel-route-discovery/pull/40
+
+**Full Changelog**: https://github.com/spatie/laravel-route-discovery/compare/1.3.0...1.3.1
+
 ## 1.1.1 - 2024-12-30
 
 ### What's Changed
