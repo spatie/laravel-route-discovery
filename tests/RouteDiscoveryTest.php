@@ -15,6 +15,8 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Middleware\Middl
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Middleware\MiddlewareOnMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Model\ModelController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\MultipleModel\MultipleModelController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\Photos\Comments\Nested1SController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\Photos\Comments\Nested1s\Nested2SController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\Photos\CommentsController as MpCommentsController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\PhotosController as MpPhotosController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\Photos\CommentsController;
@@ -142,7 +144,7 @@ it('can automatically discover a nested route with multiple model parameters', f
         ->routeRegistrar
         ->registerDirectory(controllersPath('NestedWithMultipleParametersController'));
 
-    $this->assertRegisteredRoutesCount(9);
+    $this->assertRegisteredRoutesCount(13);
 
     $this->assertRouteRegistered(
         MpPhotosController::class,
@@ -206,6 +208,35 @@ it('can automatically discover a nested route with multiple model parameters', f
         httpMethods: ['delete'],
         uri: 'photos/{photo}/comments/{comment}',
         name: 'photos.comments.destroy',
+    );
+
+    $this->assertRouteRegistered(
+        Nested1SController::class,
+        controllerMethod: 'index',
+        httpMethods: ['get', 'head'],
+        uri: 'photos/{photo}/comments/{comment}/nested1s',
+        name: 'photos.comments.nested1s',
+    );
+    $this->assertRouteRegistered(
+        Nested1SController::class,
+        controllerMethod: 'show',
+        httpMethods: ['get', 'head'],
+        uri: 'photos/{photo}/comments/{comment}/nested1s/{nested1}',
+        name: 'photos.comments.nested1s.show',
+    );
+    $this->assertRouteRegistered(
+        Nested2SController::class,
+        controllerMethod: 'index',
+        httpMethods: ['get', 'head'],
+        uri: 'photos/{photo}/comments/{comment}/nested1s/{nested1}/nested2s',
+        name: 'photos.comments.nested1s.nested2s',
+    );
+    $this->assertRouteRegistered(
+        Nested2SController::class,
+        controllerMethod: 'show',
+        httpMethods: ['get', 'head'],
+        uri: 'photos/{photo}/comments/{comment}/nested1s/{nested1}/nested2s/{nested2}',
+        name: 'photos.comments.nested1s.nested2s.show',
     );
 });
 
@@ -464,7 +495,7 @@ it('can avoid discovering the laravel middleware method', function () {
     if (! interface_exists('Illuminate\Routing\Controllers\HasMiddleware')) {
         $this->markTestSkipped("Laravel 9 or up is required to run this test.");
     }
-    
+
     $this
         ->routeRegistrar
         ->registerDirectory(controllersPath('DoNotDiscoverMiddleware'));

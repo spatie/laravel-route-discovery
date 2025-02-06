@@ -49,7 +49,7 @@ class HandleUrisOfNestedControllers implements PendingRouteTransformer
                             $paramsToRemove->map(fn (ReflectionParameter $parameter) => "{{$parameter->getName()}}")->toArray(),
                             ''
                         )
-                        ->replace('//', '/')
+                        ->replaceMatches('#/{2,}#', '/')
                         ->replace($parentPendingRoute->uri, $parentAction->uri);
 
                     $action->uri = $result;
