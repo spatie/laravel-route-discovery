@@ -15,8 +15,8 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Middleware\Middl
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Middleware\MiddlewareOnMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Model\ModelController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\MultipleModel\MultipleModelController;
-use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\Photos\Comments\Nested1SController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\Photos\Comments\Nested1s\Nested2SController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\Photos\Comments\Nested1SController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\Photos\CommentsController as MpCommentsController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\PhotosController as MpPhotosController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\Photos\CommentsController;
