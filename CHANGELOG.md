@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-route-discovery` will be documented in this file
 
+## 1.3.2 - 2025-02-17
+
+### What's Changed
+
+* Laravel 12.x Compatibility by @laravel-shift in https://github.com/spatie/laravel-route-discovery/pull/41
+
+**Full Changelog**: https://github.com/spatie/laravel-route-discovery/compare/1.3.1...1.3.2
+
 ## 1.3.1 - 2025-02-06
 
 ### What's Changed
