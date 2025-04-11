@@ -38,6 +38,19 @@ return [
     ],
 
     /*
+     * Default route names that will be automatically assigned to controller actions
+     * when no explicit name is provided. The key is the method name and the value
+     * is the default route name.
+     *
+     * For example, if you have a controller with a 'show' method, the default route
+     * name will be 'show'. You can customize this by setting a different value:
+     * 'show' => 'view'
+     */
+    'default_route_names' => [
+        // 'action' => 'name',
+    ],
+
+    /*
      * After having discovered all controllers, these classes will manipulate the routes
      * before registering them to Laravel.
      *

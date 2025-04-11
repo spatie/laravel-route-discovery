@@ -24,8 +24,7 @@ return [
      * The key is the method name and the value is the default route name.
      */
     'default_route_names' => [
-        // 'index' => 'index',
-        //' __invoke' => null,
+        // 'action' => 'name',
     ],
 
     /*
