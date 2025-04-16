@@ -1,10 +1,18 @@
-# Automatically discover routes in a Laravel app
+<div align="left">
+    <a href="https://spatie.be/open-source?utm_source=github&utm_medium=banner&utm_campaign=laravel-route-discovery">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://spatie.be/packages/header/laravel-route-discovery/html/dark.webp">
+        <img alt="Logo for laravel-route-discovery" src=" https://spatie.be/packages/header/laravel-route-discovery/html/light.webp" height="190">
+      </picture>
+    </a>
+
+<h1>Automatically discover routes in a Laravel app</h1>
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-route-discovery.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-route-discovery)
 ![Tests](https://github.com/spatie/laravel-route-discovery/workflows/Tests/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-route-discovery.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-route-discovery)
-
-This package can automatically discover routes for controllers and views in your Laravel application. This isn't an all-in approach. While using use auto discovery, you can still register routes like you're used to.
+    
+</div>
 
 ```php
 // typically in a routes file
