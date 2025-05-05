@@ -18,6 +18,16 @@ return [
     ],
 
     /*
+     * Default route names that will be automatically assigned to controller actions
+     * when no explicit name is provided.
+     *
+     * The key is the method name and the value is the default route name.
+     */
+    'default_route_names' => [
+        // 'action' => 'name',
+    ],
+
+    /*
      * After having discovered all controllers, these classes will manipulate the routes
      * before registering them to Laravel.
      *
