@@ -262,6 +262,27 @@ class ExampleController
 }
 ```
 
+## Soft Deleted Models
+
+You can instruct the implicit binding to retrieve soft deleted models by passing `true` to the `withTrashed` parameter of the `Route` attribute. This can be done on both the class and method level.
+
+Using this controller, the route to  `restore` will retrieve soft deleted users.
+
+```php
+namespace App\Http\Controllers;
+
+use Illuminate\Routing\Middleware\ValidateSignature;
+use Spatie\RouteDiscovery\Attributes\Route;
+
+class ExampleController
+{
+    public function delete(User $user) { /* ... */ }
+
+    #[Route(withTrashed: true)]
+    public function restore(User $user) { /* ... */ }
+}
+```
+
 ## Preventing routes from being discovered
 
 You can prevent a certain controller from being discovered by using the `DoNotDiscover` attribute.
