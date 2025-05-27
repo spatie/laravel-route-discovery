@@ -34,6 +34,7 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\ResourceMethods\
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\ResourceMethodsWithUri\ResourceMethodsWithUriController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Single\MyController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Where\WhereAttributeController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\WithTrashed\WithTrashedAttributeController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Middleware\OtherTestMiddleware;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Middleware\TestMiddleware;
 
@@ -581,6 +582,25 @@ it('can handle a where attribute', function () {
         );
 });
 
+it('can handle a withTrashed attribute', function () {
+    $this
+        ->routeRegistrar
+        ->registerDirectory(controllersPath('WithTrashed'));
+
+    $this
+        ->assertRegisteredRoutesCount(2)
+        ->assertRouteRegistered(
+            WithTrashedAttributeController::class,
+            controllerMethod: 'show',
+            withTrashed: false,
+        )
+        ->assertRouteRegistered(
+            WithTrashedAttributeController::class,
+            controllerMethod: 'restore',
+            withTrashed: true,
+        );
+});
+
 it('can handle a domain attribute', function () {
     $this
         ->routeRegistrar
@@ -621,7 +641,8 @@ it('will make sure the routes whose uri start with parameters will be registered
 
     $this->assertRegisteredRoutesCount(3);
 
-    $registeredUris = collect(app()->router->getRoutes())
+
+    $registeredUris = collect($this->getRouteCollection()->getRoutes())
         ->map(fn (Route $route) => $route->uri)
         ->toArray();
 

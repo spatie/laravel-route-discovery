@@ -36,6 +36,8 @@ class PendingRouteAction
 
     public ?string $domain = null;
 
+    public bool $withTrashed = false;
+
     /**
      * @param ReflectionMethod $method
      * @param class-string $controllerClass

@@ -55,14 +55,15 @@ class TestCase extends Orchestra
         string | array $middleware = [],
         ?string $name = null,
         ?string $domain = null,
-        ?array $wheres = null
+        ?array $wheres = null,
+        bool $withTrashed = false,
     ): self {
         if (! is_array($middleware)) {
             $middleware = Arr::wrap($middleware);
         }
 
         $routeRegistered = collect($this->getRouteCollection()->getRoutes())
-            ->contains(function (Route $route) use ($name, $middleware, $controllerMethod, $controller, $uri, $httpMethods, $domain, $wheres) {
+            ->contains(function (Route $route) use ($name, $middleware, $controllerMethod, $controller, $uri, $httpMethods, $domain, $wheres, $withTrashed) {
                 foreach (Arr::wrap($httpMethods) as $httpMethod) {
                     if (! in_array(strtoupper($httpMethod), $route->methods)) {
                         return false;
@@ -102,6 +103,10 @@ class TestCase extends Orchestra
                     return false;
                 }
 
+                if( $route->allowsTrashedBindings() !== $withTrashed ) {
+                    return false;
+                }
+
                 if ($wheres !== null) {
                     if ($wheres !== $route->wheres) {
                         return false;
@@ -116,9 +121,13 @@ class TestCase extends Orchestra
         return $this;
     }
 
-    protected function getRouteCollection(): RouteCollection
+    public function getRouteCollection(): RouteCollection
     {
-        return app()->router->getRoutes();
+        return tap( new RouteCollection, function( $collection ) {
+            collect( app()->router->getRoutes()->getRoutes() )
+                ->reject( fn( $route ) => $route->getName() == 'storage.local' )
+                ->each( fn( $route ) => $collection->add( $route ) );
+        });
     }
 
     protected function registerControllersFromConfigFile(): self
