@@ -33,8 +33,10 @@ class AddDefaultRouteName implements PendingRouteTransformer
             ->all();
 
         $methodName = $this->discoverMethodRouteName($pendingRouteAction);
-        
+
         if ($methodName !== null && $methodName !== end($segments)) {
+            // $segments[] = $methodName;
+            array_pop($segments);
             $segments[] = $methodName;
         }
 
@@ -47,14 +49,17 @@ class AddDefaultRouteName implements PendingRouteTransformer
      */
     protected function discoverMethodRouteName(PendingRouteAction $pendingRouteAction): ?string
     {
-        return match ($pendingRouteAction->method->name) {
-            'show' => 'show',
-            'store' => 'store',
-            'edit' => 'edit',
-            'update' => 'update',
-            'destroy' => 'destroy',
-            'delete' => 'delete',
-            default => null,
-        };
+        $defaultRouteNames = config('route-discovery.default_route_names',[]);
+
+        // $defaultRouteNames += [
+        //     'show' => 'show',
+        //     'store' => 'store',
+        //     'edit' => 'edit',
+        //     'update' => 'update',
+        //     'destroy' => 'destroy',
+        //     'delete' => 'delete',
+        // ];
+
+        return $defaultRouteNames[$pendingRouteAction->method->name] ?? null;
     }
 }
