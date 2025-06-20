@@ -29,6 +29,7 @@ class Route implements DiscoveryAttribute
         public ?string $name = null,
         array | string $middleware = [],
         public ?string $domain = null,
+        public bool $withTrashed = false,
     ) {
         $methods = Arr::wrap($method);
 
