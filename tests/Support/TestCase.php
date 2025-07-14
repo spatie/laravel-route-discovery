@@ -103,7 +103,7 @@ class TestCase extends Orchestra
                     return false;
                 }
 
-                if( $route->allowsTrashedBindings() !== $withTrashed ) {
+                if ($route->allowsTrashedBindings() !== $withTrashed) {
                     return false;
                 }
 
@@ -123,10 +123,10 @@ class TestCase extends Orchestra
 
     public function getRouteCollection(): RouteCollection
     {
-        return tap( new RouteCollection, function( $collection ) {
-            collect( app()->router->getRoutes()->getRoutes() )
-                ->reject( fn( $route ) => $route->getName() == 'storage.local' )
-                ->each( fn( $route ) => $collection->add( $route ) );
+        return tap(new RouteCollection, function ($collection) {
+            collect(app()->router->getRoutes()->getRoutes())
+                ->reject(fn ($route) => $route->getName() == 'storage.local')
+                ->each(fn ($route) => $collection->add($route));
         });
     }
 

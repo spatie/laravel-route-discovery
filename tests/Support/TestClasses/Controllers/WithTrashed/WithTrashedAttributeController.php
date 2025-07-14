@@ -5,10 +5,10 @@ namespace Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\WithTrashe
 use Illuminate\Foundation\Auth\User;
 use Spatie\RouteDiscovery\Attributes\Route;
 
-#[Route( withTrashed: true )]
+#[Route(withTrashed: true)]
 class WithTrashedAttributeController
 {
-    #[Route( withTrashed: false )]
+    #[Route(withTrashed: false)]
     public function show(User $user)
     {
     }

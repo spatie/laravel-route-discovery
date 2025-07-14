@@ -12,8 +12,8 @@ use Spatie\RouteDiscovery\PendingRouteTransformers\HandleMiddlewareAttribute;
 use Spatie\RouteDiscovery\PendingRouteTransformers\HandleRouteNameAttribute;
 use Spatie\RouteDiscovery\PendingRouteTransformers\HandleUriAttribute;
 use Spatie\RouteDiscovery\PendingRouteTransformers\HandleUrisOfNestedControllers;
-use Spatie\RouteDiscovery\PendingRouteTransformers\HandleWithTrashedAttribute;
 use Spatie\RouteDiscovery\PendingRouteTransformers\HandleWheresAttribute;
+use Spatie\RouteDiscovery\PendingRouteTransformers\HandleWithTrashedAttribute;
 use Spatie\RouteDiscovery\PendingRouteTransformers\MoveRoutesStartingWithParametersLast;
 use Spatie\RouteDiscovery\PendingRouteTransformers\RejectDefaultControllerMethodRoutes;
 
