@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-route-discovery` will be documented in this file
 
+## 1.3.3 - 2025-07-14
+
+### What's Changed
+
+* Add support for soft deleted models in route attributes "withTrashed" by @ju-gow in https://github.com/spatie/laravel-route-discovery/pull/44
+
+### New Contributors
+
+* @ju-gow made their first contribution in https://github.com/spatie/laravel-route-discovery/pull/44
+
+**Full Changelog**: https://github.com/spatie/laravel-route-discovery/compare/1.3.2...1.3.3
+
 ## 1.3.2 - 2025-02-17
 
 ### What's Changed
