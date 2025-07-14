@@ -125,6 +125,10 @@ class RouteRegistrar
                 if ($action->domain) {
                     $route->domain($action->domain);
                 }
+
+                if( $action->withTrashed ) {
+                    $route->withTrashed( $action->withTrashed );
+                }
             });
         });
     }
