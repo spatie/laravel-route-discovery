@@ -23,7 +23,7 @@
         "symfony/finder": "^5.4.2|^6.0|^7.0"
     },
     "require-dev": {
-        "nunomaduro/larastan": "^3.7",
+        "larastan/larastan": "^1.0|^2.0|^3.0",
         "orchestra/testbench": "^6.23.2|^7.0|^8.0|^9.0|^10.0",
         "pestphp/pest": "^1.21|^2.34|^3.7",
         "phpstan/extension-installer": "^1.1",
