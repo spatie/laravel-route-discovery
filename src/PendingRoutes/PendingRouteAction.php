@@ -27,7 +27,7 @@ class PendingRouteAction
     /** @var array{class-string, string} */
     public array $action;
 
-    /** @var array<int, class-string> */
+    /** @var array<int, class-string|string> */
     public array $middleware = [];
 
     /** @var array<string, string> */
@@ -95,7 +95,7 @@ class PendingRouteAction
     }
 
     /**
-     * @param array<class-string>|class-string $middleware
+     * @param array<class-string|string>|class-string|string $middleware
      *
      * @return self
      */
