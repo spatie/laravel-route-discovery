@@ -12,7 +12,7 @@ class Route implements DiscoveryAttribute
     /** @var array<int, string> */
     public array $methods;
 
-    /** @var array<int, class-string> */
+    /** @var array<int, class-string|string> */
     public array $middleware;
 
     /**
@@ -20,7 +20,7 @@ class Route implements DiscoveryAttribute
      * @param string|null $uri
      * @param string|null $fullUri
      * @param string|null $name
-     * @param array<int, class-string>|string $middleware
+     * @param array<int, class-string|string>|class-string|string $middleware
      */
     public function __construct(
         array | string $method = [],
