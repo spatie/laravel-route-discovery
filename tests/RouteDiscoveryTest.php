@@ -20,7 +20,6 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultip
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\Photos\CommentsController as MpCommentsController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\PhotosController as MpPhotosController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\Photos\CommentsController;
-use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\OptionalParameter\OptionalParameterController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\Photos\UsersController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\PhotosController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Nesting\Nested\ChildController;
@@ -28,6 +27,7 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Nesting\Nested\D
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Nesting\Nested\IndexController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Nesting\ParentController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NonPublicMethods\NonPublicMethodsController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\OptionalParameter\OptionalParameterController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\OverrideFullUri\OverrideFullUriController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\OverrideHttpMethod\OverrideHttpMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\OverrideUri\OverrideUriController;
