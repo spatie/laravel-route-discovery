@@ -20,6 +20,7 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultip
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\Photos\CommentsController as MpCommentsController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithMultipleParametersController\PhotosController as MpPhotosController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\Photos\CommentsController;
+use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\OptionalParameter\OptionalParameterController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\Photos\UsersController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\NestedWithParametersController\PhotosController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Nesting\Nested\ChildController;
@@ -651,4 +652,30 @@ it('will make sure the routes whose uri start with parameters will be registered
         '{parameter}/extra',
         '{parameter}',
     ]);
+});
+
+it('can handle optional model parameters', function () {
+    $this
+        ->routeRegistrar
+        ->registerDirectory(controllersPath('OptionalParameter'));
+
+    $this->assertRegisteredRoutesCount(3);
+
+    $this->assertRouteRegistered(
+        OptionalParameterController::class,
+        controllerMethod: 'optional',
+        uri: 'optional-parameter/optional/{user?}',
+    );
+
+    $this->assertRouteRegistered(
+        OptionalParameterController::class,
+        controllerMethod: 'multiple',
+        uri: 'optional-parameter/multiple/{user?}/{photo?}',
+    );
+
+    $this->assertRouteRegistered(
+        OptionalParameterController::class,
+        controllerMethod: 'mixed',
+        uri: 'optional-parameter/mixed/{user}/{photo?}',
+    );
 });

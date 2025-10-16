@@ -80,7 +80,7 @@ class PendingRouteAction
                 $uri .= '/';
             }
             $uri .= $this->modelParameters
-                ->map(fn (ReflectionParameter $parameter) => "{{$parameter->getName()}}")
+                ->map(fn (ReflectionParameter $parameter) => $this->formatParameterForUri($parameter))
                 ->implode('/');
         }
 
@@ -167,5 +167,46 @@ class PendingRouteAction
         }
 
         return $attributes[0]->newInstance();
+    }
+
+    /**
+     * Format a parameter for URI generation, taking optional parameters into account
+     *
+     * @param ReflectionParameter $parameter The parameter to format
+     * @return string The formatted parameter string for URI (e.g., "{user}" or "{user?}")
+     */
+    private function formatParameterForUri(ReflectionParameter $parameter): string
+    {
+        $paramName = $parameter->getName();
+        $isOptional = $this->isParameterOptional($parameter);
+
+        return $isOptional ? "{{$paramName}?}" : "{{$paramName}}";
+    }
+
+    /**
+     * Determine if a parameter is optional
+     *
+     * @param ReflectionParameter $parameter The parameter to check
+     * @return bool True if the parameter is optional, false otherwise
+     */
+    private function isParameterOptional(ReflectionParameter $parameter): bool
+    {
+        // Check if the parameter has a default value
+        if ($parameter->isDefaultValueAvailable()) {
+            return true;
+        }
+
+        // Check if the parameter is nullable (syntax ?Type)
+        if ($parameter->allowsNull()) {
+            return true;
+        }
+
+        // Check if the parameter has a nullable type (syntax ?Type)
+        $type = $parameter->getType();
+        if ($type && $type->allowsNull()) {
+            return true;
+        }
+
+        return false;
     }
 }

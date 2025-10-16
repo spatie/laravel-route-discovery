@@ -80,7 +80,7 @@ class NewsController
 }
 ```
 
-If you want override the whole URL, pass a value to the `fullUri` method. 
+If you want override the whole URL, pass a value to the `fullUri` method.
 
 For this controller, the `/alternative-uri` route will be registered instead of `/news/my-method`.
 
@@ -104,7 +104,7 @@ There are a couple of method names that will result in another HTTP verb.
 
 - `store`: `POST`
 - `update`: `PUT` and  `PATCH`
-- `destroy` and `delete`: `DELETE` 
+- `destroy` and `delete`: `DELETE`
 
 You can customize the verb to be used by adding a `Route` attribute to a method
 
@@ -122,7 +122,7 @@ class NewsController
 
 ## Adding a route name
 
-By default, the package will automatically add route names for each route that is registered. For this we'll use the controller name and the method name. 
+By default, the package will automatically add route names for each route that is registered. For this we'll use the controller name and the method name.
 
 For a `NewsController` with a method `myMethod`, the route name will be `news.my-method`. If that controller in a sub namespace, for example `App\Http\Controllers\Nested\NewsController`, the route name will become `nested.news.my-method`.
 
@@ -171,7 +171,7 @@ use Spatie\RouteDiscovery\Attributes\Route;
 class DownloadController
 {
     public function download() { /* ... */ }
-    
+
     public function otherMethod() { /* ... */ }
 }
 ```
@@ -196,6 +196,34 @@ use Spatie\RouteDiscovery\Attributes\Route;
 class UsersController
 {
     public function edit(User $user) { /* ... */ }
+}
+```
+
+## Optional model parameters
+
+Model parameters can be made optional using nullable types or default values. Optional parameters will be marked with a `?` in the generated route URI.
+
+For this controller, the `/users/optional/{user?}` route will be registered.
+
+```php
+namespace App\Http\Controllers;
+
+class UsersController
+{
+    public function optional(?User $user = null) { /* ... */ }
+}
+```
+
+You can mix required and optional model parameters.
+
+For this controller, the `/users/mixed/{user}/{photo?}` route will be registered.
+
+```php
+namespace App\Http\Controllers;
+
+class UsersController
+{
+    public function mixed(User $user, ?Photo $photo = null) { /* ... */ }
 }
 ```
 
@@ -256,7 +284,7 @@ use Spatie\RouteDiscovery\Attributes\Route;
 class ExampleController
 {
     public function firstMethod() { /* ... */ }
-    
+
     #[Route(domain: 'second.example.com')]
     public function secondMethod() { /* ... */ }
 }
@@ -298,12 +326,12 @@ class UsersController
 {
     #[DoNotDiscover]
     public function myMethod() { /* ... */}
-    
+
     public function anotherMethod() { /* ... */}
 }
 ```
 
-You can also prevent an entire controller from being discovered by adding the `DoNotDiscover` attribute on the class level. 
+You can also prevent an entire controller from being discovered by adding the `DoNotDiscover` attribute on the class level.
 
 For this controller, not a single route will be registered.
 
@@ -316,7 +344,7 @@ use Spatie\RouteDiscovery\Attributes\DoNotDiscover;
 class UsersController
 {
     public function myMethod() { /* ... */}
-    
+
     public function anotherMethod() { /* ... */}
 }
 ```
