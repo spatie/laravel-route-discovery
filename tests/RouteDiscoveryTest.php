@@ -10,7 +10,6 @@ use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDiscoverCon
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDiscoverMethod\DoNotDiscoverMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDiscoverMiddleware\DiscoverMiddlewareIfNotLaravelMethodController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDiscoverMiddleware\DoNotDiscoverMiddlewareController;
-use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\DoNotDiscoverConstructor\DoNotDiscoverConstructorController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Invokable\InvokableController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Middleware\MiddlewareOnControllerController;
 use Spatie\RouteDiscovery\Tests\Support\TestClasses\Controllers\Middleware\MiddlewareOnMethodController;
