@@ -25,6 +25,11 @@ class TestCase extends Orchestra
             ->useRootNamespace('Spatie\RouteDiscovery\Tests\Support\\');
     }
 
+    protected function defineEnvironment($app): void
+    {
+        $app['config']->set('filesystems.disks.local.serve', false);
+    }
+
     protected function getPackageProviders($app)
     {
         return [
@@ -123,11 +128,7 @@ class TestCase extends Orchestra
 
     public function getRouteCollection(): RouteCollection
     {
-        return tap(new RouteCollection, function ($collection) {
-            collect(app()->router->getRoutes()->getRoutes())
-                ->reject(fn ($route) => $route->getName() == 'storage.local')
-                ->each(fn ($route) => $collection->add($route));
-        });
+        return app()->router->getRoutes();
     }
 
     protected function registerControllersFromConfigFile(): self
