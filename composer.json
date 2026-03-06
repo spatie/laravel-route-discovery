@@ -16,19 +16,19 @@
         }
     ],
     "require": {
-        "php": "^8.0",
-        "illuminate/contracts": "^8.67|^9.0|^10.0|^11.0|^12.0|^13.0",
-        "illuminate/support": "^8.77|^9.0|^10.0|^11.0|^12.0|^13.0",
+        "php": "^8.4",
+        "illuminate/contracts": "^12.0|^13.0",
+        "illuminate/support": "^12.0|^13.0",
         "spatie/laravel-package-tools": "^1.10",
-        "symfony/finder": "^5.4.2|^6.0|^7.0|^8.0"
+        "symfony/finder": "^7.0|^8.0"
     },
     "require-dev": {
-        "larastan/larastan": "^1.0|^2.0|^3.0",
-        "orchestra/testbench": "^6.23.2|^7.0|^8.0|^9.0|^10.0|^11.0",
-        "pestphp/pest": "^1.21|^2.34|^3.7|^4.4",
-        "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan-deprecation-rules": "^1.0|^2.0",
-        "phpstan/phpstan-phpunit": "^1.0|^2.0",
+        "larastan/larastan": "^3.0",
+        "orchestra/testbench": "^10.0|^11.0",
+        "pestphp/pest": "^4.4",
+        "phpstan/extension-installer": "^2.0",
+        "phpstan/phpstan-deprecation-rules": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0",
         "spatie/laravel-ray": "^1.27"
     },
     "autoload": {
